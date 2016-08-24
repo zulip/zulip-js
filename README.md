@@ -3,8 +3,18 @@ Javascript library to access the Zulip API
 
 # Usage
 ```
-let zulip = require('zulip-js');
-zulip = zulip({username: 'your zulip username', realm: 'your zulip realm', password: 'your zulip password'});
+const zulip = require('zulip-js');
+
+zulip({
+  username: process.env.ZULIP_USERNAME,
+  password: process.env.ZULIP_PASSWORD,
+  realm: process.env.ZULIP_REALM
+}).then(zulip => {
+  // The zulip object now contains the API Key
+  zulip.accounts.retrieve()).then(res => {
+    console.log(res);
+  });
+});
 ```
 
 ## API Keys
