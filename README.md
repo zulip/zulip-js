@@ -22,6 +22,7 @@ zulip({
 `zulip.accounts.retrieve()` returns a promise that you can use to retrieve your `API key`. 
 
 ```
+// After initializing the zulip object
 zulip.accounts.retrieve().then(res => {
  console.log(res);
 });
@@ -33,3 +34,21 @@ zulip.accounts.retrieve().then(res => {
 }
 */
 ```
+
+### Get Subscribed Streams
+`zulip.streams.subscriptions()` returns a promise that can be used to retreive the user's subscriptions.
+
+```
+// After initializing the zulip object
+zulip.streams.subscriptions().then(res => {
+  console.log(res);
+});
+/* Prints
+{ msg: '',
+  result: 'success',
+  subscriptions: [
+   ...
+  ]
+}
+*/
+``` 
