@@ -1,0 +1,26 @@
+{
+  "name": "zulip-js",
+  "version": "1.0.0",
+  "description": "Javascript library to access the Zulip API",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "node-fetch": "^1.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arpith/zulip-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arpith/zulip-js/issues"
+  },
+  "homepage": "https://github.com/arpith/zulip-js#readme"
+}
