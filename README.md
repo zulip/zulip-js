@@ -2,22 +2,42 @@
 Javascript library to access the Zulip API
 
 # Usage
+## Initialization
+### With API Key
+```
+const config = {
+  username: process.env.ZULIP_USERNAME,
+  apiKey: process.env.ZULIP_API_KEY,
+  realm: process.env.ZULIP_REALM
+};
+
+const zulip = require('zulip-js')(config);
+
+zulip.streams.subscriptions().then(res => {
+  console.log(res);
+});
+```
+
+### With Username & Password
+You will need to first retrieve the API key by calling `zulip(config)` and then use the zulip object that it passes to `.then()`
+
 ```
 const zulip = require('zulip-js');
 
+//Fetch API Key
 zulip({
   username: process.env.ZULIP_USERNAME,
   password: process.env.ZULIP_PASSWORD,
   realm: process.env.ZULIP_REALM
 }).then(zulip => {
   // The zulip object now contains the API Key
-  zulip.accounts.retrieve()).then(res => {
+  zulip.accounts.retrieve().then(res => {
     console.log(res);
   });
 });
 ```
 
-## API Keys
+## Accounts
 ### Fetch API Key
 `zulip.accounts.retrieve()` returns a promise that you can use to retrieve your `API key`. 
 
@@ -35,8 +55,9 @@ zulip.accounts.retrieve().then(res => {
 */
 ```
 
+## Streams
 ### Get Subscribed Streams
-`zulip.streams.subscriptions()` returns a promise that can be used to retreive the user's subscriptions.
+`zulip.streams.subscriptions()` returns a promise that can be used to retrieve the user's subscriptions.
 
 ```
 // After initializing the zulip object
