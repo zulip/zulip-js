@@ -23,15 +23,16 @@ You will need to first retrieve the API key by calling `zulip(config)` and then 
 
 ```
 const zulip = require('zulip-js');
-
-//Fetch API Key
-zulip({
+const config = {
   username: process.env.ZULIP_USERNAME,
   password: process.env.ZULIP_PASSWORD,
   realm: process.env.ZULIP_REALM
-}).then(zulip => {
+};
+
+//Fetch API Key
+zulip(config).then(zulip => {
   // The zulip object now contains the API Key
-  zulip.accounts.retrieve().then(res => {
+  zulip.streams.subscriptions().then(res => {
     console.log(res);
   });
 });
