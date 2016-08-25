@@ -132,3 +132,33 @@ zulip.messages.retrieve(params).then(res => {
   console.log(res.messages);
 });
 ```
+
+## Queues
+`zulip.queues.register()` registers a new queue. You can pass it a params object with the types of events you are interested in and whether you want to receive raw text or html (using markdown):
+
+```
+{
+  event_types: ['message', 'subscriptions', 'realm_user', 'pointer']
+  apply_markdown: True
+}
+```
+
+For example: 
+
+```
+// After initializing the zulip object
+// Register queue to receive messages for user
+const params = {
+    event_types: ['message']
+};
+
+return zulip.queues.register(params).then(res => {
+  console.log(res);
+  // Prints 
+  // { msg: '',
+  //   max_message_id: 100375522,
+  //   last_event_id: -1,
+  //   result: 'success',
+  //   queue_id: '1472104996:2859' }
+});
+```
