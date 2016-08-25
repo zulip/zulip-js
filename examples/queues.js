@@ -18,7 +18,7 @@ zulip(config).then(zulip => {
     //   max_message_id: 100375522,
     //   last_event_id: -1,
     //   result: 'success',
-    //   queue_id: '1472104996:2859' }
+    //   queue_id: 'a queue id' }
   });
 }).catch(err => {
   console.log(err.msg);

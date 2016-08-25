@@ -134,6 +134,7 @@ zulip.messages.retrieve(params).then(res => {
 ```
 
 ## Queues
+### Register a Queue
 `zulip.queues.register()` registers a new queue. You can pass it a params object with the types of events you are interested in and whether you want to receive raw text or html (using markdown):
 
 ```
@@ -152,13 +153,54 @@ const params = {
     event_types: ['message']
 };
 
-return zulip.queues.register(params).then(res => {
+zulip.queues.register(params).then(res => {
   console.log(res);
   // Prints 
   // { msg: '',
   //   max_message_id: 100375522,
   //   last_event_id: -1,
   //   result: 'success',
-  //   queue_id: '1472104996:2859' }
+  //   queue_id: 'some queue id' }
+});
+```
+
+## Events
+### Retrieve Events from a Queue
+`zulip.events.retrieve()` retrieves events from a queue. You can pass it a params object with the id of the queue you are interested in, the last event id that you have received and wish to acknowlege. You can also specify whether the server should not block on this request until there is a new event (the default is to block).
+
+```
+{
+  queue_id: 'the queue id',
+  last_event_id: -1,
+  dont_block: false
+};
+
+
+```
+
+For example: 
+
+```
+// After initializing the zulip object
+// Retrieve events from a queue
+// Blocking until there is an event (or the request times out)
+const params = {
+  queue_id: 'your queue id',
+  last_event_id: -1,
+  dont_block: false
+};
+
+zulip.events.retrieve(params).then(res => {
+  console.log(res);
+  // Prints
+  // { msg: '',
+  //   result: 'success',
+  //   handler_id: 2005928,
+  //   events: 
+  //     [ { flags: [Object], message: [Object], type: 'message', id: 0 },
+  //       { type: 'heartbeat', id: 1 },
+  //       { flags: [], message: [Object], type: 'message', id: 2 },
+  //       { flags: [], message: [Object], type: 'message', id: 3 },
+  //       { flags: [], message: [Object], type: 'message', id: 4 } ] }
 });
 ```
