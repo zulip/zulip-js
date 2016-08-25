@@ -204,3 +204,24 @@ zulip.events.retrieve(params).then(res => {
   //       { flags: [], message: [Object], type: 'message', id: 4 } ] }
 });
 ```
+
+## Users
+### Fetching all users (bots included)
+`zulip.users.retrieve()` retrieves all users for this realm.
+
+```js
+  zulip.users.retrieve({}).then(res => {
+    console.log(res);
+  //  Prints
+  //  { msg: '',
+  //    result: 'success',
+  //    members:
+  //    [ { is_bot: false,
+  //        is_active: true,
+  //        avatar_url: 'https://secure.gravatar.com/avatar/sfgsgsfsfh84785346gsfgsgf?d=identicon',
+  //        is_admin: false,
+  //        full_name: 'John Doe',
+  //        email: 'john.doe@exmaple.com' },
+  //   ...
+  });
+```
