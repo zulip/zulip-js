@@ -94,3 +94,41 @@ zulip.streams.subscriptions.retrieve().then(res => {
 */
 ``` 
 
+## Messages
+### Send a Messge
+`zulip.messages.send()` returns a promise that can be used to send a message.
+
+```
+// After initializing the zulip object
+const params = {
+  to: 'test-bot',
+  type: 'stream',
+  subject: 'Testing zulip-js',
+  content: 'Something is wrong....'
+};
+
+// Send a message
+zulip.messages.send(params).then(res => {
+  // Response includes Message ID
+  console.log(res);
+});
+```
+
+### Read Messages from a Stream
+`zulip.messages.retrieve()` returns a promise that can be used to retrieve messages from a stream.
+
+```
+const params = {
+  stream: 'test-bot',
+  type: 'stream',
+  anchor: res.id,
+  num_before: 1,
+  num_after: 1,
+};
+
+// Fetch messages anchored around id (1 before, 1 after)
+zulip.messages.retrieve(params).then(res => {
+  // List of messages
+  console.log(res.messages);
+});
+```
