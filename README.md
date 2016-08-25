@@ -57,12 +57,31 @@ zulip.accounts.retrieve().then(res => {
 ```
 
 ## Streams
-### Get Subscribed Streams
-`zulip.streams.subscriptions()` returns a promise that can be used to retrieve the user's subscriptions.
+### Get All Streams
+`zulip.streams.retrieve()` returns a promise that can be used to retrieve all streams.
 
 ```
 // After initializing the zulip object
-zulip.streams.subscriptions().then(res => {
+zulip.streams.retrieve().then(res => {
+  console.log(res);
+});
+/* Prints
+{
+  msg: '',
+  result: 'success',
+  streams: [
+    ...
+  ]
+}
+*/
+```
+
+### Get User's Subscribed Streams
+`zulip.streams.subscriptions.retrieve()` returns a promise that can be used to retrieve the user's subscriptions.
+
+```
+// After initializing the zulip object
+zulip.streams.subscriptions.retrieve().then(res => {
   console.log(res);
 });
 /* Prints
@@ -74,3 +93,4 @@ zulip.streams.subscriptions().then(res => {
 }
 */
 ``` 
+

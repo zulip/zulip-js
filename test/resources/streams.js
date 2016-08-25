@@ -10,9 +10,14 @@ const config = {
   apiURL: apiURL
 };
 
-console.log("Testing fetch subscriptions");
-
-streams(config).subscriptions().then((resp) => {
+console.log("Testing fetch all streams");
+streams(config).retrieve().then((resp) => {
+  assert(resp.result === 'success', resp.msg);
+  console.log("Test passed");
+}).then(() => {
+  console.log("Testing fetch subscriptions");
+  return streams(config).subscriptions.retrieve();
+}).then((resp) => {
   assert(resp.result === 'success', resp.msg);
   console.log("Test passed");
 }).catch(err => {
