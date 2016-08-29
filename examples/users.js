@@ -7,7 +7,7 @@ const config = {
 };
 
 zulip(config).then(zulip => {
-  // Register queue to receive messages for user
+  // Get list of users 
   return zulip.users.retrieve({}).then(res => {
     console.log(res);
   //  Prints
