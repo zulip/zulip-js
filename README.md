@@ -115,7 +115,7 @@ zulip.messages.send(params).then(res => {
 ```
 
 ### Read Messages from a Stream
-`zulip.messages.retrieve()` returns a promise that can be used to retrieve messages from a stream.
+`zulip.messages.retrieve()` returns a promise that can be used to retrieve messages from a stream. You need to specify the id of the message to be used as an anchor.
 
 ```js
 const params = {
@@ -126,6 +126,44 @@ const params = {
   num_after: 1,
 };
 
+// Fetch messages anchored around id (1 before, 1 after)
+zulip.messages.retrieve(params).then(res => {
+  // List of messages
+  console.log(res.messages);
+});
+```
+
+### Private Messages
+#### Send a Private Message
+Specify `type` to be `private` in the params object passed to `zulip.messages.send()`
+
+```js
+const params = {
+  to: process.env.ZULIP_TEST_USERNAME,
+  type: 'private',
+  subject: 'Testing zulip-js',
+  content: 'Something is wrong....'
+};
+
+zulip.messages.send(params).then(res => {
+  console.log(res);
+});
+``` 
+
+#### Checking Private Messages
+Using a message's id as the `anchor`, add a `narrow` to the params passed to `zulip.messages.retrieve()`. The `narrow` is an array of objects, in this case just `{operator: 'is', operand: 'private'}`.
+
+```js
+const id = 'some message id';
+const params = {
+  anchor: id,
+  narrow: [{
+    operator: 'is',
+    operand: 'private'
+  }],
+  num_before: 1,
+  num_after: 1,
+};
 // Fetch messages anchored around id (1 before, 1 after)
 zulip.messages.retrieve(params).then(res => {
   // List of messages
