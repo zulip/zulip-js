@@ -2,12 +2,14 @@
   "name": "zulip-js",
   "version": "1.0.0",
   "description": "Javascript library to access the Zulip API",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "node-fetch": "^1.6.0"
+    "es6-promise": "^3.2.1",
+    "isomorphic-fetch": "^2.2.1",
+    "isomorphic-form-data": "0.0.1"
   },
   "devDependencies": {},
   "scripts": {
