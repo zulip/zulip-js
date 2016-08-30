@@ -18,7 +18,7 @@ lib(config).then(zulip => {
 }).then(config => {
   console.log("With API Key");
   return lib(config);
-}).then(zulip => zulip.streams.subscriptions()).then(resp => {
+}).then(zulip => zulip.streams.subscriptions.retrieve()).then(resp => {
     assert(resp.result === 'success', resp.msg);
     console.log("Test passed");
 }).catch(err => {
