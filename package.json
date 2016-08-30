@@ -1,6 +1,6 @@
 {
   "name": "zulip-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Javascript library to access the Zulip API",
   "main": "lib/index.js",
   "directories": {
@@ -11,8 +11,13 @@
     "isomorphic-fetch": "^2.2.1",
     "isomorphic-form-data": "0.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0"
+  },
   "scripts": {
+    "compile": "babel --presets es2015 -d lib/ src/",
+    "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
