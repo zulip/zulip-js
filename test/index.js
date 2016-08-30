@@ -1,6 +1,6 @@
 'use strict';
 const assert = require('assert');
-const lib = require('../lib');
+const lib = require('..');
 
 const config = {
   username: process.env.ZULIP_USERNAME,
