@@ -1,5 +1,6 @@
 'use strict';
-const fetch = require('node-fetch');
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 const FormData = require('form-data');
 
 module.exports = (config) => {
