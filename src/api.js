@@ -5,9 +5,9 @@ const FormData = require('form-data');
 
 module.exports = (url, config, method, params) => {
   const auth = "Basic " + new Buffer(config.username + ":" + config.apiKey).toString("base64");
-  let body = '';
+  const options = { method: method, headers: { 'Authorization': auth } };
   if (method == 'POST') {
-    body = new FormData();
+    options.body = new FormData();
     for (let key in params) {
       body.append(key, params[key]);
     }
@@ -17,11 +17,5 @@ module.exports = (url, config, method, params) => {
       url += key + "=" + params[key] + "&";
     }
   }
-  return fetch(url, {
-    method: method,
-    body: body,
-    headers: {
-      'Authorization': auth
-    }
-  }).then(res => res.json());
+  return fetch(url, options).then(res => res.json());
 };
