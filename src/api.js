@@ -9,7 +9,7 @@ module.exports = (url, config, method, params) => {
   if (method == 'POST') {
     options.body = new FormData();
     for (let key in params) {
-      body.append(key, params[key]);
+      options.body.append(key, params[key]);
     }
   } else {
     url += '?';
