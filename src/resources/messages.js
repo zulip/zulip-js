@@ -1,16 +1,20 @@
-'use strict';
 const api = require('../api');
 
-module.exports = (config) => {
+function messages(config) {
   return {
-    retrieve: (params) => {
-      const url = config.apiURL + '/messages';
-      if (params.narrow) params.narrow = JSON.stringify(params.narrow);
+    retrieve: (initialParams) => {
+      const url = `${config.apiURL}/messages`;
+      const params = initialParams;
+      if (params.narrow) {
+        params.narrow = JSON.stringify(params.narrow);
+      }
       return api(url, config, 'GET', params);
     },
     send: (params) => {
-      const url = config.apiURL + '/messages';
+      const url = `${config.apiURL}/messages`;
       return api(url, config, 'POST', params);
-    }
+    },
   };
-};
+}
+
+module.exports = messages;

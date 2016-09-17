@@ -1,11 +1,12 @@
-'use strict';
 const api = require('../api');
 
-module.exports = (config) => {
+function events(config) {
   return {
     retrieve: (params) => {
-      const url = config.apiURL + '/events';
+      const url = `${config.apiURL}/events`;
       return api(url, config, 'GET', params);
-    }
+    },
   };
-};
+}
+
+module.exports = events;

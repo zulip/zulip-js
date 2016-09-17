@@ -1,10 +1,12 @@
 const api = require('../api');
 
-module.exports = (config) => {
+function users(config) {
   return {
     retrieve: (params) => {
-      const url = config.apiURL + '/users';
+      const url = `${config.apiURL}/users`;
       return api(url, config, 'GET', params);
-    }
+    },
   };
-};
+}
+
+module.exports = users;

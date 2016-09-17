@@ -1,10 +1,12 @@
 const api = require('../api');
 
-module.exports = (config) => {
+function emojis(config) {
   return {
     retrieve: (params) => {
-      const url = config.apiURL + '/realm/emoji';
+      const url = `${config.apiURL}/realm/emoji`;
       return api(url, config, 'GET', params);
-    }
+    },
   };
-};
+}
+
+module.exports = emojis;

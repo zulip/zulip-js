@@ -1,17 +1,18 @@
-'use strict';
 const api = require('../api');
 
-module.exports = (config) => {
+function streams(config) {
   return {
     retrieve: () => {
-      const url = config.apiURL + '/streams';
+      const url = `${config.apiURL}/streams`;
       return api(url, config, 'GET');
     },
     subscriptions: {
       retrieve: () => {
-        const url = config.apiURL + '/users/me/subscriptions';
+        const url = `${config.apiURL}/users/me/subscriptions`;
         return api(url, config, 'GET');
-      }
-    }
+      },
+    },
   };
-};
+}
+
+module.exports = streams;

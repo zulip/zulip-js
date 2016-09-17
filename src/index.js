@@ -8,25 +8,27 @@ const emojis = require('./resources/emojis');
 
 function resources(config) {
   return {
-    config: config,
+    config,
     accounts: accounts(config),
     streams: streams(config),
     messages: messages(config),
     queues: queues(config),
     events: events(config),
     users: users(config),
-    emojis: emojis(config)
+    emojis: emojis(config),
   };
 }
 
-module.exports = function(config) {
-  config.apiURL = config.realm + '/api/v1';
+function zulip(initialConfig) {
+  const config = initialConfig;
+  config.apiURL = `${config.realm}/api/v1`;
   if (!config.apiKey) {
-    return accounts(config).retrieve().then(res => {
+    return accounts(config).retrieve().then((res) => {
       config.apiKey = res.api_key;
       return resources(config);
     });
-  } else {
-    return resources(config);
   }
-};
+  return resources(config);
+}
+
+module.exports = zulip;

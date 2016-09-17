@@ -1,21 +1,23 @@
-'use strict';
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
-const FormData = require('form-data');
+require('isomorphic-form-data');
 
-module.exports = (url, config, method, params) => {
-  const auth = "Basic " + new Buffer(config.username + ":" + config.apiKey).toString("base64");
-  const options = { method: method, headers: { 'Authorization': auth } };
-  if (method == 'POST') {
+function api(baseUrl, config, method, params) {
+  let url = baseUrl;
+  const auth = new Buffer(`${config.username}:${config.apiKey}`).toString('base64');
+  const authHeader = `Basic ${auth}`;
+  const options = { method, headers: { Authorization: authHeader } };
+  if (method === 'POST') {
     options.body = new FormData();
-    for (let key in params) {
+    Object.keys(params).forEach((key) => {
       options.body.append(key, params[key]);
-    }
+    });
   } else {
-    url += '?';
-    for (let key in params) {
-      url += key + "=" + params[key] + "&";
-    }
+    const generateQueryParam = key => `${key}=${params[key]}`;
+    const queryParams = Object.keys(params).map(generateQueryParam);
+    url = `${url}?${queryParams.join('&')}`;
   }
   return fetch(url, options).then(res => res.json());
-};
+}
+
+module.exports = api;
