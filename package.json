@@ -18,13 +18,14 @@
     "eslint-config-airbnb": "^11.1.0",
     "eslint-plugin-import": "^1.15.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-react": "^6.2.0"
+    "eslint-plugin-react": "^6.2.0",
+    "mocha": "^3.0.2"
   },
   "scripts": {
     "compile": "babel --presets es2015 -d lib/ src/",
     "prepublish": "npm run compile",
     "lint": "eslint src test",
-    "test": "npm run lint && mocha"
+    "test": "npm run lint && node test"
   },
   "repository": {
     "type": "git",
