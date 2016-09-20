@@ -9,7 +9,9 @@
   "dependencies": {
     "es6-promise": "^3.2.1",
     "isomorphic-fetch": "^2.2.1",
-    "isomorphic-form-data": "0.0.1"
+    "isomorphic-form-data": "0.0.1",
+    "chai-as-promised": "^5.3.0",
+    "chai": "^3.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
@@ -25,7 +27,7 @@
     "compile": "babel --presets es2015 -d lib/ src/",
     "prepublish": "npm run compile",
     "lint": "eslint src test",
-    "test": "npm run lint && node test"
+    "test": "npm run lint && mocha"
   },
   "repository": {
     "type": "git",

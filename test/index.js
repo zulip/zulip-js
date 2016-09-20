@@ -1,5 +1,7 @@
 const assert = require('assert');
 const lib = require('..');
+const chai = require('chai');
+chai.use(require('chai-as-promised'));
 
 const config = {
   username: process.env.ZULIP_USERNAME,
@@ -9,6 +11,13 @@ const config = {
 
 console.log('Testing initialization');
 console.log('With username & password');
+
+chai.should();
+describe('Initialization', () => {
+  it('Should get API key', () => {
+    lib(config).should.eventually.have.deep.property('config.apiKey');
+  });
+});
 
 lib(config)
   .then((zulip) => {
