@@ -283,3 +283,14 @@ zulip.emojis.retrieve().then(res => {
   //   ...
 });
 ``` 
+
+# Testing
+## Environmental variables
+1. `ZULIP_USERNAME`
+2. `ZULIP_PASSWORD`
+3. `ZULIP_API_KEY`
+4. `ZULIP_REALM`
+5. `ZULIP_TEST_STREAM`
+
+## Run
+`npm test`

@@ -1,5 +1,6 @@
-const assert = require('assert');
 const accounts = require('../../lib/resources/accounts');
+const chai = require('chai');
+chai.use(require('chai-as-promised'));
 
 const realm = process.env.ZULIP_REALM;
 const apiURL = `${realm}/api/v1`;
@@ -10,12 +11,9 @@ const config = {
   apiURL,
 };
 
-console.log('Testing fetch API Key');
-
-accounts(config).retrieve()
-  .then((resp) => {
-    assert(resp.result === 'success', resp.msg);
-    console.log('Test passed');
-  }).catch((err) => {
-    console.log('Test failed: ', err.message);
+chai.should();
+describe('Accounts', () => {
+  it('Should get API key', () => {
+    accounts(config).retrieve().should.eventually.have.property('result', 'success');
   });
+});

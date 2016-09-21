@@ -1,21 +1,19 @@
-const assert = require('assert');
 const emojis = require('../../lib/resources/emojis');
+const chai = require('chai');
+chai.use(require('chai-as-promised'));
 
 const realm = process.env.ZULIP_REALM;
 const apiURL = `${realm}/api/v1`;
+
 const config = {
   username: process.env.ZULIP_USERNAME,
   apiKey: process.env.ZULIP_API_KEY,
   apiURL,
 };
 
-console.log('Testing fetching emojis');
-
-emojis(config).retrieve({})
-  .then((resp) => {
-    console.log(resp);
-    assert(resp.result === 'success', resp.msg);
-    console.log('Test passed!');
-  }).catch((err) => {
-    console.log('Test failed:', err.message);
+chai.should();
+describe('Emojis', () => {
+  it('Should fetch emojis', () => {
+    emojis(config).retrieve().should.eventually.have.property('result', 'success');
   });
+});
