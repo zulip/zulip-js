@@ -31,12 +31,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arpith/zulip-js.git"
+    "url": "git+https://github.com/zulip/zulip-js.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/arpith/zulip-js/issues"
+    "url": "https://github.com/zulip/zulip-js/issues"
   },
-  "homepage": "https://github.com/arpith/zulip-js#readme"
+  "homepage": "https://github.com/zulip/zulip-js#readme"
 }
