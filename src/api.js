@@ -12,7 +12,7 @@ function api(baseUrl, config, method, params) {
     Object.keys(params).forEach((key) => {
       options.body.append(key, params[key]);
     });
-  } else {
+  } else if (params) {
     const generateQueryParam = key => `${key}=${params[key]}`;
     const queryParams = Object.keys(params).map(generateQueryParam);
     url = `${url}?${queryParams.join('&')}`;
