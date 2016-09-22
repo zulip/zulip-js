@@ -16,4 +16,7 @@ describe('Users', () => {
   it('Should fetch users', () => {
     users(config).retrieve().should.eventually.have.property('result', 'success');
   });
+  it('Should fetch pointer for user', () => {
+    users(config).me.pointer.retrieve().should.eventually.have.property('result', 'success');
+  });
 });
