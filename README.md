@@ -264,6 +264,15 @@ zulip.users.retrieve({}).then(res => {
 });
 ```
 
+### Fetching a pointer for a user
+`zulip.users.me.pointer.retrieve()` retrieves a pointer for a user.
+
+```js
+// Prints
+// { msg: '', pointer: 3432741029383298, result: 'success' }
+zulip.users.me.pointer.retrieve().then(console.log);
+``` 
+
 ## Realm Emojis
 ### Fetching Realm Emojis
 `zulip.emojis.retrieve()` retrieves the list of realm specific emojis.
