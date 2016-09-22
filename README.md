@@ -115,7 +115,7 @@ zulip.messages.send(params).then(res => {
 ```
 
 ### Read Messages from a Stream
-`zulip.messages.retrieve()` returns a promise that can be used to retrieve messages from a stream. You need to specify the id of the message to be used as an anchor.
+`zulip.messages.retrieve()` returns a promise that can be used to retrieve messages from a stream. You need to specify the id of the message to be used as an anchor. Use `1000000000` to retrieve the most recent message, or [`zulip.users.me.pointer.retrieve()`](#fetching-a-pointer-for-a-user) to get the id of the last message the user read.
 
 ```js
 const params = {
@@ -127,9 +127,17 @@ const params = {
 };
 
 // Fetch messages anchored around id (1 before, 1 after)
-zulip.messages.retrieve(params).then(res => {
-  // List of messages
-  console.log(res.messages);
+zulip.messages.retrieve(params).then(console.log);
+
+// Fetch the most recent message
+params.anchor = 1000000000;
+zulip.messages.retrieve(params).then(console.log);
+
+// Fetch the pointer for the user
+zulip.users.me.pointer.retrieve().then((res) => {
+  // Fetch messages anchored around the last message the user read (1 before, 1 after)
+  params.anchor = res.pointer;
+  zulip.messages.retrieve(params).then(console.log);
 });
 ```
 
@@ -151,7 +159,7 @@ zulip.messages.send(params).then(res => {
 ``` 
 
 #### Checking Private Messages
-Using a message's id as the `anchor`, add a `narrow` to the params passed to `zulip.messages.retrieve()`. The `narrow` is an array of objects, in this case just `{operator: 'is', operand: 'private'}`.
+Using a message's id as the `anchor`, add a `narrow` to the params passed to `zulip.messages.retrieve()`. The `narrow` is an array of objects, in this case just `{operator: 'is', operand: 'private'}`. Note that the anchor can be set to `1000000000` to get the most recent message, or to the user's pointer using [`zulip.users.me.pointer.retrieve()`](#fetching-a-pointer-for-a-user).
 
 ```js
 const id = 'some message id';
@@ -165,9 +173,23 @@ const params = {
   num_after: 1,
 };
 // Fetch messages anchored around id (1 before, 1 after)
-zulip.messages.retrieve(params).then(res => {
-  // List of messages
-  console.log(res.messages);
+zulip.messages.retrieve(params).then(console.log);
+// Fetch most recent message
+const mostRecentParams = {
+  anchor: 1000000000,
+  narrow: [{
+    operator: 'is',
+    operand: 'private'
+  }],
+  num_before: 1,
+  num_after: 1,
+};
+zulip.messages.retrieve(mostRecentParams).then(console.log);
+// Fetch pointer for the user
+zulip.users.me.pointer.retrieve().then((res) => {
+  // Fetch messages anchored around last read message (1 before, 1 after)
+  mostRecentParams.anchor = res.pointer;
+  zulip.messages.retrieve(mostRecentParams).then(console.log);
 });
 ```
 
@@ -265,7 +287,7 @@ zulip.users.retrieve({}).then(res => {
 ```
 
 ### Fetching a pointer for a user
-`zulip.users.me.pointer.retrieve()` retrieves a pointer for a user.
+`zulip.users.me.pointer.retrieve()` retrieves a pointer for a user. The pointer is the id of the last message the user read. This can then be used as an anchor message id for subsequent API calls.
 
 ```js
 // Prints
