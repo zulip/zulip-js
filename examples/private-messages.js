@@ -38,13 +38,13 @@ zulip(config).then((z) => {
       narrow: [{
         operator: 'is',
         operand: 'private',
-      }]
+      }],
     };
     z.messages.retrieve(mostRecentParams).then(console.log);
     // Fetch the pointer for the user
-    z.users.me.pointer.retrieve().then((res) => {
+    z.users.me.pointer.retrieve().then((resp) => {
       // Fetch messages anchored around the last read message (1 before, 1 after)
-      mostRecentParams.anchor = res.pointer;
+      mostRecentParams.anchor = resp.pointer;
       z.messages.retrieve(mostRecentParams).then(console.log);
     });
   });

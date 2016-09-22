@@ -33,9 +33,9 @@ zulip(config).then((z) => {
     readParams.anchor = 1000000000;
     z.messages.retrieve(readParams).then(console.log);
     // Get the id for the last message the user read
-    z.users.me.pointer.retrieve().then((res) => {
+    z.users.me.pointer.retrieve().then((resp) => {
       // Fetch the messages around the last message that the user read
-      readParams.anchor = res.pointer;
+      readParams.anchor = resp.pointer;
       z.messages.retrieve(readParams).then(console.log);
     });
   }).then(res => console.log(res.messages));
