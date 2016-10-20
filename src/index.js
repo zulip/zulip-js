@@ -5,6 +5,7 @@ const queues = require('./resources/queues');
 const events = require('./resources/events');
 const users = require('./resources/users');
 const emojis = require('./resources/emojis');
+const typing = require('./resources/typing');
 
 function resources(config) {
   return {
@@ -16,6 +17,7 @@ function resources(config) {
     events: events(config),
     users: users(config),
     emojis: emojis(config),
+    typing: typing(config),
   };
 }
 
