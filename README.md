@@ -314,6 +314,115 @@ zulip.emojis.retrieve().then(res => {
 });
 ``` 
 
+## Typing Notifications
+### Sending Typing Notifications
+`zulip.typing.send()` can be used to send a typing notification. The parameters required are `to` (either a username or a list of usernames) and `op` (either `start` or `stop`).
+
+```js
+{
+  to: 'hamlet@zulip.com',
+  op: 'start',
+};
+```
+
+For example:
+
+```js
+// After initializing the zulip object
+// Send a typing started notification to hamlet@zulip.com
+const params = {
+  to: 'hamlet@zulip.com'
+  op: 'start'
+};
+
+zulip.typing.send(params).then(res => {
+  console.log(res);
+  // Prints
+  // { msg: '',
+  //   result: 'success',
+  //   handler_id: 2005928,
+  //   events:
+  //     [ { flags: [Object], message: [Object], type: 'message', id: 0 },
+  //       { type: 'heartbeat', id: 1 },
+  //       { flags: [], message: [Object], type: 'message', id: 2 },
+  //       { flags: [], message: [Object], type: 'message', id: 3 },
+  //       { flags: [], message: [Object], type: 'message', id: 4 } ] }
+});
+```
+
+### Retrieving Typing Notification Events
+Use [`zulip.queues.register()`]('#register-a-queue') to register a queue to listen to typing notification events. This can be done by including `typing` in the list of `event_types` in the parameters passed.
+
+```js
+const queueParams = {
+  event_types: ['typing']
+}
+```
+
+Now [`zulip.events.retrieve()`]('#retrieve-events-from-a-queue') can be used to retrieve typing notification events using the `queue_id` recieved when registering the queue.
+
+```js
+const eventParams = {
+  queue_id: 'the queue id',
+  last_event_id: -1,
+  dont_block: false
+};
+```
+
+A typing notification event looks like:
+
+```js
+{
+  type: 'typing',
+  op: 'start',
+  sender: 'email address',
+  recipient: [{id: 1, email: 'email address for user id 1'}]
+}
+```
+
+For example,
+
+```js
+// After initializing the zulip object
+// Register a queue to listen to typing notification events
+zulip.queues.register({event_types: ['typing']}).then((res) => {
+  // Retrieve events from a queue
+  // Blocking until there is an event (or the request times out)
+  const params = {
+    queue_id: res.queue_id,
+    last_event_id: -1,
+    dont_block: false
+  };
+
+  zulip.events.retrieve(params).then(res => {
+    console.log(res);
+    // Prints
+    // { msg: '',
+    //   result: 'success',
+    //   handler_id: 2005928,
+    //   events: [{
+    //     type: 'typing', 
+    //     op: 'start', 
+    //     sender: 'hamlet@zulip.com',
+    //     recipients: [{
+    //       id: 1,
+    //       email: 'othello@zulip.com'
+    //     }]
+    //   },
+    //   {
+    //     type: 'typing',
+    //     op: 'stop',
+    //     sender: 'hamlet@zulip.com',
+    //     recipients: [{
+    //       id: 1,
+    //       email: 'othello@zulip.com'
+    //     }]
+    //   }]
+    // } 
+  });
+});
+```
+
 # Testing
 ## Environmental variables
 1. `ZULIP_USERNAME`
