@@ -38,6 +38,30 @@ zulip(config).then(zulip => {
 });
 ```
 
+### With zuliprc
+Create a file called `zuliprc` (in the same directory as your code) which looks like:
+```
+[api]
+email=cordelia@zulip.com
+key=wlueAg7cQXqKpUgIaPP3dmF4vibZXal7
+site=http://localhost:9991
+```
+
+Please remember to add this file to your `.gitignore`!
+Calling `zulip({ zuliprc: 'zuliprc' } )` will read this file and then pass a configured zulip object to `.then()`.
+
+```js
+const zulip = require('zulip-js');
+const path = require('path');
+const zuliprc = path.resolve(__dirname, 'zuliprc');
+zulip({ zuliprc }).then(zulip => 
+  // The zulip object now contains the config from the zuliprc file
+  zulip.streams.subscriptions().then(res => {
+    console.log(res);
+  });
+});
+```
+
 ## Accounts
 ### Fetch API Key
 `zulip.accounts.retrieve()` returns a promise that you can use to retrieve your `API key`.
