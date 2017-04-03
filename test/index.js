@@ -31,4 +31,12 @@ describe('Initialization', () => {
         .should.eventually.have.property('status', 200);
     });
   });
+
+  describe('With API Key ending with /api', () => {
+    it('Should get 200 on API request', () => {
+      config.apiKey = `${process.env.ZULIP_API_KEY}/api`;
+      lib(config).streams.subscriptions.retrieve()
+        .should.eventually.have.property('status', 200);
+    });
+  });
 });
