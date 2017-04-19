@@ -1,6 +1,6 @@
 {
   "name": "zulip-js",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Javascript library to access the Zulip API",
   "main": "lib/index.js",
   "directories": {
