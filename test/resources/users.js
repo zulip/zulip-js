@@ -19,4 +19,8 @@ describe('Users', () => {
   it('Should fetch pointer for user', () => {
     users(config).me.pointer.retrieve().should.eventually.have.property('result', 'success');
   });
+  it('Should update pointer for user', () => {
+    const id = 1;
+    users(config).me.pointer.update(id).should.eventually.have.property('result', 'success');
+  });
 });
