@@ -38,5 +38,15 @@ zulip(config).then((z) => {
       readParams.anchor = resp.pointer;
       z.messages.retrieve(readParams).then(console.log);
     });
+
+    // Mark the last message as unread
+    const flagParams = {
+      messages: [readParams.anchor],
+      flag: 'read',
+    };
+    z.messages(config).flags.remove(flagParams).then(console.log);
+
+    // Mark the last message as read
+    z.messages(config).flags.add(flagParams).then(console.log);
   }).then(res => console.log(res.messages));
 }).catch(err => console.log(err.message));

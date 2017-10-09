@@ -35,4 +35,22 @@ describe('Messages', () => {
     };
     messages(config).retrieve(params).should.eventually.have.property('result', 'success');
   });
+
+  it('Should mark message as read', () => {
+    const params = {
+      flag: 'read',
+      messages: [0],
+    };
+    messages(config).flags.add(params)
+      .should.eventually.have.property('result', 'success');
+  });
+
+  it('Should mark message as unread', () => {
+    const params = {
+      flag: 'read',
+      messages: [0],
+    };
+    messages(config).flags.remove(params)
+      .should.eventually.have.property('result', 'success');
+  });
 });
