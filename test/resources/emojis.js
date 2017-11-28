@@ -1,19 +1,35 @@
 const emojis = require('../../lib/resources/emojis');
+const common = require('../common');
 const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
-const realm = process.env.ZULIP_REALM;
-const apiURL = `${realm}/api/v1`;
+chai.should();
 
 const config = {
-  username: process.env.ZULIP_USERNAME,
-  apiKey: process.env.ZULIP_API_KEY,
-  apiURL,
+  username: 'valid@email.com',
+  apiKey: 'randomcharactersonlyq32YIpC8aMSH',
+  apiURL: 'valid.realm.url/api/v1',
 };
 
-chai.should();
 describe('Emojis', () => {
-  it('Should fetch emojis', () => {
+  it('should fetch emojis', () => {
+    const validator = (url, options) => {
+      url.should.equal(`${config.apiURL}/realm/emoji`);
+      options.should.not.have.property('body');
+    };
+    const output = {
+      emoji: {
+        green_tick: {
+          source_url: '/user_avatars/1/emoji/green_tick.png',
+          deactivated: false,
+          author: {},
+        },
+      },
+      msg: '',
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output);
     emojis(config).retrieve().should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });
