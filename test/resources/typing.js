@@ -1,47 +1,64 @@
 const typing = require('../../lib/resources/typing');
-const events = require('../../lib/resources/events');
-const queues = require('../../lib/resources/queues');
+const common = require('../common');
 const chai = require('chai');
-
 chai.use(require('chai-as-promised'));
-
-const realm = process.env.ZULIP_REALM;
-const apiURL = `${realm}/api/v1`;
-const config = {
-  username: process.env.ZULIP_USERNAME,
-  apiKey: process.env.ZULIP_API_KEY,
-  apiURL,
-};
-
-const params = {
-  last_event_id: -1,
-  dont_block: true,
-};
 
 chai.should();
 
 describe('Typing', () => {
-  before(() => queues(config).register({ event_types: ['typing'] }).then((res) => {
-    params.queue_id = res.queue_id;
-  }));
-
   it('Should send typing started notification', () => {
-    const typingParams = {
-      to: process.env.ZULIP_USERNAME,
+    const params = {
+      to: 'othello@zulip.com',
       op: 'start',
     };
-    typing(config).send(typingParams).should.eventually.have.property('result', 'success');
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/typing`);
+      Object.keys(options.body.data).length.should.equal(2);
+      options.body.data.to.should.equal(params.to);
+      options.body.data.op.should.equal(params.op);
+    };
+    const output = {
+      events: [{
+        id: 0,
+        type: 'typing',
+        op: 'start',
+        sender: {}, // TODO expand test with actual data
+        recipients: {},
+      }],
+      result: 'success',
+      msg: '',
+      handler_id: 225,
+    };
+    const stubs = common.getStubs(validator, output);
+    typing(common.config).send(params).should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
   it('Should send typing stopped notification', () => {
-    const typingParams = {
-      to: process.env.ZULIP_USERNAME,
+    const params = {
+      to: 'othello@zulip.com',
       op: 'stop',
     };
-    typing(config).send(typingParams).should.eventually.have.property('result', 'success');
-  });
-
-  it('Should retrieve typing events', () => {
-    events(config).retrieve(params).should.eventually.have.property('result', 'success');
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/typing`);
+      Object.keys(options.body.data).length.should.equal(2);
+      options.body.data.to.should.equal(params.to);
+      options.body.data.op.should.equal(params.op);
+    };
+    const output = {
+      events: [{
+        id: 0,
+        type: 'typing',
+        op: 'stop',
+        sender: {},
+        recipients: {},
+      }],
+      result: 'success',
+      msg: '',
+      handler_id: 286,
+    };
+    const stubs = common.getStubs(validator, output);
+    typing(common.config).send(params).should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });
