@@ -5,12 +5,6 @@ chai.use(require('chai-as-promised'));
 
 chai.should();
 
-const config = {
-  username: 'valid@email.com',
-  apiKey: 'randomcharactersonlyq32YIpC8aMSH',
-  apiURL: 'valid.realm.url/api/v1',
-};
-
 describe('Events', () => {
   it('should fetch events', () => {
     const params = {
@@ -18,7 +12,7 @@ describe('Events', () => {
       dont_block: true,
     };
     const validator = (url, options) => {
-      url.should.contain(`${config.apiURL}/events`);
+      url.should.contain(`${common.config.apiURL}/events`);
       options.should.not.have.property('body');
       const urldata = url.split('?', 2)[1].split('&'); // URL: host/messages?key=value&key=value...
       urldata.length.should.equal(2);
@@ -37,7 +31,7 @@ describe('Events', () => {
       queue_id: '1511901550:3',
     };
     const stubs = common.getStubs(validator, output);
-    events(config).retrieve(params).should.eventually.have.property('result', 'success');
+    events(common.config).retrieve(params).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
 });

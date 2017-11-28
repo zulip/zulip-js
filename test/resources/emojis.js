@@ -5,16 +5,10 @@ chai.use(require('chai-as-promised'));
 
 chai.should();
 
-const config = {
-  username: 'valid@email.com',
-  apiKey: 'randomcharactersonlyq32YIpC8aMSH',
-  apiURL: 'valid.realm.url/api/v1',
-};
-
 describe('Emojis', () => {
   it('should fetch emojis', () => {
     const validator = (url, options) => {
-      url.should.equal(`${config.apiURL}/realm/emoji`);
+      url.should.equal(`${common.config.apiURL}/realm/emoji`);
       options.should.not.have.property('body');
     };
     const output = {
@@ -29,7 +23,7 @@ describe('Emojis', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    emojis(config).retrieve().should.eventually.have.property('result', 'success');
+    emojis(common.config).retrieve().should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
 });

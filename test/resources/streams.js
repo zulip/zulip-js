@@ -5,16 +5,10 @@ chai.use(require('chai-as-promised'));
 
 chai.should();
 
-const config = {
-  username: 'valid@email.com',
-  apiKey: 'randomcharactersonlyq32YIpC8aMSH',
-  apiURL: 'valid.realm.url/api/v1',
-};
-
 describe('Streams', () => {
   it('should fetch streams', () => {
     const validator = (url, options) => {
-      url.should.contain(`${config.apiURL}/streams`);
+      url.should.contain(`${common.config.apiURL}/streams`);
       options.should.not.have.property('body');
     };
     const output = {
@@ -48,12 +42,12 @@ describe('Streams', () => {
       }],
     };
     const stubs = common.getStubs(validator, output);
-    streams(config).retrieve().should.eventually.have.property('result', 'success');
+    streams(common.config).retrieve().should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
   it('should fetch subscriptions', () => {
     const validator = (url, options) => {
-      url.should.contain(`${config.apiURL}/users/me/subscriptions`);
+      url.should.contain(`${common.config.apiURL}/users/me/subscriptions`);
       options.should.not.have.property('body');
     };
     const output = {
@@ -88,7 +82,7 @@ describe('Streams', () => {
       }],
     };
     const stubs = common.getStubs(validator, output);
-    streams(config).subscriptions.retrieve().should.eventually.have.property('result', 'success');
+    streams(common.config).subscriptions.retrieve().should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
 });

@@ -3,7 +3,6 @@ const common = require('../common');
 const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
-const assert = chai.assert;
 chai.should();
 
 const config = {
@@ -11,11 +10,12 @@ const config = {
   password: 'password',
   apiURL: 'valid.realm.url/api/v1',
 };
+
 const validator = (url, options) => {
-  assert.equal(url, `${config.apiURL}/fetch_api_key`);
-  assert.equal(Object.keys(options.body.data).length, 2);
-  assert.equal(options.body.data.username, config.username);
-  assert.equal(options.body.data.password, config.password);
+  url.should.equal(`${config.apiURL}/fetch_api_key`);
+  Object.keys(options.body.data).length.should.equal(2);
+  options.body.data.username.should.equal(config.username);
+  options.body.data.password.should.equal(config.password);
   return true;
 };
 
