@@ -1,6 +1,5 @@
 require('es6-promise').polyfill();
-require('isomorphic-fetch');
-require('isomorphic-form-data');
+const helper = require('./helper');
 
 function api(baseUrl, config, method, params) {
   let url = baseUrl;
@@ -8,7 +7,7 @@ function api(baseUrl, config, method, params) {
   const authHeader = `Basic ${auth}`;
   const options = { method, headers: { Authorization: authHeader } };
   if (method === 'POST') {
-    options.body = new FormData();
+    options.body = new helper.FormData();
     Object.keys(params).forEach((key) => {
       options.body.append(key, params[key]);
     });
@@ -17,7 +16,7 @@ function api(baseUrl, config, method, params) {
     const queryParams = Object.keys(params).map(generateQueryParam);
     url = `${url}?${queryParams.join('&')}`;
   }
-  return fetch(url, options).then(res => res.json());
+  return helper.fetch(url, options).then(res => res.json());
 }
 
 module.exports = api;
