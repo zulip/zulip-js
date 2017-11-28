@@ -1,15 +1,10 @@
 const accounts = require('../../lib/resources/accounts');
 const common = require('../common');
 const chai = require('chai');
-
-const assert = chai.assert;
 chai.use(require('chai-as-promised'));
 
-const restoreStubs = (stubs) => {
-  stubs.forEach((stub) => {
-    stub.restore();
-  });
-};
+const assert = chai.assert;
+chai.should();
 
 const config = {
   username: 'valid@email.com',
@@ -24,8 +19,6 @@ const validator = (url, options) => {
   return true;
 };
 
-chai.should();
-
 describe('Accounts', () => {
   it('should get API key', () => {
     const output = {
@@ -36,7 +29,7 @@ describe('Accounts', () => {
     };
     const stubs = common.getStubs(validator, output);
     accounts(config).retrieve().should.eventually.have.property('result', 'success');
-    restoreStubs(stubs);
+    common.restoreStubs(stubs);
   });
 
   it('should return error on incorrect password', () => {
@@ -47,6 +40,6 @@ describe('Accounts', () => {
     };
     const stubs = common.getStubs(validator, output);
     accounts(config).retrieve().should.eventually.have.property('result', 'error');
-    restoreStubs(stubs);
+    common.restoreStubs(stubs);
   });
 });
