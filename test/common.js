@@ -37,7 +37,14 @@ const getStubs = (validator, output) => {
   return stubs;
 };
 
+const restoreStubs = (stubs) => {
+  stubs.forEach((stub) => {
+    stub.restore();
+  });
+};
+
 module.exports = {
   getFakes,
   getStubs,
+  restoreStubs,
 };
