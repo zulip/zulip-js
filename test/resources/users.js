@@ -5,16 +5,10 @@ chai.use(require('chai-as-promised'));
 
 chai.should();
 
-const config = {
-  username: 'valid@email.com',
-  apiKey: 'randomcharactersonlyq32YIpC8aMSH',
-  apiURL: 'valid.realm.url/api/v1',
-};
-
 describe('Users', () => {
   it('should fetch users', () => {
     const validator = (url, options) => {
-      url.should.equal(`${config.apiURL}/users`);
+      url.should.equal(`${common.config.apiURL}/users`);
       options.should.not.have.property('body');
     };
     const output = {
@@ -41,12 +35,12 @@ describe('Users', () => {
       }],
     };
     const stubs = common.getStubs(validator, output);
-    users(config).retrieve().should.eventually.have.property('result', 'success');
+    users(common.config).retrieve().should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
   it('should fetch pointer for user', () => {
     const validator = (url, options) => {
-      url.should.equal(`${config.apiURL}/users/me/pointer`);
+      url.should.equal(`${common.config.apiURL}/users/me/pointer`);
       options.should.not.have.property('body');
     };
     const output = {
@@ -55,7 +49,7 @@ describe('Users', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    users(config).me.pointer.retrieve().should.eventually.have.property('result', 'success');
+    users(common.config).me.pointer.retrieve().should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
 });

@@ -3,14 +3,7 @@ const common = require('../common');
 const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
-const assert = chai.assert;
 chai.should();
-
-const config = {
-  username: 'valid@email.com',
-  apiKey: 'randomcharactersonlyq32YIpC8aMSH',
-  apiURL: 'valid.realm.url/api/v1',
-};
 
 describe('Messages', () => {
   it('should send message to test stream', () => {
@@ -21,12 +14,12 @@ describe('Messages', () => {
       content: 'Something is wrong....',
     };
     const validator = (url, options) => {
-      assert.equal(url, `${config.apiURL}/messages`);
-      assert.equal(Object.keys(options.body.data).length, 4);
-      assert.equal(options.body.data.to, params.to);
-      assert.equal(options.body.data.type, params.type);
-      assert.equal(options.body.data.subject, params.subject);
-      assert.equal(options.body.data.content, params.content);
+      url.should.equal(`${common.config.apiURL}/messages`);
+      Object.keys(options.body.data).length.should.equal(4);
+      options.body.data.to.should.equal(params.to);
+      options.body.data.type.should.equal(params.type);
+      options.body.data.subject.should.equal(params.subject);
+      options.body.data.content.should.equal(params.content);
     };
     const output = {
       result: 'success',
@@ -34,7 +27,7 @@ describe('Messages', () => {
       id: 168,
     };
     const stubs = common.getStubs(validator, output);
-    messages(config).send(params).should.eventually.have.property('result', 'success');
+    messages(common.config).send(params).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
 
@@ -47,7 +40,7 @@ describe('Messages', () => {
       num_after: 1,
     };
     const validator = (url, options) => {
-      url.should.contain(`${config.apiURL}/messages`);
+      url.should.contain(`${common.config.apiURL}/messages`);
       options.should.not.have.property('body');
       const urldata = url.split('?', 2)[1].split('&'); // URL: host/messages?key=value&key=value...
       urldata.length.should.equal(5);
@@ -63,7 +56,7 @@ describe('Messages', () => {
       messages: [], // TODO expand test with actual API message data.
     };
     const stubs = common.getStubs(validator, output);
-    messages(config).retrieve(params).should.eventually.have.property('result', 'success');
+    messages(common.config).retrieve(params).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
 });
