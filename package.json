@@ -30,7 +30,7 @@
     "compile": "babel --presets es2015 -d lib/ src/",
     "prepublish": "npm run compile",
     "lint": "eslint src test examples",
-    "test": "npm run lint && mocha test/resources/accounts.js test/resources/messages.js test/resources/streams.js test/resources/users.js test/resources/emojis.js"
+    "test": "npm run lint && mocha test/resources/accounts.js test/resources/messages.js test/resources/streams.js test/resources/users.js test/resources/emojis.js test/resources/queues.js"
   },
   "repository": {
     "type": "git",
