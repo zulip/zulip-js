@@ -1,15 +1,15 @@
 require('es6-promise').polyfill();
-require('isomorphic-fetch');
-require('isomorphic-form-data');
+
+const helper = require('../helper');
 
 function accounts(config) {
   return {
     retrieve: () => {
       const url = `${config.apiURL}/fetch_api_key`;
-      const form = new FormData();
+      const form = new helper.FormData();
       form.append('username', config.username);
       form.append('password', config.password);
-      return fetch(url, {
+      return helper.fetch(url, {
         method: 'POST',
         body: form,
       }).then(res => res.json());
