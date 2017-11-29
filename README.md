@@ -448,12 +448,41 @@ zulip.queues.register({event_types: ['typing']}).then((res) => {
 ```
 
 # Testing
-## Environmental variables
-1. `ZULIP_USERNAME`
-2. `ZULIP_PASSWORD`
-3. `ZULIP_API_KEY`
-4. `ZULIP_REALM`
-5. `ZULIP_TEST_STREAM`
 
-## Run
-`npm test`
+Use `npm test` to run the tests.
+
+## Writing Tests
+
+Currently, we have a simple testing framework which stubs our network
+requests and also allows us to test the input passed to it. This is what
+a sample test for an API endpoint looks like:
+
+```js
+const users = require('../../lib/resources/users'); // File to test.
+const common = require('../common'); // Common functions for tests.
+
+const chai = require('chai');
+chai.use(require('chai-as-promised'));
+
+chai.should();
+
+describe('Users', () => {
+  it('should fetch users', () => {
+    const validator = (url, options) => { // Function to test the network request parameters.
+      url.should.equal(`${common.config.apiURL}/users`);
+      Object.keys(options.body.data).length.should.equal(4);
+      options.body.data.subject.should.equal(params.subject);
+      options.body.data.content.should.equal(params.content);
+    };
+    const output = { // The data returned by the API in JSON format.
+      already_subscribed: {},
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output); // Stub the network modules.
+    users(common.config).retrieve().should.eventually.have.property('result', 'success'); // Function call.
+    common.restoreStubs(stubs); // Restore the stubs.
+  });
+});
+```
+
+Each pull request should contain relevant tests as well as example usage.
