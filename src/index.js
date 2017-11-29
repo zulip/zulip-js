@@ -8,6 +8,8 @@ const events = require('./resources/events');
 const users = require('./resources/users');
 const emojis = require('./resources/emojis');
 const typing = require('./resources/typing');
+const auth = require('./resources/auth');
+const emails = require('./resources/emails');
 
 function resources(config) {
   return {
@@ -20,6 +22,8 @@ function resources(config) {
     users: users(config),
     emojis: emojis(config),
     typing: typing(config),
+    auth: auth(config),
+    emails: emails(config),
   };
 }
 

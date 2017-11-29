@@ -14,6 +14,13 @@ function messages(config) {
       const url = `${config.apiURL}/messages`;
       return api(url, config, 'POST', params);
     },
+    // TODO : Improve and finalize
+    flags: {
+      retrieve: (params) => {
+        const url = `${config.apiURL}/messages/flags`;
+        return api(url, config, 'POST', params);
+      },
+    },
   };
 }
 

@@ -13,6 +13,12 @@ function users(config) {
           return api(url, config, 'GET', params);
         },
       },
+      presence: {
+        retrieve: (params) => {
+          const url = `${config.apiURL}/users/me/presence`;
+          return api(url, config, 'POST', params);
+        },
+      },
     },
   };
 }

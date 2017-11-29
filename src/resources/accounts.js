@@ -14,6 +14,17 @@ function accounts(config) {
         body: form,
       }).then(res => res.json());
     },
+    dev: {
+      retrieve: () => {
+        const url = `${config.apiURL}/dev_fetch_api_key`;
+        const form = new FormData();
+        form.append('username', config.username);
+        return fetch(url, {
+          method: 'POST',
+          body: form,
+        }).then(res => res.json());
+      },
+    },
   };
 }
 

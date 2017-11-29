@@ -25,5 +25,11 @@ zulip(config)
     // Prints
     // { msg: '', pointer: 3432741029383298, result: 'success' }
     z.users.me.pointer.retrieve().then(console.log);
+
+    const presenceParams = {
+      status: 'active',
+      new_user_input: true,
+    };
+    z.users.me.presence.retrieve(presenceParams).then(console.log).catch(console.log);
   })
   .catch(err => console.log(err.msg));
