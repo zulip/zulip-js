@@ -52,4 +52,23 @@ describe('Users', () => {
     users(common.config).me.pointer.retrieve().should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
+  it('should subscribe user to stream', () => {
+    const params = {
+      subscriptions: JSON.stringify([{ name: 'off topic' }]),
+    };
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/users/me/subscriptions`);
+      options.should.have.property('body');
+      Object.keys(options.body.data).length.should.equal(1);
+      options.body.data.subscriptions.should.equal(params.subscriptions);
+    };
+    const output = {
+      already_subscribed: {},
+      result: 'success',
+    };
+    output[common.config.username] = ['off topic'];
+    const stubs = common.getStubs(validator, output);
+    users(common.config).me.subscriptions.add(params).should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
+  });
 });
