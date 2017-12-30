@@ -59,4 +59,24 @@ describe('Messages', () => {
     messages(common.config).retrieve(params).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
+
+  it('should render messages', () => {
+    const params = {
+      content: 'Hello **world**',
+    };
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/messages/render`);
+      Object.keys(options.body.data).length.should.equal(1);
+      options.body.data.content.should.equal(params.content);
+    };
+    const output = {
+      result: 'success',
+      msg: '',
+      rendered: '<p>Hello <strong>world</strong></p>',
+    };
+    const stubs = common.getStubs(validator, output);
+    messages(common.config).render(params).should.eventually.have.property('result', 'success');
+    messages(common.config).render(params.content).should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
+  });
 });
