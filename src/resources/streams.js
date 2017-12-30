@@ -2,14 +2,14 @@ const api = require('../api');
 
 function streams(config) {
   return {
-    retrieve: () => {
+    retrieve: (params) => {
       const url = `${config.apiURL}/streams`;
-      return api(url, config, 'GET');
+      return api(url, config, 'GET', params);
     },
     subscriptions: {
-      retrieve: () => {
+      retrieve: (params) => {
         const url = `${config.apiURL}/users/me/subscriptions`;
-        return api(url, config, 'GET');
+        return api(url, config, 'GET', params);
       },
     },
   };
