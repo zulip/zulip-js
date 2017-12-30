@@ -85,4 +85,26 @@ describe('Streams', () => {
     streams(common.config).subscriptions.retrieve().should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
+
+  it('should fetch stream id', () => {
+    const params = {
+      stream: 'bot testing',
+    };
+    const validator = (url, options) => {
+      url.should.contain(`${common.config.apiURL}/get_stream_id`);
+      options.should.not.have.property('body');
+      const urldata = url.split('?', 2)[1].split('&'); // URL: host/get_stream_id?key=value&key=value...
+      urldata.length.should.equal(1);
+      urldata.should.contain(`stream=${params.stream}`);
+    };
+    const output = {
+      result: 'success',
+      msg: '',
+      stream_id: 94,
+    };
+    const stubs = common.getStubs(validator, output);
+    streams(common.config).getStreamId(params).should.eventually.have.property('result', 'success');
+    streams(common.config).getStreamId(params.stream).should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
+  });
 });

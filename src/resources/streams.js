@@ -12,6 +12,16 @@ function streams(config) {
         return api(url, config, 'GET');
       },
     },
+    getStreamId: (initialParams) => {
+      const url = `${config.apiURL}/get_stream_id`;
+      let params = initialParams;
+      if (typeof (initialParams) === 'string') {
+        params = {
+          stream: initialParams,
+        };
+      }
+      return api(url, config, 'GET', params);
+    },
   };
 }
 
