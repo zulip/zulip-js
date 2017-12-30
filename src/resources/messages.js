@@ -14,6 +14,16 @@ function messages(config) {
       const url = `${config.apiURL}/messages`;
       return api(url, config, 'POST', params);
     },
+    render: (initialParams) => {
+      const url = `${config.apiURL}/messages/render`;
+      let params = initialParams;
+      if (typeof (initialParams) === 'string') {
+        params = {
+          content: initialParams,
+        };
+      }
+      return api(url, config, 'POST', params);
+    },
   };
 }
 
