@@ -1,5 +1,9 @@
 import parseConfigFile from './zuliprc';
 
+const api = require('./api');
+
+let globalconfig = {};
+
 const accounts = require('./resources/accounts');
 const streams = require('./resources/streams');
 const messages = require('./resources/messages');
@@ -9,9 +13,19 @@ const users = require('./resources/users');
 const emojis = require('./resources/emojis');
 const typing = require('./resources/typing');
 
+function callEndpoint(endpoint, method = 'GET', params) {
+  let finalendpoint = endpoint;
+  if (!endpoint.startsWith('/')) {
+    finalendpoint = `/${endpoint}`; // eslint-disable-line
+  }
+  const url = globalconfig.apiURL + finalendpoint;
+  return api(url, globalconfig, method, params);
+}
+
 function resources(config) {
   return {
     config,
+    callEndpoint,
     accounts: accounts(config),
     streams: streams(config),
     messages: messages(config),
@@ -28,6 +42,7 @@ function zulip(initialConfig) {
     return parseConfigFile(initialConfig.zuliprc).then(config => resources(config));
   }
   const config = initialConfig;
+  globalconfig = config;
   if (config.realm.endsWith('/api')) {
     config.apiURL = `${config.realm}/v1`;
   } else {
