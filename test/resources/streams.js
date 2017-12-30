@@ -46,9 +46,15 @@ describe('Streams', () => {
     common.restoreStubs(stubs);
   });
   it('should fetch subscriptions', () => {
+    const params = {
+      subscriptions: JSON.stringify([{ name: 'off topic' }]),
+    };
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/users/me/subscriptions`);
       options.should.not.have.property('body');
+      const urldata = url.split('?', 2)[1].split('&'); // URL: host/streams?key=value&key=value...
+      urldata.length.should.equal(1);
+      urldata.should.contain(`subscriptions=${params.subscriptions}`);
     };
     const output = {
       msg: '',
@@ -82,7 +88,7 @@ describe('Streams', () => {
       }],
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config).subscriptions.retrieve().should.eventually.have.property('result', 'success');
+    streams(common.config).subscriptions.retrieve(params).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
 });
