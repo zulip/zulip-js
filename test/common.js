@@ -47,6 +47,7 @@ const config = {
   username: 'valid@email.com',
   apiKey: 'randomcharactersonlyq32YIpC8aMSH',
   apiURL: 'valid.realm.url/api/v1',
+  realm: 'valid.realm.url/api',
 };
 
 module.exports = {
