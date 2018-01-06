@@ -13,6 +13,10 @@ function users(config) {
           return api(url, config, 'GET', params);
         },
       },
+      getProfile: () => {
+        const url = `${config.apiURL}/users/me/getProfile`;
+        return api(url, config, 'GET');
+      },
       subscriptions: {
         add: (params) => {
           const url = `${config.apiURL}/users/me/subscriptions`;
