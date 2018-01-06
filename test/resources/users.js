@@ -71,4 +71,8 @@ describe('Users', () => {
     users(common.config).me.subscriptions.add(params).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
+  it('Should update pointer for user', () => {
+    const id = 1;
+    users(config).me.pointer.update(id).should.eventually.have.property('result', 'success');
+  });
 });

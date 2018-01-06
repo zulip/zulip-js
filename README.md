@@ -319,6 +319,14 @@ zulip.users.retrieve({}).then(res => {
 zulip.users.me.pointer.retrieve().then(console.log);
 ``` 
 
+### Update the pointer for a user
+`zulip.users.me.pointer.update(id)` updates the pointer for the user, for moving the home view. This has the side effect of marking some messages as read. Will not return success if the message id is invalid. Will always succeed if the id is less than the current value of the pointer (the id of the last message read).
+
+```js
+// Prints success if the message id is valid
+zulip.users.me.pointer.update(id).then(console.log);
+```
+
 ## Realm Emojis
 ### Fetching Realm Emojis
 `zulip.emojis.retrieve()` retrieves the list of realm specific emojis.

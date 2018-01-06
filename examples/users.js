@@ -24,6 +24,13 @@ zulip(config)
     // Get pointer for user
     // Prints
     // { msg: '', pointer: 3432741029383298, result: 'success' }
-    z.users.me.pointer.retrieve().then(console.log);
+    let pointer = 0;
+    z.users.me.pointer.retrieve().then((res) => {
+      pointer = res.pointer;
+      console.log(res);
+    });
+    // Update pointer for user (has the side effect of marking some messages as read)
+    // Prints success if the message id is valid
+    z.users.me.pointer.update(pointer + 1).then(console.log);
   })
   .catch(err => console.log(err.msg));
