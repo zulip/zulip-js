@@ -26,10 +26,18 @@ describe('Index', () => {
       urldata.should.contain(`one=${params.one}`);
       urldata.should.contain(`two=${params.two}`);
     };
-    const stubs = common.getStubs(validator, output);
-    lib(common.config).callEndpoint('/testurl', 'GET', params).should.eventually.have.property('result', 'success');
-    lib(common.config).callEndpoint('testurl', 'GET', params).should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    lib(common.config).then((z) => {
+      const stubs = common.getStubs(validator, output);
+      z.callEndpoint('/testurl', 'GET', params)
+      .should.eventually.have.property('result', 'success');
+      common.restoreStubs(stubs);
+    });
+    lib(common.config).then((z) => {
+      const stubs = common.getStubs(validator, output);
+      z.callEndpoint('testurl', 'GET', params)
+      .should.eventually.have.property('result', 'success');
+      common.restoreStubs(stubs);
+    });
   });
   it('should call post endpoints', () => {
     const validator = (url, options) => {
@@ -38,9 +46,17 @@ describe('Index', () => {
       options.body.data.one.should.equal(params.one);
       options.body.data.two.should.equal(params.two);
     };
-    const stubs = common.getStubs(validator, output);
-    lib(common.config).callEndpoint('/testurl', 'POST', params).should.eventually.have.property('result', 'success');
-    lib(common.config).callEndpoint('testurl', 'POST', params).should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    lib(common.config).then((z) => {
+      const stubs = common.getStubs(validator, output);
+      z.callEndpoint('/testurl', 'POST', params)
+      .should.eventually.have.property('result', 'success');
+      common.restoreStubs(stubs);
+    });
+    lib(common.config).then((z) => {
+      const stubs = common.getStubs(validator, output);
+      z.callEndpoint('testurl', 'POST', params)
+      .should.eventually.have.property('result', 'success');
+      common.restoreStubs(stubs);
+    });
   });
 });

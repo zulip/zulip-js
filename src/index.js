@@ -55,7 +55,7 @@ function zulip(initialConfig) {
       return resources(config);
     });
   }
-  return resources(config);
+  return Promise.resolve(resources(config));
 }
 
 module.exports = zulip;
