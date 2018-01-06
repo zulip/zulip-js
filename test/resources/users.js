@@ -52,6 +52,28 @@ describe('Users', () => {
     users(common.config).me.pointer.retrieve().should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
+  it('should fetch user profile', () => {
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/users/me/getProfile`);
+      options.should.not.have.property('body');
+    };
+    const output = {
+      short_name: 'sample-bot',
+      result: 'success',
+      msg: '',
+      is_bot: true,
+      email: 'sample-bot@localhost',
+      pointer: -1,
+      max_message_id: 131,
+      full_name: 'Sample',
+      user_id: 45,
+      client_id: '77431db17e4f32068756902d7c09c8bb',
+      is_admin: false,
+    };
+    const stubs = common.getStubs(validator, output);
+    users(common.config).me.getProfile().should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
+  });
   it('should subscribe user to stream', () => {
     const params = {
       subscriptions: JSON.stringify([{ name: 'off topic' }]),
