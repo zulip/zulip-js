@@ -165,6 +165,41 @@ zulip.users.me.pointer.retrieve().then((res) => {
 });
 ```
 
+### Message Flags
+Message flags are used to mark message as read or unread, to star a message, and much more!
+
+#### Valid Message Flags
+The list of possible flags is:
+['read', 'starred', 'mentioned', 'wildcard_mentioned', 'has_alert_word', 'historical']
+
+#### Adding a Flag
+`zulip.messages.flags.add({flag, messages})` can be used to add a flag to a list of messages.
+Its params are `flag`, which is a string from the [list of possible flags](#valid-message-flags),
+and `messages` which is an array of message ids (integers).
+
+```js
+// Mark the first message as read
+const params = {
+  messages: [0],
+  flag: 'read',
+};
+zulip.messages.flags.add(params).then(console.log);
+```
+
+#### Removing a Flag
+`zulip.messages.flags.remove({flag, messages})` can be used to remove a flag from a list of messages.
+Its params are `flag`, which is a string from the [list of possible flags](#valid-message-flags),
+and `messages` which is an array of message ids (integers).
+
+```js
+// Mark the first message as unread
+const params = {
+  messages: [0],
+  flag: 'read',
+};
+zulip.messages.flags.remove(params).then(console.log);
+```
+
 ### Private Messages
 #### Send a Private Message
 Specify `type` to be `private` in the params object passed to `zulip.messages.send()`
