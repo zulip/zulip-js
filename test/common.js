@@ -4,8 +4,8 @@ const helper = require('../lib/helper');
 const getFakes = (validator, output) => {
   const fetch = (url, options) => {
     validator(url, options);
-    const rval = (function () {
-      const json = function () {
+    const rval = (function rval() {
+      const json = function json() {
         return output;
       };
       return {
