@@ -21,3 +21,18 @@ zulip(config).then((z) => {
 
   return z.queues.register(params).then(console.log);
 }).catch(err => console.log(err.msg));
+
+zulip(config).then((z) => {
+  // Delete a previously registered queue
+  const params = {
+    queue_id: '1511901550:2',
+  };
+
+  // Prints
+  // {
+  //   msg: '',
+  //   result: 'success',
+  // }
+
+  return z.queues.deregister(params).then(console.log);
+}).catch(err => console.log(err.msg));

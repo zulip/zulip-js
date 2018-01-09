@@ -27,4 +27,21 @@ describe('Queues', () => {
     queues(common.config).register(params).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
+
+  it('should deregister queue', () => {
+    const params = {
+      queue_id: '1511901550:2',
+    };
+    const output = {
+      msg: '',
+      result: 'success',
+    };
+    const validator = (url, options) => {
+      url.should.contain(`${common.config.apiURL}/events`);
+      options.should.not.have.property('body');
+    };
+    const stubs = common.getStubs(validator, output);
+    queues(common.config).deregister(params).should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
+  });
 });
