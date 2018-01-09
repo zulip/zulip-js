@@ -10,6 +10,10 @@ function queues(config) {
       }
       return api(url, config, 'POST', params);
     },
+    deregister: (params) => {
+      const url = `${config.apiURL}/events`;
+      return api(url, config, 'DELETE', params);
+    },
   };
 }
 
