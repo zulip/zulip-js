@@ -24,6 +24,10 @@ function messages(config) {
       }
       return api(url, config, 'POST', params);
     },
+    update: (params) => {
+      const url = `${config.apiURL}/messages/${params.message_id}`;
+      return api(url, config, 'PATCH', params);
+    },
   };
 }
 
