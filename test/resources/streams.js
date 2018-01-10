@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Streams', () => {
-  it('should fetch streams', () => {
+  it('should fetch streams', (done) => {
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/streams`);
       options.should.not.have.property('body');
@@ -42,10 +42,15 @@ describe('Streams', () => {
       }],
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config).retrieve().should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    streams(common.config).retrieve()
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
   });
-  it('should fetch subscriptions', () => {
+
+  it('should fetch subscriptions', (done) => {
     const params = {
       subscriptions: JSON.stringify([{ name: 'off topic' }]),
     };
@@ -88,11 +93,15 @@ describe('Streams', () => {
       }],
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config).subscriptions.retrieve(params).should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    streams(common.config).subscriptions.retrieve(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
   });
 
-  it('should fetch stream id', () => {
+  it('should fetch stream id', (done) => {
     const params = {
       stream: 'bot testing',
     };
@@ -109,8 +118,15 @@ describe('Streams', () => {
       stream_id: 94,
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config).getStreamId(params).should.eventually.have.property('result', 'success');
-    streams(common.config).getStreamId(params.stream).should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    streams(common.config).getStreamId(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      return streams(common.config).getStreamId(params.stream);
+    }).then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    })
+    .catch(done);
   });
 });

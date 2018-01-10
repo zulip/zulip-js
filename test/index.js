@@ -17,7 +17,7 @@ const output = {
 };
 
 describe('Index', () => {
-  it('should call get endpoints', () => {
+  it('should call get endpoints', (done) => {
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/testurl`);
       options.should.not.have.property('body');
@@ -31,15 +31,16 @@ describe('Index', () => {
       z.callEndpoint('/testurl', 'GET', params)
       .should.eventually.have.property('result', 'success');
       common.restoreStubs(stubs);
-    });
-    lib(common.config).then((z) => {
+      return lib(common.config);
+    }).then((z) => {
       const stubs = common.getStubs(validator, output);
       z.callEndpoint('testurl', 'GET', params)
       .should.eventually.have.property('result', 'success');
       common.restoreStubs(stubs);
-    });
+      done();
+    }).catch(done);
   });
-  it('should call post endpoints', () => {
+  it('should call post endpoints', (done) => {
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/testurl`);
       Object.keys(options.body.data).length.should.equal(2);
@@ -51,12 +52,13 @@ describe('Index', () => {
       z.callEndpoint('/testurl', 'POST', params)
       .should.eventually.have.property('result', 'success');
       common.restoreStubs(stubs);
-    });
-    lib(common.config).then((z) => {
+      return lib(common.config);
+    }).then((z) => {
       const stubs = common.getStubs(validator, output);
       z.callEndpoint('testurl', 'POST', params)
       .should.eventually.have.property('result', 'success');
       common.restoreStubs(stubs);
-    });
+      done();
+    }).catch(done);
   });
 });
