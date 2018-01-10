@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Emojis', () => {
-  it('should fetch emojis', () => {
+  it('should fetch emojis', (done) => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/realm/emoji`);
       options.method.should.be.equal('GET');
@@ -24,7 +24,11 @@ describe('Emojis', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    emojis(common.config).retrieve().should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    emojis(common.config).retrieve()
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
   });
 });

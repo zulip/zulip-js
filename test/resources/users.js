@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Users', () => {
-  it('should fetch users', () => {
+  it('should fetch users', (done) => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users`);
       options.method.should.be.equal('GET');
@@ -36,10 +36,15 @@ describe('Users', () => {
       }],
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).retrieve().should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    users(common.config).retrieve()
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
   });
-  it('should fetch pointer for user', () => {
+
+  it('should fetch pointer for user', (done) => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me/pointer`);
       options.method.should.be.equal('GET');
@@ -51,10 +56,15 @@ describe('Users', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.pointer.retrieve().should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    users(common.config).me.pointer.retrieve()
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
   });
-  it('should fetch user profile', () => {
+
+  it('should fetch user profile', (done) => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me/getProfile`);
       options.method.should.be.equal('GET');
@@ -74,10 +84,15 @@ describe('Users', () => {
       is_admin: false,
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.getProfile().should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    users(common.config).me.getProfile()
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
   });
-  it('should subscribe user to stream', () => {
+
+  it('should subscribe user to stream', (done) => {
     const params = {
       subscriptions: JSON.stringify([{ name: 'off topic' }]),
     };
@@ -94,11 +109,15 @@ describe('Users', () => {
     };
     output[common.config.username] = ['off topic'];
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.subscriptions.add(params).should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    users(common.config).me.subscriptions.add(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
   });
 
-  it('should remove subscriptions', () => {
+  it('should remove subscriptions', (done) => {
     const params = {
       subscriptions: JSON.stringify(['Verona']),
     };
@@ -115,11 +134,15 @@ describe('Users', () => {
       removed: JSON.stringify(['Verona']),
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.subscriptions.remove(params).should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    users(common.config).me.subscriptions.remove(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
   });
 
-  it('should create a new user', () => {
+  it('should create a new user', (done) => {
     const params = {
       email: 'newbie@zulip.com',
       password: 'temp',
@@ -141,7 +164,11 @@ describe('Users', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).create(params).should.eventually.have.property('result', 'success');
-    common.restoreStubs(stubs);
+    users(common.config).create(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
   });
 });
