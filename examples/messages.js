@@ -20,6 +20,15 @@ zulip(config).then((z) => {
   z.messages.send(sendParams).then((res) => {
     // Response includes Message ID
     console.log(res);
+
+    const updateParams = {
+      message_id: res.id,
+      content: 'New content',
+    };
+
+    // Update the message
+    z.messages.update(updateParams).then(console.log);
+
     const readParams = {
       stream,
       type: 'stream',

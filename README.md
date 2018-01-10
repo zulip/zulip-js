@@ -89,6 +89,7 @@ zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.messages.send()` | POST `/messages` | returns a promise that can be used to send a message.|
 | `zulip.messages.retrieve()` | GET `/messages` | returns a promise that can be used to retrieve messages from a stream. You need to specify the id of the message to be used as an anchor. Use `1000000000` to retrieve the most recent message, or [`zulip.users.me.pointer.retrieve()`](#fetching-a-pointer-for-a-user) to get the id of the last message the user read. |
 | `zulip.messages.render()` | POST `/messages/render` | returns a promise that can be used to get rendered HTML for a message text. |
+| `zulip.messages.update()` | PATCH `/messages/<msg_id>` | updates the content or topic of the message with the given `msg_id`. |
 | `zulip.queues.register()` | POST `/register` | registers a new queue. You can pass it a params object with the types of events you are interested in and whether you want to receive raw text or html (using markdown). |
 | `zulip.queues.deregister()` | DELETE `/events` | deletes a previously registered queue. |
 | `zulip.streams.retrieve()` | GET `/streams` | returns a promise that can be used to retrieve all streams. |

@@ -79,4 +79,22 @@ describe('Messages', () => {
     messages(common.config).render(params.content).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
+  it('should update message', () => {
+    const params = {
+      message_id: 131,
+      content: 'New content',
+    };
+    const validator = (url, options) => {
+      url.should.contain(`${common.config.apiURL}/messages/131`);
+      options.should.not.have.property('body');
+      options.method.should.be.equal('PATCH');
+    };
+    const output = {
+      msg: '',
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output);
+    messages(common.config).update(params).should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
+  });
 });
