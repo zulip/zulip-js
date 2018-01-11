@@ -31,6 +31,12 @@ zulip(config)
     };
     z.users.create(createParams).then(console.log);
 
+    // Unsubscribe from the stream Verona
+    const removeParams = {
+      subscriptions: JSON.stringify(['Verona']),
+    };
+    z.users.me.subscriptions.remove(removeParams).then(console.log);
+
     // Get pointer for user
     // Prints
     // { msg: '', pointer: 3432741029383298, result: 'success' }

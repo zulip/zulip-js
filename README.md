@@ -101,6 +101,7 @@ zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.users.me.getProfile()` | GET `/users/me/getProfile` | retrieves the profile of the user/bot. |
 | `zulip.users.me.subscriptions()` | POST `/users/me/subscriptions` | subscribes a user to a stream/streams. |
 | `zulip.users.create()` | POST `/users` | create a new user. |
+| `zulip.users.me.subscriptions.remove()` | DELETE `/users/me/subscriptions` | remove subscriptions. |
 
 # Testing
 

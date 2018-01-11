@@ -26,6 +26,10 @@ function users(config) {
           const url = `${config.apiURL}/users/me/subscriptions`;
           return api(url, config, 'POST', params);
         },
+        remove: (params) => {
+          const url = `${config.apiURL}/users/me/subscriptions`;
+          return api(url, config, 'DELETE', params);
+        },
       },
     },
   };
