@@ -93,6 +93,27 @@ describe('Users', () => {
     users(common.config).me.subscriptions.add(params).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
+
+  it('should remove subscriptions', () => {
+    const params = {
+      subscriptions: JSON.stringify(['Verona']),
+    };
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/users/me/subscriptions?subscriptions=["Verona"]`);
+      options.should.not.have.property('body');
+      options.method.should.be.equal('DELETE');
+    };
+    const output = {
+      result: 'success',
+      not_subscribed: [],
+      msg: '',
+      removed: JSON.stringify(['Verona']),
+    };
+    const stubs = common.getStubs(validator, output);
+    users(common.config).me.subscriptions.remove(params).should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
+  });
+
   it('should create a new user', () => {
     const params = {
       email: 'newbie@zulip.com',
