@@ -21,6 +21,16 @@ zulip(config)
     //        email: 'john.doe@exmaple.com' },
     //   ...
     z.users.retrieve().then(console.log);
+
+    // Create a new user
+    const createParams = {
+      email: 'newbie@zulip.com',
+      password: 'temp',
+      full_name: 'New User',
+      short_name: 'newbie',
+    };
+    z.users.create(createParams).then(console.log);
+
     // Get pointer for user
     // Prints
     // { msg: '', pointer: 3432741029383298, result: 'success' }
