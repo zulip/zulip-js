@@ -93,4 +93,29 @@ describe('Users', () => {
     users(common.config).me.subscriptions.add(params).should.eventually.have.property('result', 'success');
     common.restoreStubs(stubs);
   });
+  it('should create a new user', () => {
+    const params = {
+      email: 'newbie@zulip.com',
+      password: 'temp',
+      full_name: 'New User',
+      short_name: 'newbie',
+    };
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/users`);
+      options.should.have.property('body');
+      options.method.should.be.equal('POST');
+      Object.keys(options.body.data).length.should.equal(4);
+      options.body.data.email.should.equal(params.email);
+      options.body.data.password.should.equal(params.password);
+      options.body.data.full_name.should.equal(params.full_name);
+      options.body.data.short_name.should.equal(params.short_name);
+    };
+    const output = {
+      result: 'success',
+      msg: '',
+    };
+    const stubs = common.getStubs(validator, output);
+    users(common.config).create(params).should.eventually.have.property('result', 'success');
+    common.restoreStubs(stubs);
+  });
 });

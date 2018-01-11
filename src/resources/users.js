@@ -6,6 +6,10 @@ function users(config) {
       const url = `${config.apiURL}/users`;
       return api(url, config, 'GET', params);
     },
+    create: (params) => {
+      const url = `${config.apiURL}/users`;
+      return api(url, config, 'POST', params);
+    },
     me: {
       pointer: {
         retrieve: (params) => {
