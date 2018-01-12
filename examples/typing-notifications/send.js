@@ -7,7 +7,7 @@ if (process.env.ZULIP_TYPING_RECIPIENT) {
 
 const config = {
   username: process.env.ZULIP_USERNAME,
-  password: process.env.ZULIP_PASSWORD,
+  apiKey: process.env.ZULIP_API_KEY,
   realm: process.env.ZULIP_REALM,
 };
 
