@@ -3,7 +3,7 @@ const path = require('path');
 
 const config = {
   username: process.env.ZULIP_USERNAME,
-  password: process.env.ZULIP_PASSWORD,
+  apiKey: process.env.ZULIP_API_KEY,
   realm: process.env.ZULIP_REALM,
 };
 
@@ -16,7 +16,7 @@ zulip({ zuliprc }).then((z) => {
 }).then(console.log)
   .catch(err => console.log(err.message));
 
-// Initialization with username & password
+// Initialization with username & API key
 zulip(config).then((z) => {
   // The zulip object now contains the API key
   console.log(z.config);
