@@ -18,7 +18,7 @@ function users(config) {
         },
       },
       getProfile: () => {
-        const url = `${config.apiURL}/users/me/getProfile`;
+        const url = `${config.apiURL}/users/me`;
         return api(url, config, 'GET');
       },
       subscriptions: {
