@@ -56,7 +56,7 @@ describe('Users', () => {
   });
   it('should fetch user profile', () => {
     const validator = (url, options) => {
-      url.should.equal(`${common.config.apiURL}/users/me/getProfile`);
+      url.should.equal(`${common.config.apiURL}/users/me`);
       options.method.should.be.equal('GET');
       options.should.not.have.property('body');
     };
