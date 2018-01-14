@@ -15,6 +15,7 @@ describe('Messages', () => {
     };
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/messages`);
+      options.method.should.be.equal('POST');
       Object.keys(options.body.data).length.should.equal(4);
       options.body.data.to.should.equal(params.to);
       options.body.data.type.should.equal(params.type);
@@ -41,6 +42,7 @@ describe('Messages', () => {
     };
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/messages`);
+      options.method.should.be.equal('GET');
       options.should.not.have.property('body');
       const urldata = url.split('?', 2)[1].split('&'); // URL: host/messages?key=value&key=value...
       urldata.length.should.equal(5);
@@ -66,6 +68,7 @@ describe('Messages', () => {
     };
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/messages/render`);
+      options.method.should.be.equal('POST');
       Object.keys(options.body.data).length.should.equal(1);
       options.body.data.content.should.equal(params.content);
     };

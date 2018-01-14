@@ -9,6 +9,7 @@ describe('Users', () => {
   it('should fetch users', () => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users`);
+      options.method.should.be.equal('GET');
       options.should.not.have.property('body');
     };
     const output = {
@@ -41,6 +42,7 @@ describe('Users', () => {
   it('should fetch pointer for user', () => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me/pointer`);
+      options.method.should.be.equal('GET');
       options.should.not.have.property('body');
     };
     const output = {
@@ -55,6 +57,7 @@ describe('Users', () => {
   it('should fetch user profile', () => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me/getProfile`);
+      options.method.should.be.equal('GET');
       options.should.not.have.property('body');
     };
     const output = {
@@ -80,6 +83,7 @@ describe('Users', () => {
     };
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me/subscriptions`);
+      options.method.should.be.equal('POST');
       options.should.have.property('body');
       Object.keys(options.body.data).length.should.equal(1);
       options.body.data.subscriptions.should.equal(params.subscriptions);
@@ -100,6 +104,7 @@ describe('Users', () => {
     };
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me/subscriptions?subscriptions=["Verona"]`);
+      options.method.should.be.equal('DELETE');
       options.should.not.have.property('body');
       options.method.should.be.equal('DELETE');
     };

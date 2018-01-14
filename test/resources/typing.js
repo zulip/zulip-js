@@ -13,6 +13,7 @@ describe('Typing', () => {
     };
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/typing`);
+      options.method.should.be.equal('POST');
       Object.keys(options.body.data).length.should.equal(2);
       options.body.data.to.should.equal(params.to);
       options.body.data.op.should.equal(params.op);
@@ -41,6 +42,7 @@ describe('Typing', () => {
     };
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/typing`);
+      options.method.should.be.equal('POST');
       Object.keys(options.body.data).length.should.equal(2);
       options.body.data.to.should.equal(params.to);
       options.body.data.op.should.equal(params.op);

@@ -13,6 +13,7 @@ const config = {
 
 const validator = (url, options) => {
   url.should.equal(`${config.apiURL}/fetch_api_key`);
+  options.method.should.be.equal('POST');
   Object.keys(options.body.data).length.should.equal(2);
   options.body.data.username.should.equal(config.username);
   options.body.data.password.should.equal(config.password);
