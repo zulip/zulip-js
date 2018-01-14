@@ -9,6 +9,7 @@ describe('Emojis', () => {
   it('should fetch emojis', () => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/realm/emoji`);
+      options.method.should.be.equal('GET');
       options.should.not.have.property('body');
     };
     const output = {

@@ -19,6 +19,7 @@ describe('Queues', () => {
     };
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/register`);
+      options.method.should.be.equal('POST');
       options.should.have.property('body');
       Object.keys(options.body.data).length.should.be.equal(1);
       options.body.data.event_types.should.be.equal('["message"]');
@@ -38,6 +39,7 @@ describe('Queues', () => {
     };
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/events`);
+      options.method.should.be.equal('DELETE');
       options.should.not.have.property('body');
     };
     const stubs = common.getStubs(validator, output);
