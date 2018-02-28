@@ -47,5 +47,15 @@ zulip(config).then((z) => {
       readParams.anchor = resp.pointer;
       z.messages.retrieve(readParams).then(console.log);
     });
+    // Add a flag for the message that was sent
+    const flagParams = {
+      messages: [res.id],
+      flag: 'read',
+    };
+    z.messages.flags.add(flagParams).then((resp) => {
+      console.log(resp);
+      // Remove the flag for the message that was sent
+      z.messages.flags.remove(flagParams).then(console.log);
+    });
   }).then(res => console.log(res.messages));
 }).catch(err => console.log(err.message));
