@@ -6,6 +6,9 @@
   "directories": {
     "test": "test"
   },
+  "browser": {
+    "fs-read-file-promise": false
+  },
   "dependencies": {
     "es6-promise": "^3.2.1",
     "fs-readfile-promise": "^3.0.0",
