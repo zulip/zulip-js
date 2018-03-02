@@ -38,8 +38,13 @@ zulip(config)
     z.users.me.subscriptions.remove(removeParams).then(console.log);
 
     // Get pointer for user
-    // Prints
-    // { msg: '', pointer: 3432741029383298, result: 'success' }
-    z.users.me.pointer.retrieve().then(console.log);
+    z.users.me.pointer.retrieve().then((resp) => {
+      // Prints
+      // { msg: '', pointer: 3432741029383298, result: 'success' }
+      console.log(resp);
+      // Update pointer for user (has the side effect of marking some messages as read)
+      // Prints success if the message id is valid
+      z.users.me.pointer.update(resp.pointer + 1).then(console.log);
+    });
   })
   .catch(err => console.log(err.msg));
