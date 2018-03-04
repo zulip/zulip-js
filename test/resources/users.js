@@ -64,6 +64,28 @@ describe('Users', () => {
     }).catch(done);
   });
 
+  it('should update pointer for user', (done) => {
+    const pointer = 172;
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/users/me/pointer`);
+      options.method.should.be.equal('POST');
+      options.should.have.property('body');
+      Object.keys(options.body.data).length.should.equal(1);
+      options.body.data.pointer.should.equal(pointer);
+    };
+    const output = {
+      msg: '',
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output);
+    users(common.config).me.pointer.update(pointer)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
+  });
+
   it('should fetch user profile', (done) => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me`);

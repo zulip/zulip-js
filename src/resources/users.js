@@ -16,6 +16,10 @@ function users(config) {
           const url = `${config.apiURL}/users/me/pointer`;
           return api(url, config, 'GET', params);
         },
+        update: (id) => {
+          const url = `${config.apiURL}/users/me/pointer`;
+          return api(url, config, 'POST', { pointer: id });
+        },
       },
       getProfile: () => {
         const url = `${config.apiURL}/users/me`;
