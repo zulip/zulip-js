@@ -120,4 +120,56 @@ describe('Messages', () => {
       done();
     }).catch(done);
   });
+
+  it('should mark message as read', (done) => {
+    const params = {
+      flag: 'read',
+      messages: [131],
+    };
+    const validator = (url, options) => {
+      url.should.contain(`${common.config.apiURL}/messages/flags`);
+      options.method.should.be.equal('POST');
+      Object.keys(options.body.data).length.should.equal(3);
+      options.body.data.flag.should.equal(params.flag);
+      options.body.data.op.should.equal('add');
+      options.body.data.messages.should.equal(params.messages);
+    };
+    const output = {
+      msg: '',
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output);
+    messages(common.config).flags.add(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
+  });
+
+  it('should mark message as unread', (done) => {
+    const params = {
+      flag: 'read',
+      messages: [131],
+    };
+    const validator = (url, options) => {
+      url.should.contain(`${common.config.apiURL}/messages/flags`);
+      options.method.should.be.equal('POST');
+      Object.keys(options.body.data).length.should.equal(3);
+      options.body.data.flag.should.equal(params.flag);
+      options.body.data.op.should.equal('remove');
+      options.body.data.messages.should.equal(params.messages);
+    };
+    const output = {
+      msg: '',
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output);
+    messages(common.config).flags.remove(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
+  });
 });
