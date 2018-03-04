@@ -12,6 +12,7 @@ const events = require('./resources/events');
 const users = require('./resources/users');
 const emojis = require('./resources/emojis');
 const typing = require('./resources/typing');
+const reactions = require('./resources/reactions');
 
 function callEndpoint(endpoint, method = 'GET', params) {
   let finalendpoint = endpoint;
@@ -34,6 +35,7 @@ function resources(config) {
     users: users(config),
     emojis: emojis(config),
     typing: typing(config),
+    reactions: reactions(config),
   };
 }
 

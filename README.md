@@ -94,6 +94,8 @@ zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.messages.flags.remove()` | POST `/messages/flags` | remove a flag from a list of messages. Its params are `flag` which is one of `[read, starred, mentioned, wildcard_mentioned, has_alert_word, historical]` and `messages` which is a list of messageIDs. |
 | `zulip.queues.register()` | POST `/register` | registers a new queue. You can pass it a params object with the types of events you are interested in and whether you want to receive raw text or html (using markdown). |
 | `zulip.queues.deregister()` | DELETE `/events` | deletes a previously registered queue. |
+| `zulip.reactions.add()` | POST `/reactions` | add a reaction to a message. Accepts a params object with `message_id` and `emoji`. |
+| `zulip.reactions.remove()` | DELETE `/reactions` | remove a reaction from a message. Accepts a params object with `message_id` and `emoji`. |
 | `zulip.streams.retrieve()` | GET `/streams` | returns a promise that can be used to retrieve all streams. |
 | `zulip.streams.getStreamId()` | GET `/get_stream_id` | returns a promise that can be used to retrieve a stream's id. |
 | `zulip.streams.subscriptions.retrieve()` | GET `/users/me/subscriptions` | returns a promise that can be used to retrieve the user's subscriptions. |
