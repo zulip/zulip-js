@@ -7,7 +7,7 @@
     "test": "test"
   },
   "browser": {
-    "fs-read-file-promise": false
+    "fs-readfile-promise": false
   },
   "dependencies": {
     "es6-promise": "^3.2.1",
