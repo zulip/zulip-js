@@ -8,7 +8,9 @@ const config = {
 
 const params = {
   message_id: 1,
-  emoji: 'smile',
+  emoji_name: 'musical_note',
+  emoji_code: '1f3b5',
+  reaction_type: 'unicode_emoji',
 };
 
 zulip(config).then(z => z.reactions.add(params).then((resp) => {
