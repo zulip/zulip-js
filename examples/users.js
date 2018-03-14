@@ -31,6 +31,21 @@ zulip(config)
     };
     z.users.create(createParams).then(console.log);
 
+    // Get user profile
+    //  Prints
+    //  { is_bot: false,
+    //    pointer: -1,
+    //    max_message_id: 141,
+    //    user_id: 22,
+    //    is_admin: false,
+    //    short_name: 'aaron',
+    //    client_id: 'f495a00ce0546e7b77d86222b0ac5f81',
+    //    full_name: 'aaron',
+    //    result: 'success',
+    //    msg: '',
+    //    email: 'AARON@zulip.com' }
+    z.users.me.getProfile().then(console.log);
+
     // Unsubscribe from the stream Verona
     const removeParams = {
       subscriptions: JSON.stringify(['Verona']),
