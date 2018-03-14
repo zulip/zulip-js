@@ -102,7 +102,7 @@ zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.typing.send()` | POST `/typing` | can be used to send a typing notification. The parameters required are `to` (either a username or a list of usernames) and `op` (either `start` or `stop`). |
 | `zulip.users.retrieve()` | GET `/users` | retrieves all users for this realm. |
 | `zulip.users.me.pointer.retrieve()` | GET `/users/me/pointer` | retrieves a pointer for a user. The pointer is the id of the last message the user read. This can then be used as an anchor message id for subsequent API calls. |
-| `zulip.users.me.getProfile()` | GET `/users/me/getProfile` | retrieves the profile of the user/bot. |
+| `zulip.users.me.getProfile()` | GET `/users/me` | retrieves the profile of the user/bot. |
 | `zulip.users.me.subscriptions()` | POST `/users/me/subscriptions` | subscribes a user to a stream/streams. |
 | `zulip.users.create()` | POST `/users` | create a new user. |
 | `zulip.users.me.subscriptions.remove()` | DELETE `/users/me/subscriptions` | remove subscriptions. |
