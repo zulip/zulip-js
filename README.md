@@ -11,10 +11,11 @@ const config = {
   realm: process.env.ZULIP_REALM
 };
 
-const zulip = require('zulip-js')(config);
-
-zulip.streams.subscriptions().then(res => {
-  console.log(res);
+zulip(config).then(zulip => {
+  // The zulip object now initialized with config
+  zulip.streams.subscriptions().then(res => {
+    console.log(res);
+  });
 });
 ```
 
