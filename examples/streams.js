@@ -8,8 +8,12 @@ const config = {
 
 zulip(config).then((z) => {
   // Fetch all streams
-  z.streams.retrieve().then(console.log).then(() => {
-    // Fetch user's subscriptions
-    z.streams.subscriptions.retrieve().then(console.log);
-  });
+  z.streams.retrieve()
+  .then(console.log)
+  // Fetch user's subscriptions
+  .then(() => z.streams.subscriptions.retrieve())
+  .then(console.log)
+  // Get all the topics in the stream with ID 15
+  .then(() => z.streams.topics.retrieve({ stream_id: 15 }))
+  .then(console.log);
 }).catch(err => console.log(err.msg));
