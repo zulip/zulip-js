@@ -132,4 +132,42 @@ describe('Streams', () => {
     })
     .catch(done);
   });
+
+  it('should fetch the topics in a stream', (done) => {
+    const params = {
+      stream_id: 15,
+    };
+    const validator = (url, options) => {
+      url.should.contain(`${common.config.apiURL}/users/me/${params.stream_id}/topics`);
+      options.method.should.be.equal('GET');
+      options.should.not.have.property('body');
+    };
+    const output = {
+      msg: '',
+      result: 'success',
+      topics: [
+        {
+          name: 'Denmark1',
+          max_id: 128,
+        },
+        {
+          name: 'Denmark3',
+          max_id: 124,
+        },
+        {
+          name: 'Denmark2',
+          max_id: 117,
+        },
+      ],
+    };
+    const stubs = common.getStubs(validator, output);
+    streams(common.config).topics.retrieve(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      data.should.have.property('topics');
+      common.restoreStubs(stubs);
+      done();
+    })
+    .catch(done);
+  });
 });
