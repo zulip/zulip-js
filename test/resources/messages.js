@@ -126,13 +126,16 @@ describe('Messages', () => {
       flag: 'read',
       messages: [131],
     };
+
+
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/messages/flags`);
       options.method.should.be.equal('POST');
       Object.keys(options.body.data).length.should.equal(3);
       options.body.data.flag.should.equal(params.flag);
       options.body.data.op.should.equal('add');
-      options.body.data.messages.should.equal(params.messages);
+      const messageList = JSON.parse(options.body.data.messages);
+      messageList.should.deep.equal(params.messages);
     };
     const output = {
       msg: '',
@@ -158,7 +161,8 @@ describe('Messages', () => {
       Object.keys(options.body.data).length.should.equal(3);
       options.body.data.flag.should.equal(params.flag);
       options.body.data.op.should.equal('remove');
-      options.body.data.messages.should.equal(params.messages);
+      const messageList = JSON.parse(options.body.data.messages);
+      messageList.should.deep.equal(params.messages);
     };
     const output = {
       msg: '',

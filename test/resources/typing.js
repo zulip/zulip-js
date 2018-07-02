@@ -15,8 +15,9 @@ describe('Typing', () => {
       url.should.equal(`${common.config.apiURL}/typing`);
       options.method.should.be.equal('POST');
       Object.keys(options.body.data).length.should.equal(2);
-      options.body.data.to.should.equal(params.to);
       options.body.data.op.should.equal(params.op);
+      // The email comes JSON-encoded (i.e. enclosed in double quotes)
+      JSON.parse(options.body.data.to).should.equal(params.to);
     };
     const output = {
       events: [{
@@ -48,8 +49,9 @@ describe('Typing', () => {
       url.should.equal(`${common.config.apiURL}/typing`);
       options.method.should.be.equal('POST');
       Object.keys(options.body.data).length.should.equal(2);
-      options.body.data.to.should.equal(params.to);
       options.body.data.op.should.equal(params.op);
+      // The email comes JSON-encoded (i.e. enclosed in double quotes)
+      JSON.parse(options.body.data.to).should.equal(params.to);
     };
     const output = {
       events: [{
