@@ -4,7 +4,7 @@ function queues(config) {
   return {
     register: (initialParams) => {
       const url = `${config.apiURL}/register`;
-      const params = initialParams;
+      const params = Object.assign({}, initialParams);
       if (params.event_types) {
         params.event_types = JSON.stringify(params.event_types);
       }

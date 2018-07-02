@@ -8,7 +8,7 @@ function streams(config) {
     },
     getStreamId: (initialParams) => {
       const url = `${config.apiURL}/get_stream_id`;
-      let params = initialParams;
+      let params = Object.assign({}, initialParams);
       if (typeof (initialParams) === 'string') {
         params = {
           stream: initialParams,

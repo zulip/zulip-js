@@ -4,7 +4,7 @@ function typing(config) {
   return {
     send: (initialParams) => {
       const url = `${config.apiURL}/typing`;
-      const params = initialParams;
+      const params = Object.assign({}, initialParams);
       if (params.to.length > 1) {
         params.to = JSON.stringify(params.to);
       }
