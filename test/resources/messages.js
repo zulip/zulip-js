@@ -121,6 +121,28 @@ describe('Messages', () => {
     }).catch(done);
   });
 
+  it('should get message by id', (done) => {
+    const params = {
+      message_id: 1,
+    };
+    const validator = (url, options) => {
+      url.should.contain(`${common.config.apiURL}/messages/1`);
+      options.should.not.have.property('body');
+      options.method.should.be.equal('GET');
+    };
+    const output = {
+      msg: '',
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output);
+    messages(common.config).getById(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
+  });
+
   it('should mark message as read', (done) => {
     const params = {
       flag: 'read',
