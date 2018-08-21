@@ -52,6 +52,10 @@ function messages(config) {
         return api(flagsURL, config, 'POST', params);
       },
     },
+    getById: (params) => {
+      const url = `${config.apiURL}/messages/${params.message_id}`;
+      return api(url, config, 'GET', params);
+    },
   };
 }
 
