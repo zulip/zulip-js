@@ -56,6 +56,10 @@ function messages(config) {
       const url = `${config.apiURL}/messages/${params.message_id}`;
       return api(url, config, 'GET', params);
     },
+    getHistoryById: (params) => {
+      const url = `${config.apiURL}/messages/${params.message_id}/history`;
+      return api(url, config, 'GET', params);
+    },
   };
 }
 
