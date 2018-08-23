@@ -63,3 +63,7 @@ zulip(config)
     });
   })
   .catch(err => console.log(err.msg));
+
+zulip(config).then((z) => {
+  z.users.me.alertWords.retrieve().then(console.log);
+}).catch(err => console.log(err.msg));

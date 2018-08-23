@@ -193,4 +193,23 @@ describe('Users', () => {
         done();
       }).catch(done);
   });
+
+  it('should fetch users alert words', (done) => {
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/users/me/alert_words`);
+      options.should.not.have.property('body');
+      options.method.should.be.equal('GET');
+    };
+    const output = {
+      result: 'success',
+      msg: '',
+    };
+    const stubs = common.getStubs(validator, output);
+    users(common.config).me.alertWords.retrieve()
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
+  });
 });

@@ -35,6 +35,12 @@ function users(config) {
           return api(url, config, 'DELETE', params);
         },
       },
+      alertWords: {
+        retrieve: (params) => {
+          const url = `${config.apiURL}/users/me/alert_words`;
+          return api(url, config, 'GET', params);
+        },
+      },
     },
   };
 }
