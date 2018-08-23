@@ -26,7 +26,31 @@ describe('Realm', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    realm(common.config).retrieve()
+    realm(common.config).emoji()
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
+  });
+
+  it('should fetch realm filters', (done) => {
+    const validator = (url, options) => {
+      url.should.equal(`${common.config.apiURL}/realm/filters`);
+      options.should.not.have.property('body');
+      options.method.should.be.equal('GET');
+    };
+    const output = {
+      filters: [
+        ['#(?P<id>[0-9]{2,8})',
+          'https://github.com/zulip/zulip/pull/%(id)s',
+          1],
+      ],
+      msg: '',
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output);
+    realm(common.config).filters()
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
