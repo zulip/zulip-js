@@ -64,6 +64,10 @@ function messages(config) {
       const url = `${config.apiURL}/messages/${params.message_id}/reactions`;
       return api(url, config, 'DELETE', params);
     },
+    deleteById: (params) => {
+      const url = `${config.apiURL}/messages/${params.message_id}`;
+      return api(url, config, 'DELETE', params);
+    },
   };
 }
 

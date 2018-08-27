@@ -106,6 +106,7 @@ zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.messages.getById()` | GET `/messages/<msg_id>` | returns a message by its id. |
 | `zulip.messages.getHistoryById()` | GET `/messages/<msg_id>/history` | return the history of a message |
 | `zulip.messages.deleteReactionById()` | DELETE `/messages/<msg_id>/reactions` | deletes reactions on a message by message id |
+| `zulip.messages.deleteById()` | DELETE `/messages/<msg_id>` | delete the message with the provided message id if the user has permission to do so. |
 | `zulip.queues.register()` | POST `/register` | registers a new queue. You can pass it a params object with the types of events you are interested in and whether you want to receive raw text or html (using markdown). |
 | `zulip.queues.deregister()` | DELETE `/events` | deletes a previously registered queue. |
 | `zulip.reactions.add()` | POST `/reactions` | add a reaction to a message. Accepts a params object with `message_id`, `emoji_name`, `emoji_code` and `reaction_type` (default is `unicode_emoji`). |
