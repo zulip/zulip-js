@@ -94,6 +94,7 @@ zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.messages.flags.add()` | POST `/messages/flags` | add a flag to a list of messages. Its params are `flag` which is one of `[read, starred, mentioned, wildcard_mentioned, has_alert_word, historical]` and `messages` which is a list of messageIDs. |
 | `zulip.messages.flags.remove()` | POST `/messages/flags` | remove a flag from a list of messages. Its params are `flag` which is one of `[read, starred, mentioned, wildcard_mentioned, has_alert_word, historical]` and `messages` which is a list of messageIDs. |
 | `zulip.messages.getById()` | GET `/messages/<msg_id>` | returns a message by its id. |
+| `zulip.messages.deleteById()` | DELETE `/messages/<msg_id>` | delete the message with the provided message id if the user has permission to do so. |
 | `zulip.queues.register()` | POST `/register` | registers a new queue. You can pass it a params object with the types of events you are interested in and whether you want to receive raw text or html (using markdown). |
 | `zulip.queues.deregister()` | DELETE `/events` | deletes a previously registered queue. |
 | `zulip.reactions.add()` | POST `/reactions` | add a reaction to a message. Accepts a params object with `message_id`, `emoji_name`, `emoji_code` and `reaction_type` (default is `unicode_emoji`). |
