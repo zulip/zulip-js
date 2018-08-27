@@ -60,6 +60,10 @@ function messages(config) {
       const url = `${config.apiURL}/messages/${params.message_id}/history`;
       return api(url, config, 'GET', params);
     },
+    deleteReactionById: (params) => {
+      const url = `${config.apiURL}/messages/${params.message_id}/reactions`;
+      return api(url, config, 'DELETE', params);
+    },
   };
 }
 

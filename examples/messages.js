@@ -73,3 +73,10 @@ zulip(config).then((z) => {
   };
   z.messages.getHistoryById(readParams).then(console.log);
 }).catch(err => console.log(err.message));
+
+zulip(config).then((z) => {
+  const readParams = {
+    message_id: 1,
+  };
+  z.messages.deleteReactionById(readParams).then(console.log);
+}).catch(err => console.log(err.message));

@@ -220,4 +220,26 @@ describe('Messages', () => {
         done();
       }).catch(done);
   });
+
+  it('should delete reaction by message id', (done) => {
+    const params = {
+      message_id: 1,
+    };
+    const validator = (url, options) => {
+      url.should.contain(`${common.config.apiURL}/messages/1/reactions`);
+      options.should.not.have.property('body');
+      options.method.should.be.equal('DELETE');
+    };
+    const output = {
+      msg: '',
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output);
+    messages(common.config).deleteReactionById(params)
+    .then((data) => {
+      data.should.have.property('result', 'success');
+      common.restoreStubs(stubs);
+      done();
+    }).catch(done);
+  });
 });
