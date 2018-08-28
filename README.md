@@ -67,6 +67,16 @@ zulip({ zuliprc }).then(zulip =>
 
 Please see some examples in [the examples directory](https://github.com/zulip/zulip-js/tree/master/examples).
 
+Also, to easily test an API endpoint while developing, you can run:
+
+```
+$ npm run build
+$ npm run call <method> <endpoint> [optional: json_params] [optional: path to zuliprc file]
+$ # For example:
+$ npm run call GET /users/me
+$ npm run call GET /users/me '' ~/path/to/my/zuliprc
+```
+
 ## Supported endpoints
 
 We support the following endpoints and are striving to have complete coverage of the API. If you want to use some endpoint we do not support presently, you can directly call it as follows:
