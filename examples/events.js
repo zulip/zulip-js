@@ -14,14 +14,14 @@ zulip(config).then((z) => {
     dont_block: false,
   };
   return z.events.retrieve(params).then(console.log);
-    // Prints
-    // { msg: '',
-    //   result: 'success',
-    //   handler_id: 2005928,
-    //   events:
-    //     [ { flags: [Object], message: [Object], type: 'message', id: 0 },
-    //       { type: 'heartbeat', id: 1 },
-    //       { flags: [], message: [Object], type: 'message', id: 2 },
-    //       { flags: [], message: [Object], type: 'message', id: 3 },
-    //       { flags: [], message: [Object], type: 'message', id: 4 } ] }
+  // Prints
+  // { msg: '',
+  //   result: 'success',
+  //   handler_id: 2005928,
+  //   events:
+  //     [ { flags: [Object], message: [Object], type: 'message', id: 0 },
+  //       { type: 'heartbeat', id: 1 },
+  //       { flags: [], message: [Object], type: 'message', id: 2 },
+  //       { flags: [], message: [Object], type: 'message', id: 3 },
+  //       { flags: [], message: [Object], type: 'message', id: 4 } ] }
 }).catch(err => console.log(err.message));

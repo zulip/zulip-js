@@ -33,10 +33,10 @@ describe('Events', () => {
     };
     const stubs = common.getStubs(validator, output);
     events(common.config).retrieve(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 });

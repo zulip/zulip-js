@@ -37,11 +37,11 @@ describe('Users', () => {
     };
     const stubs = common.getStubs(validator, output);
     users(common.config).retrieve()
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should fetch pointer for user', (done) => {
@@ -57,11 +57,11 @@ describe('Users', () => {
     };
     const stubs = common.getStubs(validator, output);
     users(common.config).me.pointer.retrieve()
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should update pointer for user', (done) => {
@@ -79,11 +79,11 @@ describe('Users', () => {
     };
     const stubs = common.getStubs(validator, output);
     users(common.config).me.pointer.update(pointer)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should fetch user profile', (done) => {
@@ -107,11 +107,11 @@ describe('Users', () => {
     };
     const stubs = common.getStubs(validator, output);
     users(common.config).me.getProfile()
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should subscribe user to stream', (done) => {
@@ -132,11 +132,11 @@ describe('Users', () => {
     output[common.config.username] = ['off topic'];
     const stubs = common.getStubs(validator, output);
     users(common.config).me.subscriptions.add(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should remove subscriptions', (done) => {
@@ -157,11 +157,11 @@ describe('Users', () => {
     };
     const stubs = common.getStubs(validator, output);
     users(common.config).me.subscriptions.remove(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should create a new user', (done) => {
@@ -187,10 +187,10 @@ describe('Users', () => {
     };
     const stubs = common.getStubs(validator, output);
     users(common.config).create(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 });

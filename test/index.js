@@ -30,13 +30,13 @@ describe('Index', () => {
     lib(common.config).then((z) => {
       const stubs = common.getStubs(validator, output);
       z.callEndpoint('/testurl', 'GET', params)
-      .should.eventually.have.property('result', 'success');
+        .should.eventually.have.property('result', 'success');
       common.restoreStubs(stubs);
       return lib(common.config);
     }).then((z) => {
       const stubs = common.getStubs(validator, output);
       z.callEndpoint('testurl', 'GET', params)
-      .should.eventually.have.property('result', 'success');
+        .should.eventually.have.property('result', 'success');
       common.restoreStubs(stubs);
       done();
     }).catch(done);
@@ -52,13 +52,13 @@ describe('Index', () => {
     lib(common.config).then((z) => {
       const stubs = common.getStubs(validator, output);
       z.callEndpoint('/testurl', 'POST', params)
-      .should.eventually.have.property('result', 'success');
+        .should.eventually.have.property('result', 'success');
       common.restoreStubs(stubs);
       return lib(common.config);
     }).then((z) => {
       const stubs = common.getStubs(validator, output);
       z.callEndpoint('testurl', 'POST', params)
-      .should.eventually.have.property('result', 'success');
+        .should.eventually.have.property('result', 'success');
       common.restoreStubs(stubs);
       done();
     }).catch(done);

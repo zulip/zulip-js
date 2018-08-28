@@ -27,11 +27,11 @@ describe('Reactions', () => {
     };
     const stubs = common.getStubs(validator, output);
     reactions(common.config).add(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should remove reaction from message', (done) => {
@@ -53,10 +53,10 @@ describe('Reactions', () => {
     };
     const stubs = common.getStubs(validator, output);
     reactions(common.config).remove(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 });

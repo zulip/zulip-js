@@ -30,11 +30,11 @@ describe('Accounts', () => {
     };
     const stubs = common.getStubs(validator, output);
     accounts(config).retrieve()
-    .then((data) => {
-      data.result.should.be.equal('success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.result.should.be.equal('success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should return error on incorrect password', (done) => {
@@ -45,10 +45,10 @@ describe('Accounts', () => {
     };
     const stubs = common.getStubs(validator, output);
     accounts(config).retrieve()
-    .then((data) => {
-      data.result.should.be.equal('error');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.result.should.be.equal('error');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 });

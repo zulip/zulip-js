@@ -33,11 +33,11 @@ describe('Typing', () => {
     };
     const stubs = common.getStubs(validator, output);
     typing(common.config).send(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('Should send typing stopped notification', (done) => {
@@ -67,10 +67,10 @@ describe('Typing', () => {
     };
     const stubs = common.getStubs(validator, output);
     typing(common.config).send(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 });

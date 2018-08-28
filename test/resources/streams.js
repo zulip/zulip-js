@@ -44,11 +44,11 @@ describe('Streams', () => {
     };
     const stubs = common.getStubs(validator, output);
     streams(common.config).retrieve()
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should fetch subscriptions', (done) => {
@@ -96,11 +96,11 @@ describe('Streams', () => {
     };
     const stubs = common.getStubs(validator, output);
     streams(common.config).subscriptions.retrieve(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should fetch stream id', (done) => {
@@ -122,15 +122,15 @@ describe('Streams', () => {
     };
     const stubs = common.getStubs(validator, output);
     streams(common.config).getStreamId(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      return streams(common.config).getStreamId(params.stream);
-    }).then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    })
-    .catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        return streams(common.config).getStreamId(params.stream);
+      }).then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      })
+      .catch(done);
   });
 
   it('should fetch the topics in a stream', (done) => {
@@ -162,12 +162,12 @@ describe('Streams', () => {
     };
     const stubs = common.getStubs(validator, output);
     streams(common.config).topics.retrieve(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      data.should.have.property('topics');
-      common.restoreStubs(stubs);
-      done();
-    })
-    .catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        data.should.have.property('topics');
+        common.restoreStubs(stubs);
+        done();
+      })
+      .catch(done);
   });
 });

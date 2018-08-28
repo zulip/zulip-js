@@ -26,11 +26,11 @@ describe('Queues', () => {
     };
     const stubs = common.getStubs(validator, output);
     queues(common.config).register(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 
   it('should deregister queue', (done) => {
@@ -48,10 +48,10 @@ describe('Queues', () => {
     };
     const stubs = common.getStubs(validator, output);
     queues(common.config).deregister(params)
-    .then((data) => {
-      data.should.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
   });
 });
