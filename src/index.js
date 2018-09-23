@@ -12,7 +12,7 @@ const emojis = require('./resources/emojis');
 const typing = require('./resources/typing');
 const reactions = require('./resources/reactions');
 const server = require('./resources/server');
-const realm = require('./resources/realm');
+const filters = require('./resources/filters');
 
 function getCallEndpoint(config) {
   return function callEndpoint(endpoint, method = 'GET', params) {
@@ -41,7 +41,7 @@ function resources(config) {
     typing: typing(config),
     reactions: reactions(config),
     server: server(config),
-    realm: realm(config),
+    filters: filters(config),
   };
 }
 

@@ -125,9 +125,7 @@ zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.users.me.subscriptions.remove()` | DELETE `/users/me/subscriptions` | remove subscriptions. |
 | `zulip.users.me.pointer.update()` | POST `users/me/pointer` | updates the pointer for the user, for moving the home view. Accepts a message id. This has the side effect of marking some messages as read. Will not return success if the message id is invalid. Will always succeed if the id is less than the current value of the pointer (the id of the last message read). |
 | `zulip.server.settings()` | GET `/server_settings` | returns a dictionary of server settings. |
-| `zulip.realm.retrieve()` | GET `realm/emoji` | returns a dictionary of all the emojis in a realm |
-| `zulip.realm.emoji()` | GET `realm/emoji` | returns a dictionary of all the emojis in a realm |
-| `zulip.realm.filters` | GET `realm/filters` | return a list of filters in a realm |
+| `zulip.filters.retrieve()` | GET `realm/filters` | return a list of filters in a realm |
 
 # Testing
 

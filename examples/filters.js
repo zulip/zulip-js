@@ -7,9 +7,5 @@ const config = {
 };
 
 zulip(config).then((z) => {
-  z.realm.emoji().then(console.log);
-}).catch(err => console.log(err.message));
-
-zulip(config).then((z) => {
-  z.realm.filters().then(console.log);
+  z.filters.retrieve().then(console.log);
 }).catch(err => console.log(err.message));
