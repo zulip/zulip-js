@@ -96,7 +96,7 @@ zulip.callEndpoint('/messages', 'POST', params);
 | --- | --- | --- |
 | `zulip.accounts.retrieve()` | POST `/fetch_api_key` | returns a promise that you can use to retrieve your `API key`. |
 | `zulip.emojis.retrieve()` | GET `/realm/emoji` | retrieves the list of realm specific emojis. |
-| `zulip.events.retrieve()` | GET `/events` | retrieves events from a queue. You can pass it a params object with the id of the queue you are interested in, the last event id that you have received and wish to acknowlege. You can also specify whether the server should not block on this request until there is a new event (the default is to block). |
+| `zulip.events.retrieve()` | GET `/events` | retrieves events from a queue. You can pass it a params object with the id of the queue you are interested in, the last event id that you have received and wish to acknowledge. You can also specify whether the server should not block on this request until there is a new event (the default is to block). |
 | `zulip.messages.send()` | POST `/messages` | returns a promise that can be used to send a message.|
 | `zulip.messages.retrieve()` | GET `/messages` | returns a promise that can be used to retrieve messages from a stream. You need to specify the id of the message to be used as an anchor. Use `1000000000` to retrieve the most recent message, or [`zulip.users.me.pointer.retrieve()`](#fetching-a-pointer-for-a-user) to get the id of the last message the user read. |
 | `zulip.messages.render()` | POST `/messages/render` | returns a promise that can be used to get rendered HTML for a message text. |
