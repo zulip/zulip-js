@@ -1,4 +1,3 @@
-require('es6-promise').polyfill();
 const helper = require('./helper');
 
 function api(baseUrl, config, method, params) {

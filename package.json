@@ -10,7 +10,6 @@
     "fs-readfile-promise": false
   },
   "dependencies": {
-    "es6-promise": "^4.2.8",
     "fs-readfile-promise": "^3.0.1",
     "ini": "^1.3.5",
     "isomorphic-fetch": "^2.2.1",
