@@ -24,4 +24,4 @@ zulip(config).then((z) => {
   //       { flags: [], message: [Object], type: 'message', id: 2 },
   //       { flags: [], message: [Object], type: 'message', id: 3 },
   //       { flags: [], message: [Object], type: 'message', id: 4 } ] }
-}).catch(err => console.log(err.message));
+}).catch((err) => console.log(err.message));

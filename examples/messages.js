@@ -57,33 +57,33 @@ zulip(config).then((z) => {
       // Remove the flag for the message that was sent
       z.messages.flags.remove(flagParams).then(console.log);
     });
-  }).then(res => console.log(res.messages));
-}).catch(err => console.log(err.message));
+  }).then((res) => console.log(res.messages));
+}).catch((err) => console.log(err.message));
 
 zulip(config).then((z) => {
   const readParams = {
     message_id: 1,
   };
   z.messages.getById(readParams).then(console.log);
-}).catch(err => console.log(err.message));
+}).catch((err) => console.log(err.message));
 
 zulip(config).then((z) => {
   const readParams = {
     message_id: 2,
   };
   z.messages.getHistoryById(readParams).then(console.log);
-}).catch(err => console.log(err.message));
+}).catch((err) => console.log(err.message));
 
 zulip(config).then((z) => {
   const readParams = {
     message_id: 1,
   };
   z.messages.deleteReactionById(readParams).then(console.log);
-}).catch(err => console.log(err.message));
+}).catch((err) => console.log(err.message));
 
 zulip(config).then((z) => {
   const readParams = {
     message_id: 1,
   };
   z.messages.deleteById(readParams).then(console.log);
-}).catch(err => console.log(err.message));
+}).catch((err) => console.log(err.message));

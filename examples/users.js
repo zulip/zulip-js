@@ -62,8 +62,8 @@ zulip(config)
       z.users.me.pointer.update(resp.pointer + 1).then(console.log);
     });
   })
-  .catch(err => console.log(err.msg));
+  .catch((err) => console.log(err.msg));
 
 zulip(config).then((z) => {
   z.users.me.alertWords.retrieve().then(console.log);
-}).catch(err => console.log(err.msg));
+}).catch((err) => console.log(err.msg));

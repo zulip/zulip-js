@@ -16,7 +16,7 @@ const filters = require('./resources/filters');
 
 function getCallEndpoint(config) {
   return function callEndpoint(endpoint, method = 'GET', params) {
-    const myConfig = Object.assign({}, config);
+    const myConfig = { ...config };
     let finalendpoint = endpoint;
     if (!endpoint.startsWith('/')) {
       finalendpoint = `/${endpoint}`; // eslint-disable-line
@@ -47,7 +47,7 @@ function resources(config) {
 
 function zulip(initialConfig) {
   if (initialConfig.zuliprc) {
-    return parseConfigFile(initialConfig.zuliprc).then(config => resources(config));
+    return parseConfigFile(initialConfig.zuliprc).then((config) => resources(config));
   }
   const config = initialConfig;
   if (config.realm.endsWith('/api')) {

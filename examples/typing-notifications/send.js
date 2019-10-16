@@ -37,4 +37,4 @@ zulip(config).then((z) => {
       // Prints
     }).catch(console.log);
   });
-}).catch(err => console.log(err.message));
+}).catch((err) => console.log(err.message));

@@ -16,4 +16,4 @@ zulip(config).then((z) => {
   // Get all the topics in the stream with ID 15
     .then(() => z.streams.topics.retrieve({ stream_id: 15 }))
     .then(console.log);
-}).catch(err => console.log(err.msg));
+}).catch((err) => console.log(err.msg));

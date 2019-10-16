@@ -12,7 +12,7 @@ function accounts(config) {
       return helper.fetch(url, {
         method: 'POST',
         body: form,
-      }).then(res => res.json());
+      }).then((res) => res.json());
     },
   };
 }

@@ -1,5 +1,5 @@
-const zulip = require('../lib');
 const path = require('path');
+const zulip = require('../lib');
 
 const config = {
   username: process.env.ZULIP_USERNAME,
@@ -14,7 +14,7 @@ zulip({ zuliprc }).then((z) => {
   console.log(z.config);
   return z.streams.subscriptions();
 }).then(console.log)
-  .catch(err => console.log(err.message));
+  .catch((err) => console.log(err.message));
 
 // Initialization with username & API key
 zulip(config).then((z) => {
@@ -26,4 +26,4 @@ zulip(config).then((z) => {
   config.apiKey = key;
   return zulip(config).streams.subscriptions();
 }).then(console.log)
-  .catch(err => console.log(err.message));
+  .catch((err) => console.log(err.message));
