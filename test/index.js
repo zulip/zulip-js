@@ -1,6 +1,6 @@
+const chai = require('chai');
 const lib = require('../lib/index');
 const common = require('./common');
-const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
 chai.should();

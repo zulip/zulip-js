@@ -1,6 +1,6 @@
+const chai = require('chai');
 const messages = require('../../lib/resources/messages');
 const common = require('../common');
-const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
 chai.should();

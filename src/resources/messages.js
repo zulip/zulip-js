@@ -6,7 +6,7 @@ function messages(config) {
   return {
     retrieve: (initialParams) => {
       const url = `${config.apiURL}/messages`;
-      const params = Object.assign({}, initialParams);
+      const params = { ...initialParams };
       if (params.narrow) {
         params.narrow = JSON.stringify(params.narrow);
       }
@@ -18,7 +18,7 @@ function messages(config) {
     },
     render: (initialParams) => {
       const url = `${config.apiURL}/messages/render`;
-      let params = Object.assign({}, initialParams);
+      let params = { ...initialParams };
       if (typeof (initialParams) === 'string') {
         params = {
           content: initialParams,
@@ -34,7 +34,7 @@ function messages(config) {
       add: (initialParams) => {
         // params.flag can be one of 'read', 'starred', 'mentioned',
         // 'wildcard_mentioned', 'has_alert_word', 'historical',
-        const params = Object.assign({}, initialParams);
+        const params = { ...initialParams };
         params.op = 'add';
         if (params.messages) {
           params.messages = JSON.stringify(params.messages);
@@ -44,7 +44,7 @@ function messages(config) {
       remove: (initialParams) => {
         // params.flag can be one of 'read', 'starred', 'mentioned',
         // 'wildcard_mentioned', 'has_alert_word', 'historical',
-        const params = Object.assign({}, initialParams);
+        const params = { ...initialParams };
         params.op = 'remove';
         if (params.messages) {
           params.messages = JSON.stringify(params.messages);

@@ -13,7 +13,7 @@ const params = {
   reaction_type: 'unicode_emoji',
 };
 
-zulip(config).then(z => z.reactions.add(params).then((resp) => {
+zulip(config).then((z) => z.reactions.add(params).then((resp) => {
   console.log(resp);
   return z.reactions.remove(params).then(console.log);
-})).catch(err => console.log(err.msg));
+})).catch((err) => console.log(err.msg));

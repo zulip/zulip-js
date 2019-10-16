@@ -1,6 +1,6 @@
-const zulip = require('../lib');
 const path = require('path');
 const homedir = require('os').homedir();
+const zulip = require('../lib');
 
 if (process.argv[2] === 'help') {
   console.log('This is a helper script to test Zulip APIs.');
@@ -14,6 +14,6 @@ const params = process.argv[4] || '';
 const zuliprc = process.argv[5] ? path.resolve(__dirname, process.argv[5]) : path.resolve(homedir, '.zuliprc');
 
 zulip({ zuliprc })
-  .then(z => z.callEndpoint(endpoint, method, params))
+  .then((z) => z.callEndpoint(endpoint, method, params))
   .then(console.log)
-  .catch(err => console.log(err.message));
+  .catch((err) => console.log(err.message));

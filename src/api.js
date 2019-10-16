@@ -12,11 +12,11 @@ function api(baseUrl, config, method, params) {
       options.body.append(key, params[key]);
     });
   } else if (params) {
-    const generateQueryParam = key => `${key}=${params[key]}`;
+    const generateQueryParam = (key) => `${key}=${params[key]}`;
     const queryParams = Object.keys(params).map(generateQueryParam);
     url = `${url}?${queryParams.join('&')}`;
   }
-  return helper.fetch(url, options).then(res => res.json());
+  return helper.fetch(url, options).then((res) => res.json());
 }
 
 module.exports = api;

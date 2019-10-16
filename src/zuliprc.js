@@ -3,7 +3,7 @@ import { parse } from 'ini';
 
 function parseConfigFile(filename) {
   return readFile(filename)
-    .then(buf => buf.toString())
+    .then((buf) => buf.toString())
     .then(parse)
     .then((parsedConfig) => {
       const config = {
