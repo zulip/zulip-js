@@ -16,7 +16,26 @@ function api(baseUrl, config, method, params) {
     const queryParams = Object.keys(params).map(generateQueryParam);
     url = `${url}?${queryParams.join('&')}`;
   }
-  return helper.fetch(url, options).then((res) => res.json());
+  let response = null;
+  return helper.fetch(url, options).then((res) => {
+    response = res;
+    return res.json();
+  }).catch((e) => {
+    if (e instanceof SyntaxError) {
+      // We probably got a non-JSON response from the server.
+      // We should inform the user of the same.
+      let message = 'Server Returned a non-JSON response.';
+      if (response.status === 404) {
+        message += ` Maybe endpoint: ${method} ${response.url.replace(config.apiURL, '')} doesn't exist.`;
+      } else {
+        message += ' Please check the API documentation.';
+      }
+      const error = new Error(message);
+      error.res = response;
+      throw error;
+    }
+    throw e;
+  });
 }
 
 module.exports = api;
