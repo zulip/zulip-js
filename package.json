@@ -18,8 +18,11 @@
     "postinstall-build": "^5.0.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-destructuring": "^7.6.0",
+    "@babel/plugin-transform-instanceof": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^6.5.1",
