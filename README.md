@@ -5,6 +5,7 @@ Javascript library to access the Zulip API
 ## Initialization
 ### With API Key
 ```js
+const zulip = require('zulip-js');
 const config = {
   username: process.env.ZULIP_USERNAME,
   apiKey: process.env.ZULIP_API_KEY,
@@ -13,7 +14,7 @@ const config = {
 
 zulip(config).then(zulip => {
   // The zulip object now initialized with config
-  zulip.streams.subscriptions().then(res => {
+  zulip.streams.subscriptions.retrieve().then(res => {
     console.log(res);
   });
 });
@@ -33,7 +34,7 @@ const config = {
 //Fetch API Key
 zulip(config).then(zulip => {
   // The zulip object now contains the API Key
-  zulip.streams.subscriptions().then(res => {
+  zulip.streams.subscriptions.retrieve().then(res => {
     console.log(res);
   });
 });
@@ -55,9 +56,9 @@ Calling `zulip({ zuliprc: 'zuliprc' } )` will read this file and then pass a con
 const zulip = require('zulip-js');
 const path = require('path');
 const zuliprc = path.resolve(__dirname, 'zuliprc');
-zulip({ zuliprc }).then(zulip => 
+zulip({ zuliprc }).then(zulip => {
   // The zulip object now contains the config from the zuliprc file
-  zulip.streams.subscriptions().then(res => {
+  zulip.streams.subscriptions.retrieve().then(res => {
     console.log(res);
   });
 });
@@ -138,16 +139,19 @@ requests and also allows us to test the input passed to it. This is what
 a sample test for an API endpoint looks like:
 
 ```js
+const chai = require('chai');
 const users = require('../../lib/resources/users'); // File to test.
 const common = require('../common'); // Common functions for tests.
-
-const chai = require('chai');
 chai.use(require('chai-as-promised'));
 
 chai.should();
 
 describe('Users', () => {
   it('should fetch users', () => {
+    const params = {
+      subject: 'test',
+      content: 'sample test',
+    };
     const validator = (url, options) => { // Function to test the network request parameters.
       url.should.equal(`${common.config.apiURL}/users`);
       Object.keys(options.body.data).length.should.equal(4);
@@ -159,7 +163,7 @@ describe('Users', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output); // Stub the network modules.
-    users(common.config).retrieve().should.eventually.have.property('result', 'success'); // Function call.
+    users(common.config).retrieve(params).should.eventually.have.property('result', 'success'); // Function call.
     common.restoreStubs(stubs); // Restore the stubs.
   });
 });
