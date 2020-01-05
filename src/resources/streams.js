@@ -28,6 +28,10 @@ function streams(config) {
         return api(url, config, 'GET');
       },
     },
+    deleteById: (params) => {
+      const url = `${config.apiURL}/streams/${params.stream_id}`;
+      return api(url, config, 'DELETE', params);
+    },
   };
 }
 

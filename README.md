@@ -115,6 +115,7 @@ zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.streams.retrieve()` | GET `/streams` | returns a promise that can be used to retrieve all streams. |
 | `zulip.streams.getStreamId()` | GET `/get_stream_id` | returns a promise that can be used to retrieve a stream's id. |
 | `zulip.streams.subscriptions.retrieve()` | GET `/users/me/subscriptions` | returns a promise that can be used to retrieve the user's subscriptions. |
+| `zulip.streams.deleteById()` | DELETE `/streams/<stream_id>` | delete the stream with the provided stream id if the user has permission to do so. |
 | `zulip.streams.topics.retrieve()` | GET `/users/me/<stream_id>/topics` | retrieves all the topics in a specific stream. |
 | `zulip.typing.send()` | POST `/typing` | can be used to send a typing notification. The parameters required are `to` (either a username or a list of usernames) and `op` (either `start` or `stop`). |
 | `zulip.users.retrieve()` | GET `/users` | retrieves all users for this realm. |
