@@ -4,7 +4,7 @@ const config = {
   realm: process.env.ZULIP_REALM,
 };
 
-const zulip = require('../lib/')(config);
+const zulip = require('../lib/');
 
 // Prints
 //   { msg: '',
@@ -15,6 +15,9 @@ const zulip = require('../lib/')(config);
 const params = {
   subscriptions: JSON.stringify([{ name: 'off topic' }]),
 };
-zulip.users.me.subscriptions.add(params).then((data) => {
-  console.log(data);
+
+zulip(config).then((z) => {
+  z.users.me.subscriptions.add(params).then((data) => {
+    console.log(data);
+  });
 });
