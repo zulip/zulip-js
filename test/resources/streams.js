@@ -170,4 +170,26 @@ describe('Streams', () => {
       })
       .catch(done);
   });
+
+  it('should delete stream by stream id', (done) => {
+    const params = {
+      stream_id: 1,
+    };
+    const validator = (url, options) => {
+      url.should.contain(`${common.config.apiURL}/streams/${params.stream_id}`);
+      options.should.not.have.property('body');
+      options.method.should.be.equal('DELETE');
+    };
+    const output = {
+      msg: '',
+      result: 'success',
+    };
+    const stubs = common.getStubs(validator, output);
+    streams(common.config).deleteById(params)
+      .then((data) => {
+        data.should.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      }).catch(done);
+  });
 });
