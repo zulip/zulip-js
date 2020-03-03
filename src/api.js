@@ -8,7 +8,11 @@ function api(baseUrl, config, method, params) {
   if (method === 'POST') {
     options.body = new helper.FormData();
     Object.keys(params).forEach((key) => {
-      options.body.append(key, params[key]);
+      let data = params[key];
+      if (Array.isArray(data)) {
+        data = JSON.stringify(data);
+      }
+      options.body.append(key, data);
     });
   } else if (params) {
     const generateQueryParam = (key) => `${key}=${params[key]}`;
