@@ -13,6 +13,7 @@ const typing = require('./resources/typing');
 const reactions = require('./resources/reactions');
 const server = require('./resources/server');
 const filters = require('./resources/filters');
+const eventsWapper = require('./events_wrapper');
 
 function getCallEndpoint(config) {
   return function callEndpoint(endpoint, method = 'GET', params) {
@@ -25,7 +26,6 @@ function getCallEndpoint(config) {
     return api(url, myConfig, method, params);
   };
 }
-
 
 function resources(config) {
   return {
@@ -42,6 +42,7 @@ function resources(config) {
     reactions: reactions(config),
     server: server(config),
     filters: filters(config),
+    callOnEachEvent: eventsWapper(config),
   };
 }
 
