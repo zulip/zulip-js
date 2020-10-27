@@ -1,4 +1,4 @@
-# zulip-js [![Build Status](https://travis-ci.org/zulip/zulip-js.svg?branch=master)](https://travis-ci.org/zulip/zulip-js)
+# zulip-js [![Build Status](https://travis-ci.com/zulip/zulip-js.svg?branch=master)](https://travis-ci.com/github/zulip/zulip-js)
 Javascript library to access the Zulip API
 
 # Usage
