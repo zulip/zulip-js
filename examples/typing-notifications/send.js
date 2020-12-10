@@ -1,9 +1,6 @@
 const zulip = require('../../lib');
 
-let recipient = process.env.ZULIP_USERNAME;
-if (process.env.ZULIP_TYPING_RECIPIENT) {
-  recipient = process.env.ZULIP_TYPING_RECIPIENT;
-}
+const recipient = Number(process.env.ZULIP_TYPING_RECIPIENT);
 
 const config = {
   username: process.env.ZULIP_USERNAME,
@@ -23,7 +20,7 @@ const config = {
 
   // Send typing started notification
   await z.typing.send({
-    to: recipient,
+    to: [recipient],
     op: 'start',
   });
   console.log('sent typing params');

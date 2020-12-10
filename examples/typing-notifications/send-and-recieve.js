@@ -29,6 +29,8 @@ const [
     realm,
   });
 
+  const { user_id: recipientId } = await recipientClient.users.me.getProfile();
+
   const res = await recipientClient.queues.register({
     event_types: ['typing'],
   });
@@ -37,7 +39,7 @@ const [
 
   console.log(
     await senderClient.typing.send({
-      to: recipient,
+      to: [recipientId],
       op: 'start',
     })
   );
