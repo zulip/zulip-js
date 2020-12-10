@@ -46,11 +46,9 @@ function resources(config) {
   };
 }
 
-function zulip(initialConfig) {
+async function zulip(initialConfig) {
   if (initialConfig.zuliprc) {
-    return parseConfigFile(initialConfig.zuliprc).then((config) =>
-      resources(config)
-    );
+    return resources(await parseConfigFile(initialConfig.zuliprc));
   }
   const config = initialConfig;
   if (config.realm.endsWith('/api')) {
@@ -60,14 +58,10 @@ function zulip(initialConfig) {
   }
 
   if (!config.apiKey) {
-    return accounts(config)
-      .retrieve()
-      .then((res) => {
-        config.apiKey = res.api_key;
-        return resources(config);
-      });
+    const res = await accounts(config).retrieve();
+    config.apiKey = res.api_key;
   }
-  return Promise.resolve(resources(config));
+  return resources(config);
 }
 
 module.exports = zulip;
