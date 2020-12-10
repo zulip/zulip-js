@@ -1,9 +1,9 @@
-import readFile from 'fs-readfile-promise';
+import { promises as fsPromises } from 'fs';
 import { parse } from 'ini';
 
 async function parseConfigFile(filename) {
-  const buf = await readFile(filename);
-  const parsedConfig = parse(buf.toString());
+  const data = await fsPromises.readFile(filename, 'utf8');
+  const parsedConfig = parse(data);
   const config = {
     realm: parsedConfig.api.site,
     username: parsedConfig.api.email,
