@@ -9,7 +9,7 @@ Javascript library to access the Zulip API
 ### With API Key
 
 ```js
-const zulip = require('zulip-js');
+const zulipInit = require('zulip-js');
 const config = {
   username: process.env.ZULIP_USERNAME,
   apiKey: process.env.ZULIP_API_KEY,
@@ -17,7 +17,7 @@ const config = {
 };
 
 (async () => {
-  const zulip = await zulip(config);
+  const zulip = await zulipInit(config);
   // The zulip object now initialized with config
   console.log(await zulip.streams.subscriptions.retrieve());
 })();
@@ -25,10 +25,10 @@ const config = {
 
 ### With Username & Password
 
-You will need to first retrieve the API key by calling `await zulip(config)`.
+You will need to first retrieve the API key by calling `await zulipInit(config)`.
 
 ```js
-const zulip = require('zulip-js');
+const zulipInit = require('zulip-js');
 const config = {
   username: process.env.ZULIP_USERNAME,
   password: process.env.ZULIP_PASSWORD,
@@ -37,7 +37,7 @@ const config = {
 
 (async () => {
   // Fetch API Key
-  const zulip = await zulip(config);
+  const zulip = await zulipInit(config);
   // The zulip object now contains the API Key
   console.log(await zulip.streams.subscriptions.retrieve());
 })();
@@ -54,14 +54,14 @@ key=wlueAg7cQXqKpUgIaPP3dmF4vibZXal7
 site=http://localhost:9991
 ```
 
-Please remember to add this file to your `.gitignore`! Calling `await zulip({ zuliprc: 'zuliprc' })` will read this file.
+Please remember to add this file to your `.gitignore`! Calling `await zulipInit({ zuliprc: 'zuliprc' })` will read this file.
 
 ```js
-const zulip = require('zulip-js');
+const zulipInit = require('zulip-js');
 const path = require('path');
 const zuliprc = path.resolve(__dirname, 'zuliprc');
 (async () => {
-  const zulip = await zulip({ zuliprc });
+  const zulip = await zulipInit({ zuliprc });
   // The zulip object now contains the config from the zuliprc file
   console.log(await zulip.streams.subscriptions.retrieve());
 })();
