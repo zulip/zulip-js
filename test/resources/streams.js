@@ -59,9 +59,9 @@ describe('Streams', () => {
       url.should.contain(`${common.config.apiURL}/users/me/subscriptions`);
       options.method.should.be.equal('GET');
       options.should.not.have.property('body');
-      const urldata = url.split('?', 2)[1].split('&'); // URL: host/streams?key=value&key=value...
-      urldata.length.should.equal(1);
-      urldata.should.contain(`subscriptions=${params.subscriptions}`);
+      [...new URL(url).searchParams].should.have.deep.members([
+        ['subscriptions', params.subscriptions],
+      ]);
     };
     const output = {
       msg: '',
@@ -111,9 +111,9 @@ describe('Streams', () => {
       url.should.contain(`${common.config.apiURL}/get_stream_id`);
       options.method.should.be.equal('GET');
       options.should.not.have.property('body');
-      const urldata = url.split('?', 2)[1].split('&'); // URL: host/get_stream_id?key=value&key=value...
-      urldata.length.should.equal(1);
-      urldata.should.contain(`stream=${params.stream}`);
+      [...new URL(url).searchParams].should.have.deep.members([
+        ['stream', params.stream],
+      ]);
     };
     const output = {
       result: 'success',

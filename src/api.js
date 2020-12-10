@@ -1,7 +1,7 @@
 const helper = require('./helper');
 
 function api(baseUrl, config, method, params) {
-  let url = baseUrl;
+  const url = new URL(baseUrl);
   const auth = Buffer.from(`${config.username}:${config.apiKey}`).toString('base64');
   const authHeader = `Basic ${auth}`;
   const options = { method, headers: { Authorization: authHeader } };
@@ -15,12 +15,12 @@ function api(baseUrl, config, method, params) {
       options.body.append(key, data);
     });
   } else if (params) {
-    const generateQueryParam = (key) => `${key}=${params[key]}`;
-    const queryParams = Object.keys(params).map(generateQueryParam);
-    url = `${url}?${queryParams.join('&')}`;
+    Object.entries(params).forEach(([key, value]) => {
+      url.searchParams.append(key, value);
+    });
   }
   let response = null;
-  return helper.fetch(url, options).then((res) => {
+  return helper.fetch(url.href, options).then((res) => {
     response = res;
     return res.json();
   }).catch((e) => {
