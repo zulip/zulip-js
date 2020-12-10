@@ -18,7 +18,8 @@ function eventsWrapper(config) {
 
   async function registerQueue(eventTypes = null) {
     let res;
-    while (true) { // eslint-disable-line no-constant-condition
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
       try {
         const params = { eventTypes };
         res = await z.queues.register(params); // eslint-disable-line no-await-in-loop
@@ -44,14 +45,16 @@ function eventsWrapper(config) {
       lastEventId = Math.max(lastEventId, event.id);
       callback(event);
     };
-    while (true) { // eslint-disable-line no-constant-condition
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
       if (!queueId) {
         const queueData = await registerQueue(eventTypes); // eslint-disable-line no-await-in-loop
         queueId = queueData.queueId;
         lastEventId = queueData.lastEventId;
       }
       try {
-        const res = await z.events.retrieve({ // eslint-disable-line no-await-in-loop
+        // eslint-disable-next-line no-await-in-loop
+        const res = await z.events.retrieve({
           queue_id: queueId,
           last_event_id: lastEventId,
           dont_block: false,
