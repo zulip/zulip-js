@@ -6,18 +6,16 @@ const config = {
   realm: process.env.ZULIP_REALM,
 };
 
-const params = {
-  message_id: 1,
-  emoji_name: 'musical_note',
-  emoji_code: '1f3b5',
-  reaction_type: 'unicode_emoji',
-};
+(async () => {
+  const z = await zulip(config);
 
-zulip(config)
-  .then((z) =>
-    z.reactions.add(params).then((resp) => {
-      console.log(resp);
-      return z.reactions.remove(params).then(console.log);
-    })
-  )
-  .catch((err) => console.log(err.msg));
+  const params = {
+    message_id: 1,
+    emoji_name: 'musical_note',
+    emoji_code: '1f3b5',
+    reaction_type: 'unicode_emoji',
+  };
+
+  console.log(await z.reactions.add(params));
+  console.log(await z.reactions.remove(params));
+})();

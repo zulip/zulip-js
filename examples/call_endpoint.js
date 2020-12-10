@@ -6,13 +6,15 @@ const config = {
   realm: process.env.ZULIP_REALM,
 };
 
-const sendParams = {
-  to: 'bot testing',
-  type: 'stream',
-  subject: 'Testing zulip-js',
-  content: 'Something is horribly wrong....',
-};
+(async () => {
+  const z = await zulip(config);
 
-const z = zulip(config);
-
-z.callEndpoint('/messages', 'POST', sendParams);
+  console.log(
+    await z.callEndpoint('/messages', 'POST', {
+      to: 'bot testing',
+      type: 'stream',
+      subject: 'Testing zulip-js',
+      content: 'Something is horribly wrong....',
+    })
+  );
+})();

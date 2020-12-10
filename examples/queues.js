@@ -6,37 +6,27 @@ const config = {
   realm: process.env.ZULIP_REALM,
 };
 
-zulip(config)
-  .then((z) => {
-    // Register queue to receive messages for user
-    const params = {
-      event_types: ['message'],
-    };
+(async () => {
+  const z = await zulip(config);
 
-    // Prints
-    // { msg: '',
-    //   max_message_id: 100375522,
-    //   last_event_id: -1,
-    //   result: 'success',
-    //   queue_id: 'a queue id' }
+  // Register queue to receive messages for user
 
-    return z.queues.register(params).then(console.log);
-  })
-  .catch((err) => console.log(err.msg));
+  // Prints
+  // { msg: '',
+  //   max_message_id: 100375522,
+  //   last_event_id: -1,
+  //   result: 'success',
+  //   queue_id: 'a queue id' }
 
-zulip(config)
-  .then((z) => {
-    // Delete a previously registered queue
-    const params = {
-      queue_id: '1511901550:2',
-    };
+  console.log(await z.queues.register({ event_types: ['message'] }));
 
-    // Prints
-    // {
-    //   msg: '',
-    //   result: 'success',
-    // }
+  // Delete a previously registered queue
 
-    return z.queues.deregister(params).then(console.log);
-  })
-  .catch((err) => console.log(err.msg));
+  // Prints
+  // {
+  //   msg: '',
+  //   result: 'success',
+  // }
+
+  console.log(await z.queues.deregister({ queue_id: '1511901550:2' }));
+})();

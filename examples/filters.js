@@ -6,8 +6,7 @@ const config = {
   realm: process.env.ZULIP_REALM,
 };
 
-zulip(config)
-  .then((z) => {
-    z.filters.retrieve().then(console.log);
-  })
-  .catch((err) => console.log(err.message));
+(async () => {
+  const z = await zulip(config);
+  console.log(await z.filters.retrieve());
+})();

@@ -1,9 +1,15 @@
 const zulip = require('../lib');
 
-zulip({
-  username: process.env.ZULIP_USERNAME,
-  apiKey: process.env.ZULIP_API_KEY,
-  realm: process.env.ZULIP_REALM,
-})
-  .then((z) => z.accounts.retrieve())
-  .then(console.log);
+process.on('unhandledRejection', (err) => {
+  console.error(err);
+  process.exit(1);
+});
+
+(async () => {
+  const z = await zulip({
+    username: process.env.ZULIP_USERNAME,
+    apiKey: process.env.ZULIP_API_KEY,
+    realm: process.env.ZULIP_REALM,
+  });
+  console.log(await z.accounts.retrieve());
+})();

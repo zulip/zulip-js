@@ -19,7 +19,7 @@ const zuliprc = process.argv[5]
   ? path.resolve(__dirname, process.argv[5])
   : path.resolve(homedir, '.zuliprc');
 
-zulip({ zuliprc })
-  .then((z) => z.callEndpoint(endpoint, method, params))
-  .then(console.log)
-  .catch((err) => console.log(err.message));
+(async () => {
+  const z = await zulip({ zuliprc });
+  console.log(await z.callEndpoint(endpoint, method, params));
+})();

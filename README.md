@@ -16,17 +16,16 @@ const config = {
   realm: process.env.ZULIP_REALM,
 };
 
-zulip(config).then((zulip) => {
+(async () => {
+  const zulip = await zulip(config);
   // The zulip object now initialized with config
-  zulip.streams.subscriptions.retrieve().then((res) => {
-    console.log(res);
-  });
-});
+  console.log(await zulip.streams.subscriptions.retrieve());
+})();
 ```
 
 ### With Username & Password
 
-You will need to first retrieve the API key by calling `zulip(config)` and then use the zulip object that it passes to `.then()`
+You will need to first retrieve the API key by calling `await zulip(config)`.
 
 ```js
 const zulip = require('zulip-js');
@@ -36,13 +35,12 @@ const config = {
   realm: process.env.ZULIP_REALM,
 };
 
-//Fetch API Key
-zulip(config).then((zulip) => {
+(async () => {
+  // Fetch API Key
+  const zulip = await zulip(config);
   // The zulip object now contains the API Key
-  zulip.streams.subscriptions.retrieve().then((res) => {
-    console.log(res);
-  });
-});
+  console.log(await zulip.streams.subscriptions.retrieve());
+})();
 ```
 
 ### With zuliprc
@@ -56,18 +54,17 @@ key=wlueAg7cQXqKpUgIaPP3dmF4vibZXal7
 site=http://localhost:9991
 ```
 
-Please remember to add this file to your `.gitignore`! Calling `zulip({ zuliprc: 'zuliprc' } )` will read this file and then pass a configured zulip object to `.then()`.
+Please remember to add this file to your `.gitignore`! Calling `await zulip({ zuliprc: 'zuliprc' })` will read this file.
 
 ```js
 const zulip = require('zulip-js');
 const path = require('path');
 const zuliprc = path.resolve(__dirname, 'zuliprc');
-zulip({ zuliprc }).then((zulip) => {
+(async () => {
+  const zulip = await zulip({ zuliprc });
   // The zulip object now contains the config from the zuliprc file
-  zulip.streams.subscriptions.retrieve().then((res) => {
-    console.log(res);
-  });
-});
+  console.log(await zulip.streams.subscriptions.retrieve());
+})();
 ```
 
 ## Examples
@@ -96,7 +93,7 @@ const params = {
   content: 'Something is horribly wrong....',
 };
 
-zulip.callEndpoint('/messages', 'POST', params);
+await zulip.callEndpoint('/messages', 'POST', params);
 ```
 
 | Function to call | API Endpoint | Documentation |

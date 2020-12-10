@@ -6,18 +6,18 @@ const config = {
 
 const zulip = require('../lib');
 
-// Prints
-//   { msg: '',
-//     subscribed: { 'aero31aero@gmail.com': [ 'off topic' ] },
-//     already_subscribed: {},
-//     result: 'success' }
+(async () => {
+  const z = await zulip(config);
 
-const params = {
-  subscriptions: JSON.stringify([{ name: 'off topic' }]),
-};
+  // Prints
+  //   { msg: '',
+  //     subscribed: { 'aero31aero@gmail.com': [ 'off topic' ] },
+  //     already_subscribed: {},
+  //     result: 'success' }
 
-zulip(config).then((z) => {
-  z.users.me.subscriptions.add(params).then((data) => {
-    console.log(data);
-  });
-});
+  console.log(
+    await z.users.me.subscriptions.add({
+      subscriptions: JSON.stringify([{ name: 'off topic' }]),
+    })
+  );
+})();

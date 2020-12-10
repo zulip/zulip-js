@@ -3,9 +3,10 @@ const zulip = require('../lib');
 
 const zuliprc = path.resolve('/path/to/your/zuliprc');
 
-zulip({ zuliprc }).then((z) => {
-  const handleEvent = async (event) => {
+(async () => {
+  const z = await zulip({ zuliprc });
+  const handleEvent = (event) => {
     console.log('Got Event:', event);
   };
-  z.callOnEachEvent(handleEvent, ['message']);
-});
+  await z.callOnEachEvent(handleEvent, ['message']);
+})();
