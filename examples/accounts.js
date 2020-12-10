@@ -8,7 +8,7 @@ process.on('unhandledRejection', (err) => {
 (async () => {
   const z = await zulip({
     username: process.env.ZULIP_USERNAME,
-    apiKey: process.env.ZULIP_API_KEY,
+    password: process.env.ZULIP_PASSWORD,
     realm: process.env.ZULIP_REALM,
   });
   console.log(await z.accounts.retrieve());

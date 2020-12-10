@@ -1,6 +1,6 @@
 const config = {
   username: process.env.ZULIP_USERNAME,
-  apiKey: process.env.ZULIP_APIKEY,
+  apiKey: process.env.ZULIP_API_KEY,
   realm: process.env.ZULIP_REALM,
 };
 

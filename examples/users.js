@@ -2,7 +2,7 @@ const zulip = require('../lib');
 
 const config = {
   username: process.env.ZULIP_USERNAME,
-  apikey: process.env.ZULIP_API_KEY,
+  apiKey: process.env.ZULIP_API_KEY,
   realm: process.env.ZULIP_REALM,
 };
 
