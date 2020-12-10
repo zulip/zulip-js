@@ -22,10 +22,10 @@ describe('Index', () => {
       url.should.contain(`${common.config.apiURL}/testurl`);
       options.method.should.be.equal('GET');
       options.should.not.have.property('body');
-      const urldata = url.split('?', 2)[1].split('&'); // URL: host/messages?key=value&key=value...
-      urldata.length.should.equal(2);
-      urldata.should.contain(`one=${params.one}`);
-      urldata.should.contain(`two=${params.two}`);
+      [...new URL(url).searchParams].should.have.deep.members([
+        ['one', params.one],
+        ['two', params.two],
+      ]);
     };
     lib(common.config).then((z) => {
       const stubs = common.getStubs(validator, output);

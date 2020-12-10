@@ -48,13 +48,13 @@ describe('Messages', () => {
       url.should.contain(`${common.config.apiURL}/messages`);
       options.method.should.be.equal('GET');
       options.should.not.have.property('body');
-      const urldata = url.split('?', 2)[1].split('&'); // URL: host/messages?key=value&key=value...
-      urldata.length.should.equal(5);
-      urldata.should.contain(`stream=${params.stream}`);
-      urldata.should.contain(`type=${params.type}`);
-      urldata.should.contain(`anchor=${params.anchor}`);
-      urldata.should.contain(`num_before=${params.num_before}`);
-      urldata.should.contain(`num_after=${params.num_after}`);
+      [...new URL(url).searchParams].should.have.deep.members([
+        ['stream', params.stream],
+        ['type', params.type],
+        ['anchor', `${params.anchor}`],
+        ['num_before', `${params.num_before}`],
+        ['num_after', `${params.num_after}`],
+      ]);
     };
     const output = {
       result: 'success',

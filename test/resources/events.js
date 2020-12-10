@@ -15,10 +15,10 @@ describe('Events', () => {
       url.should.contain(`${common.config.apiURL}/events`);
       options.method.should.be.equal('GET');
       options.should.not.have.property('body');
-      const urldata = url.split('?', 2)[1].split('&'); // URL: host/messages?key=value&key=value...
-      urldata.length.should.equal(2);
-      urldata.should.contain(`last_event_id=${params.last_event_id}`);
-      urldata.should.contain(`dont_block=${params.dont_block}`);
+      [...new URL(url).searchParams].should.have.deep.members([
+        ['last_event_id', `${params.last_event_id}`],
+        ['dont_block', `${params.dont_block}`],
+      ]);
     };
     const output = {
       events: [{
