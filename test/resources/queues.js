@@ -25,12 +25,14 @@ describe('Queues', () => {
       options.body.data.event_types.should.be.equal('["message"]');
     };
     const stubs = common.getStubs(validator, output);
-    queues(common.config).register(params)
+    queues(common.config)
+      .register(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should deregister queue', (done) => {
@@ -47,11 +49,13 @@ describe('Queues', () => {
       options.should.not.have.property('body');
     };
     const stubs = common.getStubs(validator, output);
-    queues(common.config).deregister(params)
+    queues(common.config)
+      .deregister(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

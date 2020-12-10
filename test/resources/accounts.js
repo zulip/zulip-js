@@ -29,12 +29,14 @@ describe('Accounts', () => {
       email: config.email,
     };
     const stubs = common.getStubs(validator, output);
-    accounts(config).retrieve()
+    accounts(config)
+      .retrieve()
       .then((data) => {
         data.result.should.be.equal('success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should return error on incorrect password', (done) => {
@@ -44,11 +46,13 @@ describe('Accounts', () => {
       reason: 'incorrect_creds',
     };
     const stubs = common.getStubs(validator, output);
-    accounts(config).retrieve()
+    accounts(config)
+      .retrieve()
       .then((data) => {
         data.result.should.be.equal('error');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

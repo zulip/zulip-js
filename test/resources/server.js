@@ -15,7 +15,8 @@ describe('Server', () => {
     const output = {
       realm_name: 'Zulip Community',
       realm_icon: '/user_avatars/2/realm/icon.png?version=2',
-      realm_description: '<p>Welcome to the Zulip development and user community!  </p>\n<p>Join to get a quick Zulip demo, observe a healthy Zulip community, offer feedback to the Zulip core team, or get involved in as a contributor.  </p>\n<ul>\n<li><a href="http://zulip.readthedocs.io/en/latest/chat-zulip-org.html" target="_blank" title="http://zulip.readthedocs.io/en/latest/chat-zulip-org.html">Community conventions</a></li>\n<li><a href="https://zulip.readthedocs.io/en/latest/code-of-conduct.html" target="_blank" title="https://zulip.readthedocs.io/en/latest/code-of-conduct.html">Code of Conduct</a></li>\n</ul>\n<p>Note that this server runs a bleeding-edge version of Zulip, so you may encounter bugs.  Please report them!</p>',
+      realm_description:
+        '<p>Welcome to the Zulip development and user community!  </p>\n<p>Join to get a quick Zulip demo, observe a healthy Zulip community, offer feedback to the Zulip core team, or get involved in as a contributor.  </p>\n<ul>\n<li><a href="http://zulip.readthedocs.io/en/latest/chat-zulip-org.html" target="_blank" title="http://zulip.readthedocs.io/en/latest/chat-zulip-org.html">Community conventions</a></li>\n<li><a href="https://zulip.readthedocs.io/en/latest/code-of-conduct.html" target="_blank" title="https://zulip.readthedocs.io/en/latest/code-of-conduct.html">Code of Conduct</a></li>\n</ul>\n<p>Note that this server runs a bleeding-edge version of Zulip, so you may encounter bugs.  Please report them!</p>',
       require_email_format_usernames: true,
       result: 'success',
       authentication_methods: {
@@ -34,11 +35,13 @@ describe('Server', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    server(common.config).settings()
+    server(common.config)
+      .settings()
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

@@ -11,7 +11,7 @@ const getFakes = (validator, output) => {
       return {
         json,
       };
-    }());
+    })();
     return Promise.resolve(rval);
   };
   const FormData = () => {

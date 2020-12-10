@@ -15,40 +15,48 @@ describe('Streams', () => {
     const output = {
       result: 'success',
       msg: '',
-      streams: [{
-        name: 'Denmark',
-        stream_id: 1,
-        invite_only: false,
-        description: 'A Scandinavian country',
-      }, {
-        name: 'Rome',
-        stream_id: 2,
-        invite_only: false,
-        description: 'Yet another Italian city',
-      }, {
-        name: 'Scotland',
-        stream_id: 3,
-        invite_only: false,
-        description: 'Located in the United Kingdom',
-      }, {
-        name: 'Venice',
-        stream_id: 4,
-        invite_only: false,
-        description: 'A northeastern Italian city',
-      }, {
-        name: 'Verona',
-        stream_id: 5,
-        invite_only: false,
-        description: 'A city in Italy',
-      }],
+      streams: [
+        {
+          name: 'Denmark',
+          stream_id: 1,
+          invite_only: false,
+          description: 'A Scandinavian country',
+        },
+        {
+          name: 'Rome',
+          stream_id: 2,
+          invite_only: false,
+          description: 'Yet another Italian city',
+        },
+        {
+          name: 'Scotland',
+          stream_id: 3,
+          invite_only: false,
+          description: 'Located in the United Kingdom',
+        },
+        {
+          name: 'Venice',
+          stream_id: 4,
+          invite_only: false,
+          description: 'A northeastern Italian city',
+        },
+        {
+          name: 'Verona',
+          stream_id: 5,
+          invite_only: false,
+          description: 'A city in Italy',
+        },
+      ],
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config).retrieve()
+    streams(common.config)
+      .retrieve()
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should fetch subscriptions', (done) => {
@@ -66,41 +74,48 @@ describe('Streams', () => {
     const output = {
       msg: '',
       result: 'success',
-      subscriptions: [{
-        color: '#e79ab5',
-        invite_only: false,
-        desktop_notifications: true,
-        subscribers: [Object],
-        stream_id: 1,
-        pin_to_top: false,
-        email_address: 'Denmark+986326cbbaef74fcb4c77cc41d47b12c@zulipdev.com:9991',
-        audible_notifications: true,
-        description: 'A Scandinavian country',
-        in_home_view: true,
-        push_notifications: false,
-        name: 'Denmark',
-      }, {
-        color: '#e79ab5',
-        invite_only: false,
-        desktop_notifications: true,
-        subscribers: [Object],
-        stream_id: 3,
-        pin_to_top: false,
-        email_address: 'Scotland+a3a2dc96b0406d47c826041f773ee29a@zulipdev.com:9991',
-        audible_notifications: true,
-        description: 'Located in the United Kingdom',
-        in_home_view: true,
-        push_notifications: false,
-        name: 'Scotland',
-      }],
+      subscriptions: [
+        {
+          color: '#e79ab5',
+          invite_only: false,
+          desktop_notifications: true,
+          subscribers: [Object],
+          stream_id: 1,
+          pin_to_top: false,
+          email_address:
+            'Denmark+986326cbbaef74fcb4c77cc41d47b12c@zulipdev.com:9991',
+          audible_notifications: true,
+          description: 'A Scandinavian country',
+          in_home_view: true,
+          push_notifications: false,
+          name: 'Denmark',
+        },
+        {
+          color: '#e79ab5',
+          invite_only: false,
+          desktop_notifications: true,
+          subscribers: [Object],
+          stream_id: 3,
+          pin_to_top: false,
+          email_address:
+            'Scotland+a3a2dc96b0406d47c826041f773ee29a@zulipdev.com:9991',
+          audible_notifications: true,
+          description: 'Located in the United Kingdom',
+          in_home_view: true,
+          push_notifications: false,
+          name: 'Scotland',
+        },
+      ],
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config).subscriptions.retrieve(params)
+    streams(common.config)
+      .subscriptions.retrieve(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should fetch stream id', (done) => {
@@ -121,11 +136,13 @@ describe('Streams', () => {
       stream_id: 94,
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config).getStreamId(params)
+    streams(common.config)
+      .getStreamId(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         return streams(common.config).getStreamId(params.stream);
-      }).then((data) => {
+      })
+      .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
@@ -138,7 +155,9 @@ describe('Streams', () => {
       stream_id: 15,
     };
     const validator = (url, options) => {
-      url.should.contain(`${common.config.apiURL}/users/me/${params.stream_id}/topics`);
+      url.should.contain(
+        `${common.config.apiURL}/users/me/${params.stream_id}/topics`
+      );
       options.method.should.be.equal('GET');
       options.should.not.have.property('body');
     };
@@ -161,7 +180,8 @@ describe('Streams', () => {
       ],
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config).topics.retrieve(params)
+    streams(common.config)
+      .topics.retrieve(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         data.should.have.property('topics');
@@ -185,11 +205,13 @@ describe('Streams', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config).deleteById(params)
+    streams(common.config)
+      .deleteById(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

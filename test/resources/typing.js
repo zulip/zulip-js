@@ -20,24 +20,28 @@ describe('Typing', () => {
       JSON.parse(options.body.data.to).should.equal(params.to);
     };
     const output = {
-      events: [{
-        id: 0,
-        type: 'typing',
-        op: 'start',
-        sender: {}, // TODO expand test with actual data
-        recipients: {},
-      }],
+      events: [
+        {
+          id: 0,
+          type: 'typing',
+          op: 'start',
+          sender: {}, // TODO expand test with actual data
+          recipients: {},
+        },
+      ],
       result: 'success',
       msg: '',
       handler_id: 225,
     };
     const stubs = common.getStubs(validator, output);
-    typing(common.config).send(params)
+    typing(common.config)
+      .send(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('Should send typing stopped notification', (done) => {
@@ -54,23 +58,27 @@ describe('Typing', () => {
       JSON.parse(options.body.data.to).should.equal(params.to);
     };
     const output = {
-      events: [{
-        id: 0,
-        type: 'typing',
-        op: 'stop',
-        sender: {},
-        recipients: {},
-      }],
+      events: [
+        {
+          id: 0,
+          type: 'typing',
+          op: 'stop',
+          sender: {},
+          recipients: {},
+        },
+      ],
       result: 'success',
       msg: '',
       handler_id: 286,
     };
     const stubs = common.getStubs(validator, output);
-    typing(common.config).send(params)
+    typing(common.config)
+      .send(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

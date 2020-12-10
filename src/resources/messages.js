@@ -19,7 +19,7 @@ function messages(config) {
     render: (initialParams) => {
       const url = `${config.apiURL}/messages/render`;
       let params = { ...initialParams };
-      if (typeof (initialParams) === 'string') {
+      if (typeof initialParams === 'string') {
         params = {
           content: initialParams,
         };

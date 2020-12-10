@@ -28,12 +28,14 @@ describe('Messages', () => {
       id: 168,
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).send(params)
+    messages(common.config)
+      .send(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should fetch messages from test stream', (done) => {
@@ -62,12 +64,14 @@ describe('Messages', () => {
       messages: [], // TODO expand test with actual API message data.
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).retrieve(params)
+    messages(common.config)
+      .retrieve(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should render messages', (done) => {
@@ -86,11 +90,13 @@ describe('Messages', () => {
       rendered: '<p>Hello <strong>world</strong></p>',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).render(params)
+    messages(common.config)
+      .render(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         return messages(common.config).render(params.content);
-      }).then((data) => {
+      })
+      .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
@@ -113,12 +119,14 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).update(params)
+    messages(common.config)
+      .update(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should get message by id', (done) => {
@@ -135,12 +143,14 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).getById(params)
+    messages(common.config)
+      .getById(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should get message history by id', (done) => {
@@ -157,12 +167,14 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).getHistoryById(params)
+    messages(common.config)
+      .getHistoryById(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should mark message as read', (done) => {
@@ -185,12 +197,14 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).flags.add(params)
+    messages(common.config)
+      .flags.add(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should mark message as unread', (done) => {
@@ -212,12 +226,14 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).flags.remove(params)
+    messages(common.config)
+      .flags.remove(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should delete reaction by message id', (done) => {
@@ -234,12 +250,14 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).deleteReactionById(params)
+    messages(common.config)
+      .deleteReactionById(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should delete message by message id', (done) => {
@@ -256,11 +274,13 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config).deleteById(params)
+    messages(common.config)
+      .deleteById(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

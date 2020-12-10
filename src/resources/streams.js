@@ -9,7 +9,7 @@ function streams(config) {
     getStreamId: (initialParams) => {
       const url = `${config.apiURL}/get_stream_id`;
       let params = { ...initialParams };
-      if (typeof (initialParams) === 'string') {
+      if (typeof initialParams === 'string') {
         params = {
           stream: initialParams,
         };

@@ -1,26 +1,31 @@
 # zulip-js [![Build Status](https://travis-ci.com/zulip/zulip-js.svg?branch=master)](https://travis-ci.com/github/zulip/zulip-js)
+
 Javascript library to access the Zulip API
 
 # Usage
+
 ## Initialization
+
 ### With API Key
+
 ```js
 const zulip = require('zulip-js');
 const config = {
   username: process.env.ZULIP_USERNAME,
   apiKey: process.env.ZULIP_API_KEY,
-  realm: process.env.ZULIP_REALM
+  realm: process.env.ZULIP_REALM,
 };
 
-zulip(config).then(zulip => {
+zulip(config).then((zulip) => {
   // The zulip object now initialized with config
-  zulip.streams.subscriptions.retrieve().then(res => {
+  zulip.streams.subscriptions.retrieve().then((res) => {
     console.log(res);
   });
 });
 ```
 
 ### With Username & Password
+
 You will need to first retrieve the API key by calling `zulip(config)` and then use the zulip object that it passes to `.then()`
 
 ```js
@@ -28,20 +33,22 @@ const zulip = require('zulip-js');
 const config = {
   username: process.env.ZULIP_USERNAME,
   password: process.env.ZULIP_PASSWORD,
-  realm: process.env.ZULIP_REALM
+  realm: process.env.ZULIP_REALM,
 };
 
 //Fetch API Key
-zulip(config).then(zulip => {
+zulip(config).then((zulip) => {
   // The zulip object now contains the API Key
-  zulip.streams.subscriptions.retrieve().then(res => {
+  zulip.streams.subscriptions.retrieve().then((res) => {
     console.log(res);
   });
 });
 ```
 
 ### With zuliprc
+
 Create a file called `zuliprc` (in the same directory as your code) which looks like:
+
 ```
 [api]
 email=cordelia@zulip.com
@@ -49,16 +56,15 @@ key=wlueAg7cQXqKpUgIaPP3dmF4vibZXal7
 site=http://localhost:9991
 ```
 
-Please remember to add this file to your `.gitignore`!
-Calling `zulip({ zuliprc: 'zuliprc' } )` will read this file and then pass a configured zulip object to `.then()`.
+Please remember to add this file to your `.gitignore`! Calling `zulip({ zuliprc: 'zuliprc' } )` will read this file and then pass a configured zulip object to `.then()`.
 
 ```js
 const zulip = require('zulip-js');
 const path = require('path');
 const zuliprc = path.resolve(__dirname, 'zuliprc');
-zulip({ zuliprc }).then(zulip => {
+zulip({ zuliprc }).then((zulip) => {
   // The zulip object now contains the config from the zuliprc file
-  zulip.streams.subscriptions.retrieve().then(res => {
+  zulip.streams.subscriptions.retrieve().then((res) => {
     console.log(res);
   });
 });
@@ -98,7 +104,7 @@ zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.accounts.retrieve()` | POST `/fetch_api_key` | returns a promise that you can use to retrieve your `API key`. |
 | `zulip.emojis.retrieve()` | GET `/realm/emoji` | retrieves the list of realm specific emojis. |
 | `zulip.events.retrieve()` | GET `/events` | retrieves events from a queue. You can pass it a params object with the id of the queue you are interested in, the last event id that you have received and wish to acknowledge. You can also specify whether the server should not block on this request until there is a new event (the default is to block). |
-| `zulip.messages.send()` | POST `/messages` | returns a promise that can be used to send a message.|
+| `zulip.messages.send()` | POST `/messages` | returns a promise that can be used to send a message. |
 | `zulip.messages.retrieve()` | GET `/messages` | returns a promise that can be used to retrieve messages from a stream. You need to specify the id of the message to be used as an anchor. Use `1000000000` to retrieve the most recent message, or [`zulip.users.me.pointer.retrieve()`](#fetching-a-pointer-for-a-user) to get the id of the last message the user read. |
 | `zulip.messages.render()` | POST `/messages/render` | returns a promise that can be used to get rendered HTML for a message text. |
 | `zulip.messages.update()` | PATCH `/messages/<msg_id>` | updates the content or topic of the message with the given `msg_id`. |
@@ -135,9 +141,7 @@ Use `npm test` to run the tests.
 
 ## Writing Tests
 
-Currently, we have a simple testing framework which stubs our network
-requests and also allows us to test the input passed to it. This is what
-a sample test for an API endpoint looks like:
+Currently, we have a simple testing framework which stubs our network requests and also allows us to test the input passed to it. This is what a sample test for an API endpoint looks like:
 
 ```js
 const chai = require('chai');
@@ -153,18 +157,22 @@ describe('Users', () => {
       subject: 'test',
       content: 'sample test',
     };
-    const validator = (url, options) => { // Function to test the network request parameters.
+    const validator = (url, options) => {
+      // Function to test the network request parameters.
       url.should.equal(`${common.config.apiURL}/users`);
       Object.keys(options.body.data).length.should.equal(4);
       options.body.data.subject.should.equal(params.subject);
       options.body.data.content.should.equal(params.content);
     };
-    const output = { // The data returned by the API in JSON format.
+    const output = {
+      // The data returned by the API in JSON format.
       already_subscribed: {},
       result: 'success',
     };
     const stubs = common.getStubs(validator, output); // Stub the network modules.
-    users(common.config).retrieve(params).should.eventually.have.property('result', 'success'); // Function call.
+    users(common.config)
+      .retrieve(params)
+      .should.eventually.have.property('result', 'success'); // Function call.
     common.restoreStubs(stubs); // Restore the stubs.
   });
 });

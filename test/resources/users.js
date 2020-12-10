@@ -15,33 +15,40 @@ describe('Users', () => {
     const output = {
       msg: '',
       result: 'success',
-      members: [{
-        email: 'iago@zulip.com',
-        user_id: 5,
-        full_name: 'Iago',
-        bot_type: null,
-        is_bot: false,
-        is_admin: true,
-        is_active: true,
-        avatar_url: 'https://secure.gravatar.com/avatar/af4f06322c177ef4e1e9b2c424986b54?d=identicon&version=1',
-      }, {
-        email: 'cordelia@zulip.com',
-        user_id: 3,
-        full_name: 'Cordelia Lear',
-        bot_type: null,
-        is_bot: false,
-        is_admin: false,
-        is_active: true,
-        avatar_url: 'https://secure.gravatar.com/avatar/77c3871a68c8d70356156029fd0a4999?d=identicon&version=1',
-      }],
+      members: [
+        {
+          email: 'iago@zulip.com',
+          user_id: 5,
+          full_name: 'Iago',
+          bot_type: null,
+          is_bot: false,
+          is_admin: true,
+          is_active: true,
+          avatar_url:
+            'https://secure.gravatar.com/avatar/af4f06322c177ef4e1e9b2c424986b54?d=identicon&version=1',
+        },
+        {
+          email: 'cordelia@zulip.com',
+          user_id: 3,
+          full_name: 'Cordelia Lear',
+          bot_type: null,
+          is_bot: false,
+          is_admin: false,
+          is_active: true,
+          avatar_url:
+            'https://secure.gravatar.com/avatar/77c3871a68c8d70356156029fd0a4999?d=identicon&version=1',
+        },
+      ],
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).retrieve()
+    users(common.config)
+      .retrieve()
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should fetch pointer for user', (done) => {
@@ -56,12 +63,14 @@ describe('Users', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.pointer.retrieve()
+    users(common.config)
+      .me.pointer.retrieve()
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should update pointer for user', (done) => {
@@ -78,12 +87,14 @@ describe('Users', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.pointer.update(pointer)
+    users(common.config)
+      .me.pointer.update(pointer)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should fetch user profile', (done) => {
@@ -106,12 +117,14 @@ describe('Users', () => {
       is_admin: false,
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.getProfile()
+    users(common.config)
+      .me.getProfile()
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should subscribe user to stream', (done) => {
@@ -131,12 +144,14 @@ describe('Users', () => {
     };
     output[common.config.username] = ['off topic'];
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.subscriptions.add(params)
+    users(common.config)
+      .me.subscriptions.add(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should remove subscriptions', (done) => {
@@ -144,7 +159,9 @@ describe('Users', () => {
       subscriptions: JSON.stringify(['Verona']),
     };
     const validator = (url, options) => {
-      url.should.equal(`${common.config.apiURL}/users/me/subscriptions?subscriptions=%5B%22Verona%22%5D`);
+      url.should.equal(
+        `${common.config.apiURL}/users/me/subscriptions?subscriptions=%5B%22Verona%22%5D`
+      );
       options.method.should.be.equal('DELETE');
       options.should.not.have.property('body');
       options.method.should.be.equal('DELETE');
@@ -156,12 +173,14 @@ describe('Users', () => {
       removed: JSON.stringify(['Verona']),
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.subscriptions.remove(params)
+    users(common.config)
+      .me.subscriptions.remove(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should create a new user', (done) => {
@@ -186,12 +205,14 @@ describe('Users', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).create(params)
+    users(common.config)
+      .create(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should fetch users alert words', (done) => {
@@ -205,11 +226,13 @@ describe('Users', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config).me.alertWords.retrieve()
+    users(common.config)
+      .me.alertWords.retrieve()
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

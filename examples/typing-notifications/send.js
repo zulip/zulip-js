@@ -11,30 +11,35 @@ const config = {
   realm: process.env.ZULIP_REALM,
 };
 
-zulip(config).then((z) => {
-  const params = {
-    event_types: ['typing'],
-  };
-  // Register queue to receive typing notification events
-  z.queues.register(params).then((res) => {
-    console.log('registered queue');
-    const queueID = res.queue_id;
-    const typingParams = {
-      to: recipient,
-      op: 'start',
+zulip(config)
+  .then((z) => {
+    const params = {
+      event_types: ['typing'],
     };
-    // Send typing started notification
-    z.typing.send(typingParams).then(() => {
-      console.log('sent typing params');
-      // Retrieve typing events from a queue,
-      // blocking until there is an event (or the request times out)
-      const eventParams = {
-        queue_id: queueID,
-        last_event_id: -1,
-        dont_block: false,
+    // Register queue to receive typing notification events
+    z.queues.register(params).then((res) => {
+      console.log('registered queue');
+      const queueID = res.queue_id;
+      const typingParams = {
+        to: recipient,
+        op: 'start',
       };
-      z.events.retrieve(eventParams).then(console.log);
-      // Prints
-    }).catch(console.log);
-  });
-}).catch((err) => console.log(err.message));
+      // Send typing started notification
+      z.typing
+        .send(typingParams)
+        .then(() => {
+          console.log('sent typing params');
+          // Retrieve typing events from a queue,
+          // blocking until there is an event (or the request times out)
+          const eventParams = {
+            queue_id: queueID,
+            last_event_id: -1,
+            dont_block: false,
+          };
+          z.events.retrieve(eventParams).then(console.log);
+          // Prints
+        })
+        .catch(console.log);
+    });
+  })
+  .catch((err) => console.log(err.message));

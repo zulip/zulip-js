@@ -14,19 +14,23 @@ describe('Filters', () => {
     };
     const output = {
       filters: [
-        ['#(?P<id>[0-9]{2,8})',
+        [
+          '#(?P<id>[0-9]{2,8})',
           'https://github.com/zulip/zulip/pull/%(id)s',
-          1],
+          1,
+        ],
       ],
       msg: '',
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    filters(common.config).retrieve()
+    filters(common.config)
+      .retrieve()
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

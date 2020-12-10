@@ -17,6 +17,7 @@ const config = {
 //       },
 //   ...
 
-zulip(config).then((z) => z.emojis.retrieve())
+zulip(config)
+  .then((z) => z.emojis.retrieve())
   .then(console.log)
   .catch((err) => console.log(err.msg));

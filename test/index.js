@@ -27,19 +27,28 @@ describe('Index', () => {
         ['two', params.two],
       ]);
     };
-    lib(common.config).then((z) => {
-      const stubs = common.getStubs(validator, output);
-      z.callEndpoint('/testurl', 'GET', params)
-        .should.eventually.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      return lib(common.config);
-    }).then((z) => {
-      const stubs = common.getStubs(validator, output);
-      z.callEndpoint('testurl', 'GET', params)
-        .should.eventually.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+    lib(common.config)
+      .then((z) => {
+        const stubs = common.getStubs(validator, output);
+        z.callEndpoint(
+          '/testurl',
+          'GET',
+          params
+        ).should.eventually.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        return lib(common.config);
+      })
+      .then((z) => {
+        const stubs = common.getStubs(validator, output);
+        z.callEndpoint(
+          'testurl',
+          'GET',
+          params
+        ).should.eventually.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      })
+      .catch(done);
   });
   it('should call post endpoints', (done) => {
     const validator = (url, options) => {
@@ -49,18 +58,27 @@ describe('Index', () => {
       options.body.data.one.should.equal(params.one);
       options.body.data.two.should.equal(params.two);
     };
-    lib(common.config).then((z) => {
-      const stubs = common.getStubs(validator, output);
-      z.callEndpoint('/testurl', 'POST', params)
-        .should.eventually.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      return lib(common.config);
-    }).then((z) => {
-      const stubs = common.getStubs(validator, output);
-      z.callEndpoint('testurl', 'POST', params)
-        .should.eventually.have.property('result', 'success');
-      common.restoreStubs(stubs);
-      done();
-    }).catch(done);
+    lib(common.config)
+      .then((z) => {
+        const stubs = common.getStubs(validator, output);
+        z.callEndpoint(
+          '/testurl',
+          'POST',
+          params
+        ).should.eventually.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        return lib(common.config);
+      })
+      .then((z) => {
+        const stubs = common.getStubs(validator, output);
+        z.callEndpoint(
+          'testurl',
+          'POST',
+          params
+        ).should.eventually.have.property('result', 'success');
+        common.restoreStubs(stubs);
+        done();
+      })
+      .catch(done);
   });
 });

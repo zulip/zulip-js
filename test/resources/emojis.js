@@ -24,11 +24,13 @@ describe('Emojis', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    emojis(common.config).retrieve()
+    emojis(common.config)
+      .retrieve()
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

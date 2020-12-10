@@ -21,22 +21,26 @@ describe('Events', () => {
       ]);
     };
     const output = {
-      events: [{
-        id: 0,
-        message: [Object],
-        type: 'message',
-        flags: [Object],
-      }],
+      events: [
+        {
+          id: 0,
+          message: [Object],
+          type: 'message',
+          flags: [Object],
+        },
+      ],
       result: 'success',
       msg: '',
       queue_id: '1511901550:3',
     };
     const stubs = common.getStubs(validator, output);
-    events(common.config).retrieve(params)
+    events(common.config)
+      .retrieve(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

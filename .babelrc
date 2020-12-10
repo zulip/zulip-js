@@ -3,7 +3,8 @@
   "plugins": [
     "@babel/plugin-transform-destructuring",
     "@babel/plugin-transform-instanceof",
-    ["@babel/plugin-transform-runtime",
+    [
+      "@babel/plugin-transform-runtime",
       {
         "regenerator": true
       }

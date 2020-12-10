@@ -14,7 +14,9 @@ describe('Reactions', () => {
       reaction_type: 'unicode_emoji',
     };
     const validator = (url, options) => {
-      url.should.equal(`${common.config.apiURL}/messages/${params.message_id}/reactions`);
+      url.should.equal(
+        `${common.config.apiURL}/messages/${params.message_id}/reactions`
+      );
       options.method.should.be.equal('POST');
       Object.keys(options.body.data).length.should.equal(3);
       options.body.data.emoji_name.should.equal(params.emoji_name);
@@ -26,12 +28,14 @@ describe('Reactions', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    reactions(common.config).add(params)
+    reactions(common.config)
+      .add(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 
   it('should remove reaction from message', (done) => {
@@ -52,11 +56,13 @@ describe('Reactions', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    reactions(common.config).remove(params)
+    reactions(common.config)
+      .remove(params)
       .then((data) => {
         data.should.have.property('result', 'success');
         common.restoreStubs(stubs);
         done();
-      }).catch(done);
+      })
+      .catch(done);
   });
 });

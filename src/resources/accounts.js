@@ -7,10 +7,12 @@ function accounts(config) {
       const form = new helper.FormData();
       form.append('username', config.username);
       form.append('password', config.password);
-      return helper.fetch(url, {
-        method: 'POST',
-        body: form,
-      }).then((res) => res.json());
+      return helper
+        .fetch(url, {
+          method: 'POST',
+          body: form,
+        })
+        .then((res) => res.json());
     },
   };
 }
