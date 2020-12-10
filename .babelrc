@@ -1,13 +1,4 @@
 {
   "presets": ["@babel/preset-env"],
-  "plugins": [
-    "@babel/plugin-transform-destructuring",
-    "@babel/plugin-transform-instanceof",
-    [
-      "@babel/plugin-transform-runtime",
-      {
-        "regenerator": true
-      }
-    ]
-  ]
+  "plugins": ["@babel/plugin-transform-runtime"]
 }
