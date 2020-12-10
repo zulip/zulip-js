@@ -1,7 +1,6 @@
 const chai = require('chai');
 const events = require('../../lib/resources/events');
 const common = require('../common');
-chai.use(require('chai-as-promised'));
 
 chai.should();
 

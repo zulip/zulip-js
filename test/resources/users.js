@@ -1,7 +1,6 @@
 const chai = require('chai');
 const users = require('../../lib/resources/users');
 const common = require('../common');
-chai.use(require('chai-as-promised'));
 
 chai.should();
 

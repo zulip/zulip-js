@@ -1,7 +1,6 @@
 const chai = require('chai');
 const emojis = require('../../lib/resources/emojis');
 const common = require('../common');
-chai.use(require('chai-as-promised'));
 
 chai.should();
 

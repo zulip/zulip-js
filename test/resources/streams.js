@@ -1,7 +1,6 @@
 const chai = require('chai');
 const streams = require('../../lib/resources/streams');
 const common = require('../common');
-chai.use(require('chai-as-promised'));
 
 chai.should();
 

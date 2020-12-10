@@ -1,7 +1,6 @@
 const chai = require('chai');
 const lib = require('../lib/index');
 const common = require('./common');
-chai.use(require('chai-as-promised'));
 
 chai.should();
 
@@ -29,11 +28,11 @@ describe('Index', () => {
     };
     const z = await lib(common.config);
     const stubs = common.getStubs(validator, output);
-    z.callEndpoint('/testurl', 'GET', params).should.eventually.have.property(
+    (await z.callEndpoint('/testurl', 'GET', params)).should.have.property(
       'result',
       'success'
     );
-    z.callEndpoint('testurl', 'GET', params).should.eventually.have.property(
+    (await z.callEndpoint('testurl', 'GET', params)).should.have.property(
       'result',
       'success'
     );
@@ -49,11 +48,11 @@ describe('Index', () => {
     };
     const z = await lib(common.config);
     const stubs = common.getStubs(validator, output);
-    z.callEndpoint('/testurl', 'POST', params).should.eventually.have.property(
+    (await z.callEndpoint('/testurl', 'POST', params)).should.have.property(
       'result',
       'success'
     );
-    z.callEndpoint('testurl', 'POST', params).should.eventually.have.property(
+    (await z.callEndpoint('testurl', 'POST', params)).should.have.property(
       'result',
       'success'
     );
