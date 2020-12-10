@@ -59,6 +59,7 @@ function zulip(initialConfig) {
 
   if (!config.apiKey) {
     return accounts(config).retrieve().then((res) => {
+      if (res.error) return Promise.reject(res.msg)
       config.apiKey = res.api_key;
       return resources(config);
     });
