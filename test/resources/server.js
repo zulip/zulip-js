@@ -33,9 +33,8 @@ describe('Server', () => {
       push_notifications_enabled: true,
       msg: '',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await server(common.config).settings();
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 });

@@ -29,19 +29,17 @@ const getFakes = (validator, output) => {
   };
 };
 
-const getStubs = (validator, output) => {
-  const stubs = [];
+const sandbox = sinon.createSandbox();
+
+const stubNetwork = (validator, output) => {
   const fakes = getFakes(validator, output);
-  stubs.push(sinon.stub(helper, 'fetch').callsFake(fakes.fetch));
-  stubs.push(sinon.stub(helper, 'FormData').callsFake(fakes.FormData));
-  return stubs;
+  sandbox.stub(helper, 'fetch').callsFake(fakes.fetch);
+  sandbox.stub(helper, 'FormData').callsFake(fakes.FormData);
 };
 
-const restoreStubs = (stubs) => {
-  stubs.forEach((stub) => {
-    stub.restore();
-  });
-};
+afterEach(() => {
+  sandbox.restore();
+});
 
 const config = {
   username: 'valid@email.com',
@@ -52,7 +50,6 @@ const config = {
 
 module.exports = {
   getFakes,
-  getStubs,
-  restoreStubs,
+  stubNetwork,
   config,
 };

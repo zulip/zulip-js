@@ -26,10 +26,9 @@ describe('Reactions', () => {
       result: 'success',
       msg: '',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await reactions(common.config).add(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should remove reaction from message', async () => {
@@ -49,9 +48,8 @@ describe('Reactions', () => {
       result: 'success',
       msg: '',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await reactions(common.config).remove(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 });

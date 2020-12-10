@@ -23,10 +23,9 @@ describe('Queues', () => {
       Object.keys(options.body.data).length.should.be.equal(1);
       options.body.data.event_types.should.be.equal('["message"]');
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await queues(common.config).register(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should deregister queue', async () => {
@@ -42,9 +41,8 @@ describe('Queues', () => {
       options.method.should.be.equal('DELETE');
       options.should.not.have.property('body');
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await queues(common.config).deregister(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 });

@@ -39,10 +39,9 @@ describe('Users', () => {
         },
       ],
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await users(common.config).retrieve();
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should fetch pointer for user', async () => {
@@ -56,10 +55,9 @@ describe('Users', () => {
       msg: '',
       result: 'success',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await users(common.config).me.pointer.retrieve();
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should update pointer for user', async () => {
@@ -75,10 +73,9 @@ describe('Users', () => {
       msg: '',
       result: 'success',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await users(common.config).me.pointer.update(pointer);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should fetch user profile', async () => {
@@ -100,10 +97,9 @@ describe('Users', () => {
       client_id: '77431db17e4f32068756902d7c09c8bb',
       is_admin: false,
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await users(common.config).me.getProfile();
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should subscribe user to stream', async () => {
@@ -122,10 +118,9 @@ describe('Users', () => {
       result: 'success',
     };
     output[common.config.username] = ['off topic'];
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await users(common.config).me.subscriptions.add(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should remove subscriptions', async () => {
@@ -146,10 +141,9 @@ describe('Users', () => {
       msg: '',
       removed: JSON.stringify(['Verona']),
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await users(common.config).me.subscriptions.remove(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should create a new user', async () => {
@@ -173,10 +167,9 @@ describe('Users', () => {
       result: 'success',
       msg: '',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await users(common.config).create(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should fetch users alert words', async () => {
@@ -189,9 +182,8 @@ describe('Users', () => {
       result: 'success',
       msg: '',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await users(common.config).me.alertWords.retrieve();
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 });

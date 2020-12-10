@@ -168,10 +168,9 @@ describe('Users', () => {
       already_subscribed: {},
       result: 'success',
     };
-    const stubs = common.getStubs(validator, output); // Stub the network modules.
+    common.stubNetwork(validator, output); // Stub the network modules.
     const data = await users(common.config).retrieve(params);
     data.should.have.property('result', 'success'); // Function call.
-    common.restoreStubs(stubs); // Restore the stubs.
   });
 });
 ```

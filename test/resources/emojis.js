@@ -22,9 +22,8 @@ describe('Emojis', () => {
       msg: '',
       result: 'success',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await emojis(common.config).retrieve();
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 });

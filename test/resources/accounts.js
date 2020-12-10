@@ -27,10 +27,9 @@ describe('Accounts', () => {
       api_key: 'randomcharactersonlyq32YIpC8aMSH',
       email: config.email,
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await accounts(config).retrieve();
     data.result.should.be.equal('success');
-    common.restoreStubs(stubs);
   });
 
   it('should return error on incorrect password', async () => {
@@ -39,9 +38,8 @@ describe('Accounts', () => {
       msg: 'Your username or password is incorrect.',
       reason: 'incorrect_creds',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await accounts(config).retrieve();
     data.result.should.be.equal('error');
-    common.restoreStubs(stubs);
   });
 });

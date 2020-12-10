@@ -32,9 +32,8 @@ describe('Events', () => {
       msg: '',
       queue_id: '1511901550:3',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await events(common.config).retrieve(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 });

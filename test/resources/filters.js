@@ -22,9 +22,8 @@ describe('Filters', () => {
       msg: '',
       result: 'success',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await filters(common.config).retrieve();
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 });

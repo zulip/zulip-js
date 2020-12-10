@@ -32,10 +32,9 @@ describe('Typing', () => {
       msg: '',
       handler_id: 225,
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await typing(common.config).send(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('Should send typing stopped notification', async () => {
@@ -65,9 +64,8 @@ describe('Typing', () => {
       msg: '',
       handler_id: 286,
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await typing(common.config).send(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 });

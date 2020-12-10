@@ -27,7 +27,7 @@ describe('Index', () => {
       ]);
     };
     const z = await lib(common.config);
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     (await z.callEndpoint('/testurl', 'GET', params)).should.have.property(
       'result',
       'success'
@@ -36,7 +36,6 @@ describe('Index', () => {
       'result',
       'success'
     );
-    common.restoreStubs(stubs);
   });
   it('should call post endpoints', async () => {
     const validator = (url, options) => {
@@ -47,7 +46,7 @@ describe('Index', () => {
       options.body.data.two.should.equal(params.two);
     };
     const z = await lib(common.config);
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     (await z.callEndpoint('/testurl', 'POST', params)).should.have.property(
       'result',
       'success'
@@ -56,6 +55,5 @@ describe('Index', () => {
       'result',
       'success'
     );
-    common.restoreStubs(stubs);
   });
 });

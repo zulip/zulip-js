@@ -47,10 +47,9 @@ describe('Streams', () => {
         },
       ],
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await streams(common.config).retrieve();
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should fetch subscriptions', async () => {
@@ -101,10 +100,9 @@ describe('Streams', () => {
         },
       ],
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await streams(common.config).subscriptions.retrieve(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should fetch stream id', async () => {
@@ -124,12 +122,11 @@ describe('Streams', () => {
       msg: '',
       stream_id: 94,
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     let data = await streams(common.config).getStreamId(params);
     data.should.have.property('result', 'success');
     data = await streams(common.config).getStreamId(params.stream);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 
   it('should fetch the topics in a stream', async () => {
@@ -161,11 +158,10 @@ describe('Streams', () => {
         },
       ],
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await streams(common.config).topics.retrieve(params);
     data.should.have.property('result', 'success');
     data.should.have.property('topics');
-    common.restoreStubs(stubs);
   });
 
   it('should delete stream by stream id', async () => {
@@ -181,9 +177,8 @@ describe('Streams', () => {
       msg: '',
       result: 'success',
     };
-    const stubs = common.getStubs(validator, output);
+    common.stubNetwork(validator, output);
     const data = await streams(common.config).deleteById(params);
     data.should.have.property('result', 'success');
-    common.restoreStubs(stubs);
   });
 });
