@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Events', () => {
-  it('should fetch events', (done) => {
+  it('should fetch events', async () => {
     const params = {
       last_event_id: -1,
       dont_block: true,
@@ -34,13 +34,8 @@ describe('Events', () => {
       queue_id: '1511901550:3',
     };
     const stubs = common.getStubs(validator, output);
-    events(common.config)
-      .retrieve(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await events(common.config).retrieve(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });

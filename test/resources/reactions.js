@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Reactions', () => {
-  it('should add reaction to message', (done) => {
+  it('should add reaction to message', async () => {
     const params = {
       message_id: 1,
       emoji_name: 'musical_note',
@@ -28,17 +28,12 @@ describe('Reactions', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    reactions(common.config)
-      .add(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await reactions(common.config).add(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should remove reaction from message', (done) => {
+  it('should remove reaction from message', async () => {
     const params = {
       message_id: 1,
       emoji_code: '1f3b5',
@@ -56,13 +51,8 @@ describe('Reactions', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    reactions(common.config)
-      .remove(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await reactions(common.config).remove(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });

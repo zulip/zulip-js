@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Typing', () => {
-  it('Should send typing started notification', (done) => {
+  it('Should send typing started notification', async () => {
     const params = {
       to: 'othello@zulip.com',
       op: 'start',
@@ -34,17 +34,12 @@ describe('Typing', () => {
       handler_id: 225,
     };
     const stubs = common.getStubs(validator, output);
-    typing(common.config)
-      .send(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await typing(common.config).send(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('Should send typing stopped notification', (done) => {
+  it('Should send typing stopped notification', async () => {
     const params = {
       to: 'othello@zulip.com',
       op: 'stop',
@@ -72,13 +67,8 @@ describe('Typing', () => {
       handler_id: 286,
     };
     const stubs = common.getStubs(validator, output);
-    typing(common.config)
-      .send(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await typing(common.config).send(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });

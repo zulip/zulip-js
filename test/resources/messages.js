@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Messages', () => {
-  it('should send message to test stream', (done) => {
+  it('should send message to test stream', async () => {
     const params = {
       to: 'test stream',
       type: 'stream',
@@ -28,17 +28,12 @@ describe('Messages', () => {
       id: 168,
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .send(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await messages(common.config).send(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should fetch messages from test stream', (done) => {
+  it('should fetch messages from test stream', async () => {
     const params = {
       stream: 'test stream',
       type: 'stream',
@@ -64,17 +59,12 @@ describe('Messages', () => {
       messages: [], // TODO expand test with actual API message data.
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .retrieve(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await messages(common.config).retrieve(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should render messages', (done) => {
+  it('should render messages', async () => {
     const params = {
       content: 'Hello **world**',
     };
@@ -90,21 +80,14 @@ describe('Messages', () => {
       rendered: '<p>Hello <strong>world</strong></p>',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .render(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        return messages(common.config).render(params.content);
-      })
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    let data = await messages(common.config).render(params);
+    data.should.have.property('result', 'success');
+    data = await messages(common.config).render(params.content);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should update message', (done) => {
+  it('should update message', async () => {
     const params = {
       message_id: 131,
       content: 'New content',
@@ -119,17 +102,12 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .update(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await messages(common.config).update(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should get message by id', (done) => {
+  it('should get message by id', async () => {
     const params = {
       message_id: 1,
     };
@@ -143,17 +121,12 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .getById(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await messages(common.config).getById(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should get message history by id', (done) => {
+  it('should get message history by id', async () => {
     const params = {
       message_id: 2,
     };
@@ -167,17 +140,12 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .getHistoryById(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await messages(common.config).getHistoryById(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should mark message as read', (done) => {
+  it('should mark message as read', async () => {
     const params = {
       flag: 'read',
       messages: [131],
@@ -197,17 +165,12 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .flags.add(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await messages(common.config).flags.add(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should mark message as unread', (done) => {
+  it('should mark message as unread', async () => {
     const params = {
       flag: 'read',
       messages: [131],
@@ -226,17 +189,12 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .flags.remove(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await messages(common.config).flags.remove(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should delete reaction by message id', (done) => {
+  it('should delete reaction by message id', async () => {
     const params = {
       message_id: 1,
     };
@@ -250,17 +208,12 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .deleteReactionById(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await messages(common.config).deleteReactionById(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should delete message by message id', (done) => {
+  it('should delete message by message id', async () => {
     const params = {
       message_id: 1,
     };
@@ -274,13 +227,8 @@ describe('Messages', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    messages(common.config)
-      .deleteById(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await messages(common.config).deleteById(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });

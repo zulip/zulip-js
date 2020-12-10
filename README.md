@@ -147,12 +147,11 @@ Currently, we have a simple testing framework which stubs our network requests a
 const chai = require('chai');
 const users = require('../../lib/resources/users'); // File to test.
 const common = require('../common'); // Common functions for tests.
-chai.use(require('chai-as-promised'));
 
 chai.should();
 
 describe('Users', () => {
-  it('should fetch users', () => {
+  it('should fetch users', async () => {
     const params = {
       subject: 'test',
       content: 'sample test',
@@ -170,9 +169,8 @@ describe('Users', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output); // Stub the network modules.
-    users(common.config)
-      .retrieve(params)
-      .should.eventually.have.property('result', 'success'); // Function call.
+    const data = await users(common.config).retrieve(params);
+    data.should.have.property('result', 'success'); // Function call.
     common.restoreStubs(stubs); // Restore the stubs.
   });
 });

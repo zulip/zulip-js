@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Queues', () => {
-  it('should register queue', (done) => {
+  it('should register queue', async () => {
     const params = {
       event_types: ['message'],
     };
@@ -25,17 +25,12 @@ describe('Queues', () => {
       options.body.data.event_types.should.be.equal('["message"]');
     };
     const stubs = common.getStubs(validator, output);
-    queues(common.config)
-      .register(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await queues(common.config).register(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should deregister queue', (done) => {
+  it('should deregister queue', async () => {
     const params = {
       queue_id: '1511901550:2',
     };
@@ -49,13 +44,8 @@ describe('Queues', () => {
       options.should.not.have.property('body');
     };
     const stubs = common.getStubs(validator, output);
-    queues(common.config)
-      .deregister(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await queues(common.config).deregister(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });

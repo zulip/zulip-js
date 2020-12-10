@@ -21,7 +21,7 @@ const validator = (url, options) => {
 };
 
 describe('Accounts', () => {
-  it('should get API key', (done) => {
+  it('should get API key', async () => {
     const output = {
       result: 'success',
       msg: '',
@@ -29,30 +29,20 @@ describe('Accounts', () => {
       email: config.email,
     };
     const stubs = common.getStubs(validator, output);
-    accounts(config)
-      .retrieve()
-      .then((data) => {
-        data.result.should.be.equal('success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await accounts(config).retrieve();
+    data.result.should.be.equal('success');
+    common.restoreStubs(stubs);
   });
 
-  it('should return error on incorrect password', (done) => {
+  it('should return error on incorrect password', async () => {
     const output = {
       result: 'error',
       msg: 'Your username or password is incorrect.',
       reason: 'incorrect_creds',
     };
     const stubs = common.getStubs(validator, output);
-    accounts(config)
-      .retrieve()
-      .then((data) => {
-        data.result.should.be.equal('error');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await accounts(config).retrieve();
+    data.result.should.be.equal('error');
+    common.restoreStubs(stubs);
   });
 });

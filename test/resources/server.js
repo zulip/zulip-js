@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Server', () => {
-  it('should fetch server settings', (done) => {
+  it('should fetch server settings', async () => {
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/server_settings`);
       options.should.not.have.property('body');
@@ -35,13 +35,8 @@ describe('Server', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    server(common.config)
-      .settings()
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await server(common.config).settings();
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });

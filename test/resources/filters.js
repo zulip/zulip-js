@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Filters', () => {
-  it('should fetch realm filters', (done) => {
+  it('should fetch realm filters', async () => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/realm/filters`);
       options.should.not.have.property('body');
@@ -24,13 +24,8 @@ describe('Filters', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    filters(common.config)
-      .retrieve()
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await filters(common.config).retrieve();
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });

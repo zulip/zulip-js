@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Users', () => {
-  it('should fetch users', (done) => {
+  it('should fetch users', async () => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users`);
       options.method.should.be.equal('GET');
@@ -41,17 +41,12 @@ describe('Users', () => {
       ],
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config)
-      .retrieve()
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await users(common.config).retrieve();
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should fetch pointer for user', (done) => {
+  it('should fetch pointer for user', async () => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me/pointer`);
       options.method.should.be.equal('GET');
@@ -63,17 +58,12 @@ describe('Users', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config)
-      .me.pointer.retrieve()
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await users(common.config).me.pointer.retrieve();
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should update pointer for user', (done) => {
+  it('should update pointer for user', async () => {
     const pointer = 172;
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me/pointer`);
@@ -87,17 +77,12 @@ describe('Users', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config)
-      .me.pointer.update(pointer)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await users(common.config).me.pointer.update(pointer);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should fetch user profile', (done) => {
+  it('should fetch user profile', async () => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me`);
       options.method.should.be.equal('GET');
@@ -117,17 +102,12 @@ describe('Users', () => {
       is_admin: false,
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config)
-      .me.getProfile()
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await users(common.config).me.getProfile();
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should subscribe user to stream', (done) => {
+  it('should subscribe user to stream', async () => {
     const params = {
       subscriptions: JSON.stringify([{ name: 'off topic' }]),
     };
@@ -144,17 +124,12 @@ describe('Users', () => {
     };
     output[common.config.username] = ['off topic'];
     const stubs = common.getStubs(validator, output);
-    users(common.config)
-      .me.subscriptions.add(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await users(common.config).me.subscriptions.add(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should remove subscriptions', (done) => {
+  it('should remove subscriptions', async () => {
     const params = {
       subscriptions: JSON.stringify(['Verona']),
     };
@@ -173,17 +148,12 @@ describe('Users', () => {
       removed: JSON.stringify(['Verona']),
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config)
-      .me.subscriptions.remove(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await users(common.config).me.subscriptions.remove(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should create a new user', (done) => {
+  it('should create a new user', async () => {
     const params = {
       email: 'newbie@zulip.com',
       password: 'temp',
@@ -205,17 +175,12 @@ describe('Users', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config)
-      .create(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await users(common.config).create(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should fetch users alert words', (done) => {
+  it('should fetch users alert words', async () => {
     const validator = (url, options) => {
       url.should.equal(`${common.config.apiURL}/users/me/alert_words`);
       options.should.not.have.property('body');
@@ -226,13 +191,8 @@ describe('Users', () => {
       msg: '',
     };
     const stubs = common.getStubs(validator, output);
-    users(common.config)
-      .me.alertWords.retrieve()
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await users(common.config).me.alertWords.retrieve();
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });

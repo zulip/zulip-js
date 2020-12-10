@@ -6,7 +6,7 @@ chai.use(require('chai-as-promised'));
 chai.should();
 
 describe('Streams', () => {
-  it('should fetch streams', (done) => {
+  it('should fetch streams', async () => {
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/streams`);
       options.method.should.be.equal('GET');
@@ -49,17 +49,12 @@ describe('Streams', () => {
       ],
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config)
-      .retrieve()
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await streams(common.config).retrieve();
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should fetch subscriptions', (done) => {
+  it('should fetch subscriptions', async () => {
     const params = {
       subscriptions: JSON.stringify([{ name: 'off topic' }]),
     };
@@ -108,17 +103,12 @@ describe('Streams', () => {
       ],
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config)
-      .subscriptions.retrieve(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await streams(common.config).subscriptions.retrieve(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should fetch stream id', (done) => {
+  it('should fetch stream id', async () => {
     const params = {
       stream: 'bot testing',
     };
@@ -136,21 +126,14 @@ describe('Streams', () => {
       stream_id: 94,
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config)
-      .getStreamId(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        return streams(common.config).getStreamId(params.stream);
-      })
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    let data = await streams(common.config).getStreamId(params);
+    data.should.have.property('result', 'success');
+    data = await streams(common.config).getStreamId(params.stream);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 
-  it('should fetch the topics in a stream', (done) => {
+  it('should fetch the topics in a stream', async () => {
     const params = {
       stream_id: 15,
     };
@@ -180,18 +163,13 @@ describe('Streams', () => {
       ],
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config)
-      .topics.retrieve(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        data.should.have.property('topics');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await streams(common.config).topics.retrieve(params);
+    data.should.have.property('result', 'success');
+    data.should.have.property('topics');
+    common.restoreStubs(stubs);
   });
 
-  it('should delete stream by stream id', (done) => {
+  it('should delete stream by stream id', async () => {
     const params = {
       stream_id: 1,
     };
@@ -205,13 +183,8 @@ describe('Streams', () => {
       result: 'success',
     };
     const stubs = common.getStubs(validator, output);
-    streams(common.config)
-      .deleteById(params)
-      .then((data) => {
-        data.should.have.property('result', 'success');
-        common.restoreStubs(stubs);
-        done();
-      })
-      .catch(done);
+    const data = await streams(common.config).deleteById(params);
+    data.should.have.property('result', 'success');
+    common.restoreStubs(stubs);
   });
 });
