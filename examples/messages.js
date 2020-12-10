@@ -1,4 +1,4 @@
-const zulip = require('../lib/');
+const zulip = require('../lib');
 
 const stream = 'test-bot';
 

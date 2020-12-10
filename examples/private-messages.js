@@ -1,4 +1,4 @@
-const zulip = require('../lib/');
+const zulip = require('../lib');
 
 const sendParams = {
   to: process.env.ZULIP_TEST_USERNAME,

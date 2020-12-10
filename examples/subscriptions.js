@@ -4,7 +4,7 @@ const config = {
   realm: process.env.ZULIP_REALM,
 };
 
-const zulip = require('../lib/');
+const zulip = require('../lib');
 
 // Prints
 //   { msg: '',

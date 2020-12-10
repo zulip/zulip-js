@@ -1,4 +1,4 @@
-const zulip = require('../lib/');
+const zulip = require('../lib');
 
 const config = {
   username: process.env.ZULIP_USERNAME,

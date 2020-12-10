@@ -1,4 +1,4 @@
-const zulip = require('../../lib/');
+const zulip = require('../../lib');
 
 if (process.argv.length < 7) {
   console.log('Usage: $node examples/typing-notifications/send-and-recieve.js realm-url sender-username sender-API-key recipient-username recipient-API-key');

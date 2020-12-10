@@ -1,4 +1,4 @@
-const zulip = require('../../lib/');
+const zulip = require('../../lib');
 
 let recipient = process.env.ZULIP_USERNAME;
 if (process.env.ZULIP_TYPING_RECIPIENT) {
