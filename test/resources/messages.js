@@ -171,7 +171,6 @@ describe('Messages', () => {
       messages: [131],
     };
 
-
     const validator = (url, options) => {
       url.should.contain(`${common.config.apiURL}/messages/flags`);
       options.method.should.be.equal('POST');
