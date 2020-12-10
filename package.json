@@ -34,7 +34,7 @@
     "sinon": "^9.2.1"
   },
   "scripts": {
-    "build": "babel -d lib/ src/",
+    "build": "babel --delete-dir-on-start -d lib/ src/",
     "prepare": "npm run build",
     "prepublish": "npm run build",
     "lint": "eslint .",
