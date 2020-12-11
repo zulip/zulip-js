@@ -20,7 +20,7 @@ function getCallEndpoint(config) {
     const myConfig = { ...config };
     let finalendpoint = endpoint;
     if (!endpoint.startsWith('/')) {
-      finalendpoint = `/${endpoint}`; // eslint-disable-line
+      finalendpoint = `/${endpoint}`;
     }
     const url = myConfig.apiURL + finalendpoint;
     return api(url, myConfig, method, params);
