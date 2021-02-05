@@ -1,4 +1,4 @@
-# zulip-js [![Build Status](https://travis-ci.com/zulip/zulip-js.svg?branch=main)](https://travis-ci.com/github/zulip/zulip-js)
+# zulip-js ![Node.js CI](https://github.com/zulip/zulip-js/workflows/Node.js%20CI/badge.svg)
 
 Javascript library to access the Zulip API
 
