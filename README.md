@@ -1,4 +1,4 @@
-# zulip-js [![Build Status](https://travis-ci.com/zulip/zulip-js.svg?branch=master)](https://travis-ci.com/github/zulip/zulip-js)
+# zulip-js [![Build Status](https://travis-ci.com/zulip/zulip-js.svg?branch=main)](https://travis-ci.com/github/zulip/zulip-js)
 
 Javascript library to access the Zulip API
 
@@ -69,7 +69,7 @@ const zuliprc = path.resolve(__dirname, 'zuliprc');
 
 ## Examples
 
-Please see some examples in [the examples directory](https://github.com/zulip/zulip-js/tree/master/examples).
+Please see some examples in [the examples directory](https://github.com/zulip/zulip-js/tree/main/examples).
 
 Also, to easily test an API endpoint while developing, you can run:
 
