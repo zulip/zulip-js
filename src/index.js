@@ -14,6 +14,7 @@ const reactions = require('./resources/reactions');
 const server = require('./resources/server');
 const filters = require('./resources/filters');
 const eventsWapper = require('./events_wrapper');
+const mark = require('./resources/mark');
 
 function getCallEndpoint(config) {
   return function callEndpoint(endpoint, method = 'GET', params) {
@@ -43,6 +44,7 @@ function resources(config) {
     server: server(config),
     filters: filters(config),
     callOnEachEvent: eventsWapper(config),
+    mark: mark(config),
   };
 }
 
