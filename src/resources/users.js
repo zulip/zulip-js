@@ -21,6 +21,26 @@ function users(config) {
           return api(url, config, 'POST', { pointer: id });
         },
       },
+	  status: {
+        retrieve: (params) => {
+          const url = `${config.apiURL}/users/me/status`;
+          return api(url, config, 'GET', params);
+        },
+        update: (awayval) => {
+          const url = `${config.apiURL}/users/me/status`;
+          return api(url, config, 'POST', { away: JSON.stringify(awayval) });
+        },
+      },
+	  presence: {
+        retrieve: (params) => {
+          const url = `${config.apiURL}/users/me/presence`;
+          return api(url, config, 'GET', params);
+        },
+        update: (awayval) => {
+          const url = `${config.apiURL}/users/me/presence`;
+          return api(url, config, 'POST', { status: awayval });
+        },
+      },	  
       getProfile: () => {
         const url = `${config.apiURL}/users/me`;
         return api(url, config, 'GET');
