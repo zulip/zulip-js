@@ -1,6 +1,6 @@
-const path = require('path');
-const homedir = require('os').homedir();
-const zulip = require('../lib');
+import path from 'path';
+import { homedir } from 'os';
+import zulip from '../lib';
 
 if (process.argv[2] === 'help') {
   console.log('This is a helper script to test Zulip APIs.');
