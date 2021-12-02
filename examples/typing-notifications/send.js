@@ -1,4 +1,4 @@
-const zulip = require('../../lib');
+import zulip from '../../lib';
 
 const recipient = Number(process.env.ZULIP_TYPING_RECIPIENT);
 

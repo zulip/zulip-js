@@ -9,7 +9,8 @@ Javascript library to access the Zulip API
 ### With API Key
 
 ```js
-const zulipInit = require('zulip-js');
+import zulipInit from 'zulip-js';
+
 const config = {
   username: process.env.ZULIP_USERNAME,
   apiKey: process.env.ZULIP_API_KEY,
@@ -28,7 +29,8 @@ const config = {
 You will need to first retrieve the API key by calling `await zulipInit(config)`.
 
 ```js
-const zulipInit = require('zulip-js');
+import zulipInit from 'zulip-js';
+
 const config = {
   username: process.env.ZULIP_USERNAME,
   password: process.env.ZULIP_PASSWORD,
@@ -57,8 +59,9 @@ site=http://localhost:9991
 Please remember to add this file to your `.gitignore`! Calling `await zulipInit({ zuliprc: 'zuliprc' })` will read this file.
 
 ```js
-const zulipInit = require('zulip-js');
-const path = require('path');
+import zulipInit from 'zulip-js';
+import path from 'path';
+
 const zuliprc = path.resolve(__dirname, 'zuliprc');
 (async () => {
   const zulip = await zulipInit({ zuliprc });
@@ -141,9 +144,9 @@ Use `npm test` to run the tests.
 Currently, we have a simple testing framework which stubs our network requests and also allows us to test the input passed to it. This is what a sample test for an API endpoint looks like:
 
 ```js
-const chai = require('chai');
-const users = require('../../lib/resources/users'); // File to test.
-const common = require('../common'); // Common functions for tests.
+import chai from 'chai';
+import users from '../../lib/resources/users';
+import common from '../common';
 
 chai.should();
 

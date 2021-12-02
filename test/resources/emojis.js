@@ -1,6 +1,6 @@
-const chai = require('chai');
-const emojis = require('../../lib/resources/emojis');
-const common = require('../common');
+import chai from 'chai';
+import emojis from '../../lib/resources/emojis';
+import common from '../common';
 
 chai.should();
 

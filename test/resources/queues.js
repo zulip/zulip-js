@@ -1,6 +1,6 @@
-const chai = require('chai');
-const queues = require('../../lib/resources/queues');
-const common = require('../common');
+import chai from 'chai';
+import queues from '../../lib/resources/queues';
+import common from '../common';
 
 chai.should();
 
