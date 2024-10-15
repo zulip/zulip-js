@@ -1,4 +1,4 @@
-const zulip = require('../lib');
+import zulip from '../lib';
 
 process.on('unhandledRejection', (err) => {
   console.error(err);

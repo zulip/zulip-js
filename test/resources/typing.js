@@ -1,6 +1,6 @@
-const chai = require('chai');
-const typing = require('../../lib/resources/typing');
-const common = require('../common');
+import chai from 'chai';
+import typing from '../../lib/resources/typing';
+import common from '../common';
 
 chai.should();
 
