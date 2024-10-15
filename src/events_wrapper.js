@@ -21,7 +21,7 @@ function eventsWrapper(config) {
     // eslint-disable-next-line no-constant-condition
     while (true) {
       try {
-        const params = { eventTypes };
+        const params = { event_types: eventTypes };
         res = await z.queues.register(params); // eslint-disable-line no-await-in-loop
         if (res.result === 'error') {
           logError(res.msg);
