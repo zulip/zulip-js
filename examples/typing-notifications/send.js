@@ -32,6 +32,6 @@ const config = {
       queue_id: queueID,
       last_event_id: -1,
       dont_block: false,
-    })
+    }),
   );
 })();

@@ -25,7 +25,7 @@ const config = {
     await z.messages.update({
       message_id: res.id,
       content: 'New content',
-    })
+    }),
   );
 
   const readParams = {

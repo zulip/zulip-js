@@ -5,10 +5,10 @@ const zulip = require('../lib');
 if (process.argv[2] === 'help') {
   console.log('This is a helper script to test Zulip APIs.');
   console.log(
-    'Call with: npm run call <method> <endpoint> <json_params> <zuliprc path>.'
+    'Call with: npm run call <method> <endpoint> <json_params> <zuliprc path>.',
   );
   console.log(
-    'Put your zuliprc file in ~/.zuliprc or specify the 4th argument above.'
+    'Put your zuliprc file in ~/.zuliprc or specify the 4th argument above.',
   );
   process.exit(0);
 }

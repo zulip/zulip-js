@@ -14,7 +14,7 @@ const config = {
       queue_id: process.env.ZULIP_QUEUE_ID,
       last_event_id: -1,
       dont_block: false,
-    })
+    }),
   );
   // Prints
   // { msg: '',

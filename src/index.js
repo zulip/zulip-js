@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-import-module-exports
 import parseConfigFile from './zuliprc';
 
 const api = require('./api');
@@ -16,7 +17,7 @@ const filters = require('./resources/filters');
 const eventsWapper = require('./events_wrapper');
 
 function getCallEndpoint(config) {
-  return function callEndpoint(endpoint, method = 'GET', params) {
+  return function callEndpoint(endpoint, method = 'GET', params = {}) {
     const myConfig = { ...config };
     let finalendpoint = endpoint;
     if (!endpoint.startsWith('/')) {

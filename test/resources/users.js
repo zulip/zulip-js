@@ -129,7 +129,7 @@ describe('Users', () => {
     };
     const validator = (url, options) => {
       url.should.equal(
-        `${common.config.apiURL}/users/me/subscriptions?subscriptions=%5B%22Verona%22%5D`
+        `${common.config.apiURL}/users/me/subscriptions?subscriptions=%5B%22Verona%22%5D`,
       );
       options.method.should.be.equal('DELETE');
       options.should.not.have.property('body');

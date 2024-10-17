@@ -18,6 +18,6 @@ const zulip = require('../lib');
   console.log(
     await z.users.me.subscriptions.add({
       subscriptions: JSON.stringify([{ name: 'off topic' }]),
-    })
+    }),
   );
 })();

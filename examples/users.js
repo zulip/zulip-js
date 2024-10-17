@@ -30,7 +30,7 @@ const config = {
       password: 'temp',
       full_name: 'New User',
       short_name: 'newbie',
-    })
+    }),
   );
 
   // Get user profile
@@ -52,7 +52,7 @@ const config = {
   console.log(
     await z.users.me.subscriptions.remove({
       subscriptions: JSON.stringify(['Verona']),
-    })
+    }),
   );
 
   // Get pointer for user

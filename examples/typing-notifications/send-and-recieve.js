@@ -2,20 +2,13 @@ const zulip = require('../../lib');
 
 if (process.argv.length < 7) {
   console.log(
-    'Usage: $node examples/typing-notifications/send-and-recieve.js realm-url sender-username sender-API-key recipient-username recipient-API-key'
+    'Usage: $node examples/typing-notifications/send-and-recieve.js realm-url sender-username sender-API-key recipient-username recipient-API-key',
   );
   process.exit(1);
 }
 
-const [
-  ,
-  ,
-  realm,
-  sender,
-  senderAPIKey,
-  recipient,
-  recipientAPIKey,
-] = process.argv;
+const [, , realm, sender, senderAPIKey, recipient, recipientAPIKey] =
+  process.argv;
 
 (async () => {
   const senderClient = await zulip({
@@ -41,12 +34,12 @@ const [
     await senderClient.typing.send({
       to: [recipientId],
       op: 'start',
-    })
+    }),
   );
   console.log(
     await recipientClient.events.retrieve({
       queue_id: queueID,
       last_event_id: -1,
-    })
+    }),
   );
 })();
