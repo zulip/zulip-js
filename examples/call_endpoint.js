@@ -15,6 +15,6 @@ const config = {
       type: 'stream',
       subject: 'Testing zulip-js',
       content: 'Something is horribly wrong....',
-    })
+    }),
   );
 })();

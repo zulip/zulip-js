@@ -30,11 +30,11 @@ describe('Index', () => {
     common.stubNetwork(validator, output);
     (await z.callEndpoint('/testurl', 'GET', params)).should.have.property(
       'result',
-      'success'
+      'success',
     );
     (await z.callEndpoint('testurl', 'GET', params)).should.have.property(
       'result',
-      'success'
+      'success',
     );
   });
   it('should call post endpoints', async () => {
@@ -49,11 +49,11 @@ describe('Index', () => {
     common.stubNetwork(validator, output);
     (await z.callEndpoint('/testurl', 'POST', params)).should.have.property(
       'result',
-      'success'
+      'success',
     );
     (await z.callEndpoint('testurl', 'POST', params)).should.have.property(
       'result',
-      'success'
+      'success',
     );
   });
 });

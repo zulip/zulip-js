@@ -14,7 +14,7 @@ describe('Reactions', () => {
     };
     const validator = (url, options) => {
       url.should.equal(
-        `${common.config.apiURL}/messages/${params.message_id}/reactions`
+        `${common.config.apiURL}/messages/${params.message_id}/reactions`,
       );
       options.method.should.be.equal('POST');
       Object.keys(options.body.data).length.should.equal(3);

@@ -3,7 +3,7 @@ const helper = require('./helper');
 async function api(baseUrl, config, method, params) {
   const url = new URL(baseUrl);
   const auth = Buffer.from(`${config.username}:${config.apiKey}`).toString(
-    'base64'
+    'base64',
   );
   const authHeader = `Basic ${auth}`;
   const options = { method, headers: { Authorization: authHeader } };
@@ -32,7 +32,7 @@ async function api(baseUrl, config, method, params) {
       if (response.status === 404) {
         message += ` Maybe endpoint: ${method} ${response.url.replace(
           config.apiURL,
-          ''
+          '',
         )} doesn't exist.`;
       } else {
         message += ' Please check the API documentation.';

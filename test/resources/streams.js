@@ -135,7 +135,7 @@ describe('Streams', () => {
     };
     const validator = (url, options) => {
       url.should.contain(
-        `${common.config.apiURL}/users/me/${params.stream_id}/topics`
+        `${common.config.apiURL}/users/me/${params.stream_id}/topics`,
       );
       options.method.should.be.equal('GET');
       options.should.not.have.property('body');

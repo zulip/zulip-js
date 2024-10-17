@@ -30,7 +30,7 @@ const config = {
       ],
       num_before: 1,
       num_after: 1,
-    })
+    }),
   );
   // Fetch the most recent message
   const mostRecentParams = {
