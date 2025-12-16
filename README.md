@@ -11,9 +11,9 @@ Javascript library to access the Zulip API
 ```js
 const zulipInit = require('zulip-js');
 const config = {
-  username: process.env.ZULIP_USERNAME,
-  apiKey: process.env.ZULIP_API_KEY,
-  realm: process.env.ZULIP_REALM,
+  username: process.env.ZULIP_USERNAME, // same as "email" in zuliprc
+  apiKey: process.env.ZULIP_API_KEY, // same as "key" in zuliprc
+  realm: process.env.ZULIP_REALM, // same as "site" in zuliprc
 };
 
 (async () => {
@@ -30,9 +30,9 @@ You will need to first retrieve the API key by calling `await zulipInit(config)`
 ```js
 const zulipInit = require('zulip-js');
 const config = {
-  username: process.env.ZULIP_USERNAME,
+  username: process.env.ZULIP_USERNAME, // same as "email" in zuliprc
   password: process.env.ZULIP_PASSWORD,
-  realm: process.env.ZULIP_REALM,
+  realm: process.env.ZULIP_REALM, // same as "site" in zuliprc
 };
 
 (async () => {
