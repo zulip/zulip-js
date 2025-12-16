@@ -1,4 +1,4 @@
-const zulip = require('../../lib');
+import zulip from '../../lib';
 
 if (process.argv.length < 6) {
   console.log(

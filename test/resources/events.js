@@ -1,6 +1,6 @@
-const chai = require('chai');
-const events = require('../../lib/resources/events');
-const common = require('../common');
+import chai from 'chai';
+import events from '../../lib/resources/events';
+import common from '../common';
 
 chai.should();
 

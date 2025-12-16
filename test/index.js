@@ -1,6 +1,6 @@
-const chai = require('chai');
-const lib = require('../lib/index');
-const common = require('./common');
+import chai from 'chai';
+import lib from '../lib/index';
+import common from './common';
 
 chai.should();
 

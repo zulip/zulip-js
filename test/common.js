@@ -1,5 +1,5 @@
-const sinon = require('sinon');
-const helper = require('../lib/helper');
+import sinon from 'sinon';
+import helper from '../lib/helper';
 
 const getFakes = (validator, output) => {
   const fetch = (url, options) => {
@@ -48,7 +48,7 @@ const config = {
   realm: 'https://valid.realm.url/api',
 };
 
-module.exports = {
+export default {
   getFakes,
   stubNetwork,
   config,

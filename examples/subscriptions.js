@@ -1,10 +1,10 @@
+import zulip from '../lib';
+
 const config = {
   username: process.env.ZULIP_USERNAME,
   apiKey: process.env.ZULIP_API_KEY,
   realm: process.env.ZULIP_REALM,
 };
-
-const zulip = require('../lib');
 
 (async () => {
   const z = await zulip(config);

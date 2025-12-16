@@ -1,20 +1,20 @@
-// eslint-disable-next-line import/no-import-module-exports
 import parseConfigFile from './zuliprc';
 
-const api = require('./api');
+import api from './api';
 
-const accounts = require('./resources/accounts');
-const streams = require('./resources/streams');
-const messages = require('./resources/messages');
-const queues = require('./resources/queues');
-const events = require('./resources/events');
-const users = require('./resources/users');
-const emojis = require('./resources/emojis');
-const typing = require('./resources/typing');
-const reactions = require('./resources/reactions');
-const server = require('./resources/server');
-const filters = require('./resources/filters');
-const eventsWapper = require('./events_wrapper');
+import accounts from './resources/accounts';
+
+import streams from './resources/streams';
+import messages from './resources/messages';
+import queues from './resources/queues';
+import events from './resources/events';
+import users from './resources/users';
+import emojis from './resources/emojis';
+import typing from './resources/typing';
+import reactions from './resources/reactions';
+import server from './resources/server';
+import filters from './resources/filters';
+import eventsWapper from './events_wrapper';
 
 function getCallEndpoint(config) {
   return function callEndpoint(endpoint, method = 'GET', params = {}) {
@@ -65,4 +65,4 @@ async function zulip(initialConfig) {
   return resources(config);
 }
 
-module.exports = zulip;
+export default zulip;

@@ -17,6 +17,7 @@
     "@babel/core": "^7.25.8",
     "@babel/plugin-transform-runtime": "^7.25.7",
     "@babel/preset-env": "^7.25.8",
+    "@babel/register": "^7.28.3",
     "chai": "^4.5.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
@@ -30,8 +31,8 @@
   "scripts": {
     "build": "babel --delete-dir-on-start -d lib/ src/",
     "prepare": "npm run build",
-    "lint": "eslint . && prettier --loglevel=warn --check .",
-    "lint:fix": "eslint --fix . && prettier --loglevel=warn --write .",
+    "lint": "eslint . && prettier --log-level=warn --check .",
+    "lint:fix": "eslint --fix . && prettier --log-level=warn --write .",
     "test": "npm run lint && npm run build && mocha test/*",
     "call": "node examples/interactive_call_endpoint.js"
   },

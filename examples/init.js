@@ -1,5 +1,5 @@
-const path = require('path');
-const zulip = require('../lib');
+import path from 'path';
+import zulip from '../lib';
 
 (async () => {
   // Initialization with zuliprc
