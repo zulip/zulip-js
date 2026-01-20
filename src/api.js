@@ -14,10 +14,16 @@ async function api(baseUrl, config, method, params) {
       if (Array.isArray(data)) {
         data = JSON.stringify(data);
       }
+      if (data === null || typeof data === 'undefined') {
+        return;
+      }
       options.body.append(key, data);
     });
   } else if (params) {
     Object.entries(params).forEach(([key, value]) => {
+      if (value === null || typeof value === 'undefined') {
+        return;
+      }
       url.searchParams.append(key, value);
     });
   }
