@@ -17,7 +17,7 @@ const endpoint = process.argv[3] || '/users/me';
 const params = JSON.parse(process.argv[4] || '{}');
 const zuliprc = process.argv[5]
   ? path.resolve(__dirname, process.argv[5])
-  : path.resolve(homedir, '.zuliprc');
+  : path.resolve(homedir, 'zuliprc');
 
 (async () => {
   const z = await zulip({ zuliprc });
