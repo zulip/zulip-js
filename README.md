@@ -130,7 +130,10 @@ await zulip.callEndpoint('/messages', 'POST', params);
 | `zulip.users.me.subscriptions.remove()` | DELETE `/users/me/subscriptions` | remove subscriptions. |
 | `zulip.users.me.pointer.update()` | POST `users/me/pointer` | updates the pointer for the user, for moving the home view. Accepts a message id. This has the side effect of marking some messages as read. Will not return success if the message id is invalid. Will always succeed if the id is less than the current value of the pointer (the id of the last message read). |
 | `zulip.server.settings()` | GET `/server_settings` | returns a dictionary of server settings. |
-| `zulip.filters.retrieve()` | GET `realm/filters` | return a list of filters in a realm |
+| `zulip.filters.retrieve()` | GET `realm/filters` | return a list of filters in a realm. |
+| `zulip.mark.all()` | POST `/mark_all_as_read ` | Marks all of the current user's unread messages as read. |
+| `zulip.mark.stream()` | POST `/mark_stream_as_read ` | Mark all the unread messages in a stream as read. Accepts a params object with `stream_id`. |
+| `zulip.mark.topic()` | POST `/mark_topic_as_read ` | Mark all the unread messages in a topic as read. Accepts a params object with `stream_id` and `topic_name`. |
 
 # Testing
 
